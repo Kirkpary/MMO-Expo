@@ -26,6 +26,7 @@ jobs:
 
       # Test
       - name: Run tests
+        id: myTestStep
         uses: webbertakken/unity-test-runner@v1.4
         with:
           unityVersion: 2020.1.10f1
@@ -38,10 +39,15 @@ jobs:
           targetPlatform: WebGL
 
       # Output
-      - uses: actions/upload-artifact@v1
+      - name: Upload build
+        uses: actions/upload-artifact@v1
         with:
           name: Build
           path: build
+      - uses: actions/upload-artifact@v1
+        with:
+            name: Test results
+            path: artifacts
       # Deploy to local repo
       - name: Deploy
         uses: s0/git-publish-subdir-action@develop
