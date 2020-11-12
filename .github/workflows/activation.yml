@@ -6,7 +6,8 @@ jobs:
         runs-on: ubuntu-latest
         steps:
             # Request manual activation file
-            - id: getManualLicenseFile
+            - name: Request manual activation file
+                id: getManualLicenseFile
                 uses: webbertakken/unity-request-manual-activation-file@v1.2
                 with:
                     unityVersion: 2020.1.10f1
