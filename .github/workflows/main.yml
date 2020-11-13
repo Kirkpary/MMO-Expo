@@ -31,13 +31,19 @@ jobs:
         with:
           customParameters: '-nographics' # <--- Remove when test runner is working for Unity 2020
           unityVersion: 2020.1.10f1
-
+      # Test Results
+      - name: Upload test results
+        uses: actions/upload-artifact@v1
+        with:
+            name: Test results
+            path: artifacts
       # Build
       - name: Build project
         uses: webbertakken/unity-builder@v1.5
         with:
           unityVersion: 2020.1.10f1
           targetPlatform: WebGL
+          versioning: none  # <--- Change to semantic versioning later
 
       # Output
       - name: Upload build
@@ -45,10 +51,6 @@ jobs:
         with:
           name: Build
           path: build
-      - uses: actions/upload-artifact@v1
-        with:
-            name: Test results
-            path: artifacts
       # Deploy to local repo
       - name: Deploy
         uses: s0/git-publish-subdir-action@develop
