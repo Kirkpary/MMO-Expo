@@ -44,6 +44,7 @@ jobs:
           unityVersion: 2020.1.10f1
           targetPlatform: WebGL
           versioning: None  # <--- Change to semantic versioning later
+          customParameters: '-nographics' # <--- Remove when unity builder is working for Unity 2020
 
       # Output
       - name: Upload build
