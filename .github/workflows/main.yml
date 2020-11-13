@@ -43,7 +43,7 @@ jobs:
         with:
           unityVersion: 2020.1.10f1
           targetPlatform: WebGL
-          versioning: none  # <--- Change to semantic versioning later
+          versioning: None  # <--- Change to semantic versioning later
 
       # Output
       - name: Upload build
