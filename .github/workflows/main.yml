@@ -27,8 +27,9 @@ jobs:
       # Test
       - name: Run tests
         id: myTestStep
-        uses: webbertakken/unity-test-runner@v1.4
+        uses: webbertakken/unity-test-runner@v1.7
         with:
+          customParameters: '-nographics' # <--- Remove when test runner is working for Unity 2020
           unityVersion: 2020.1.10f1
 
       # Build
