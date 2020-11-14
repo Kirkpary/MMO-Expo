@@ -21,6 +21,12 @@ namespace Com.Oregonstate.MMOExpo
         [Tooltip("The Player's UI GameObject Prefab")]
         [SerializeField]
         public GameObject PlayerUiPrefab;
+        [SerializeField]
+        public CharacterController characterController;
+        [SerializeField]
+        public float moveSpeed = 0.01f;
+        [SerializeField]
+        public float rotationSpeed = 0.4f;
         #endregion
 
         #region Private Methods
@@ -87,10 +93,19 @@ namespace Com.Oregonstate.MMOExpo
 #endif
         }
 
-        /// <summary>
-        /// MonoBehavior method called on GameObject by Unity on every frame.
-        /// </summary>
+        //TODO Remove when physics movement is added
         void Update()
+        {
+            if (photonView.IsMine)
+            {
+                ProcessClicks();
+            }
+        }
+
+        /// <summary>
+        /// FixedUpdate is called at a fixed interval and is independent of frame rate. Put physics code here.
+        /// </summary>
+        void FixedUpdate()
         {
             if (photonView.IsMine)
             {
@@ -129,17 +144,58 @@ namespace Com.Oregonstate.MMOExpo
 
         #region Custom
         /// <summary>
-        /// Processes the inputs. Maintain a flag representing when the user is pressing Fire.
+        /// Processes the inputs.
         /// </summary>
         void ProcessInputs()
         {
-            if (Input.GetButtonDown("Fire1"))
+            float h = Input.GetAxis("Horizontal");
+            float v = Input.GetAxis("Vertical");
+            if (h == 0 && v == 0)
             {
-                RaycastHit hit;
-
-                if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, 100))
+                /*if (Input.GetButtonDown("Fire1"))
                 {
-                    agent.destination = hit.point;
+                    RaycastHit hit;
+
+                    if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, 100))
+                    {
+                        agent.destination = hit.point;
+                    }
+                }*/
+            }
+            else
+            {
+                agent.isStopped = true;
+                agent.ResetPath();
+                if (characterController != null) {
+                    //TODO Change to physics movement
+                    characterController.Move(transform.TransformDirection(Vector3.forward) * v * moveSpeed);
+                    transform.Rotate(0, h * rotationSpeed, 0, Space.Self);
+                }
+                else
+                {
+                    Debug.LogError("<Color=Red><a>Missing</a></Color> CharacterController Component on playerPrefab.", this);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Processes the clicks.
+        /// </summary>
+        //TODO Remove when physics movement is added
+        void ProcessClicks()
+        {
+            float h = Input.GetAxis("Horizontal");
+            float v = Input.GetAxis("Vertical");
+            if (h == 0 && v == 0)
+            {
+                if (Input.GetButtonDown("Fire1"))
+                {
+                    RaycastHit hit;
+
+                    if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, 100))
+                    {
+                        agent.destination = hit.point;
+                    }
                 }
             }
         }

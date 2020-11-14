@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 3223030749807689845}
   - component: {fileID: 1474783790316295383}
   - component: {fileID: 6444642191923618180}
+  - component: {fileID: 4556568997653832928}
   - component: {fileID: 82556815}
   - component: {fileID: 343581239786643453}
   - component: {fileID: 6472913501689989078}
@@ -113,6 +114,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PlayerUiPrefab: {fileID: 8732337277991191219, guid: a1c0f010ec799b946a35808e5c255e4d, type: 3}
+  characterController: {fileID: 4556568997653832928}
+  moveSpeed: 0.05
+  rotationSpeed: 3
 --- !u!114 &6444642191923618180
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -130,6 +134,24 @@ MonoBehaviour:
   centerOffset: {x: 0, y: 0, z: 0}
   followOnStart: 0
   smoothSpeed: 2
+--- !u!143 &4556568997653832928
+CharacterController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3223030749807689846}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Height: 1
+  m_Radius: 0.5
+  m_SlopeLimit: 45
+  m_StepOffset: 0.3
+  m_SkinWidth: 0.08
+  m_MinMoveDistance: 0.001
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!195 &82556815
 NavMeshAgent:
   m_ObjectHideFlags: 0

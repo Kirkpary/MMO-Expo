@@ -552,6 +552,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canvas: {fileID: 994554966}
+  maxFPS: -1
 --- !u!1 &1073330330
 GameObject:
   m_ObjectHideFlags: 0
