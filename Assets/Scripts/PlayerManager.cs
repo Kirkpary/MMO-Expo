@@ -93,26 +93,13 @@ namespace Com.Oregonstate.MMOExpo
 #endif
         }
 
-        //TODO Remove when physics movement is added
         void Update()
-        {
-            if (photonView.IsMine)
-            {
-                ProcessClicks();
-            }
-        }
-
-        /// <summary>
-        /// FixedUpdate is called at a fixed interval and is independent of frame rate. Put physics code here.
-        /// </summary>
-        void FixedUpdate()
         {
             if (photonView.IsMine)
             {
                 ProcessInputs();
             }
         }
-
 
 #if !UNITY_5_4_OR_NEWER
         void OnLevelWasLoaded(int level) 
@@ -152,42 +139,6 @@ namespace Com.Oregonstate.MMOExpo
             float v = Input.GetAxis("Vertical");
             if (h == 0 && v == 0)
             {
-                /*if (Input.GetButtonDown("Fire1"))
-                {
-                    RaycastHit hit;
-
-                    if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, 100))
-                    {
-                        agent.destination = hit.point;
-                    }
-                }*/
-            }
-            else
-            {
-                agent.isStopped = true;
-                agent.ResetPath();
-                if (characterController != null) {
-                    //TODO Change to physics movement
-                    characterController.Move(transform.TransformDirection(Vector3.forward) * v * moveSpeed);
-                    transform.Rotate(0, h * rotationSpeed, 0, Space.Self);
-                }
-                else
-                {
-                    Debug.LogError("<Color=Red><a>Missing</a></Color> CharacterController Component on playerPrefab.", this);
-                }
-            }
-        }
-
-        /// <summary>
-        /// Processes the clicks.
-        /// </summary>
-        //TODO Remove when physics movement is added
-        void ProcessClicks()
-        {
-            float h = Input.GetAxis("Horizontal");
-            float v = Input.GetAxis("Vertical");
-            if (h == 0 && v == 0)
-            {
                 if (Input.GetButtonDown("Fire1"))
                 {
                     RaycastHit hit;
@@ -196,6 +147,19 @@ namespace Com.Oregonstate.MMOExpo
                     {
                         agent.destination = hit.point;
                     }
+                }
+            }
+            else
+            {
+                agent.isStopped = true;
+                agent.ResetPath();
+                if (characterController != null) {
+                    characterController.Move(transform.TransformDirection(Vector3.forward) * v * (moveSpeed * Time.deltaTime));
+                    transform.Rotate(0, h * (rotationSpeed * Time.deltaTime), 0, Space.Self);
+                }
+                else
+                {
+                    Debug.LogError("<Color=Red><a>Missing</a></Color> CharacterController Component on playerPrefab.", this);
                 }
             }
         }
