@@ -1,5 +1,8 @@
 ﻿using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UI;
+using UnityEngine.EventSystems;
+using System.Collections.Generic;
 
 using Photon.Pun;
 
@@ -13,6 +16,9 @@ namespace Com.Oregonstate.MMOExpo
     {
         #region Private Fields
         NavMeshAgent agent;
+        GraphicRaycaster graphicRaycaster;
+        PointerEventData pointerEventData;
+        EventSystem eventSystem;
         #endregion
 
         #region Public Fields
@@ -48,6 +54,11 @@ namespace Com.Oregonstate.MMOExpo
             // used in GameManager.cs: we keep track of the localPlayer instance to prevent instantiation when levels are synchrononized
             if (photonView.IsMine)
             {
+                // Get the Raycaster from the Canvas
+                graphicRaycaster = GameObject.FindObjectOfType<Canvas>().GetComponent<GraphicRaycaster>();
+                // Get the Event System form the Scene
+                eventSystem = GetComponent<EventSystem>();
+
                 PlayerManager.LocalPlayerInstance = this.gameObject;
             }
             // #Critical
@@ -118,6 +129,11 @@ namespace Com.Oregonstate.MMOExpo
 
         void CalledOnLevelWasLoaded(int level)
         {
+            // Get the Raycaster from the Canvas
+            graphicRaycaster = GameObject.FindObjectOfType<Canvas>().GetComponent<GraphicRaycaster>();
+            // Get the Event System form the Scene
+            eventSystem = GetComponent<EventSystem>();
+
             // check if we are outside the Arena and if it's the case, spawn around the center of the arena in a safe zone
             if (!Physics.Raycast(transform.position, -Vector3.up, 5f))
             {
@@ -147,13 +163,25 @@ namespace Com.Oregonstate.MMOExpo
             float v = Input.GetAxis("Vertical");
             if (h == 0 && v == 0)
             {
-                if (Input.GetButtonDown("Fire1") && !ChatGui.isChatEnabled)
+                if (Input.GetButtonDown("Fire1"))
                 {
-                    RaycastHit hit;
+                    // Check for UI click
+                    pointerEventData = new PointerEventData(eventSystem);
+                    pointerEventData.position = Input.mousePosition;
 
-                    if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, 100))
+                    List<RaycastResult> results = new List<RaycastResult>();
+
+                    graphicRaycaster.Raycast(pointerEventData, results);
+
+                    // Only set destination if the ui is not clicked on
+                    if (results.Count <= 0)
                     {
-                        agent.destination = hit.point;
+                        RaycastHit hit;
+
+                        if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, 100))
+                        {
+                            agent.destination = hit.point;
+                        }
                     }
                 }
             }

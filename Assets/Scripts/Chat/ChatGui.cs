@@ -56,14 +56,18 @@ public class ChatGui : MonoBehaviour, IChatClientListener
     #endif
     protected internal ChatAppSettings chatAppSettings;
 
-
+    [Tooltip("Main chat panel that holds all the chat UI")]
 	public RectTransform ChatPanel;     // set in inspector (to enable/disable panel)
+    [Tooltip("Chat input box")]
 	public InputField InputFieldChat;   // set in inspector
+    [Tooltip("Chat Output Text Object")]
 	public Text CurrentChannelText;     // set in inspector
+    [Tooltip("Channel Toggle from Channel Panel")]
 	public GameObject ChannelToggleToInstantiate; // set in inspector
 
 	private readonly Dictionary<string, GameObject> channelToggles = new Dictionary<string, GameObject>();
 
+    [Tooltip("Text object to display the current user ID. Not currently part of the chat panel.")]
 	public Text UserIdText; // set in inspector
 
     private GameObject[] booths;
@@ -108,9 +112,23 @@ public class ChatGui : MonoBehaviour, IChatClientListener
 
         chatManager = this;
 
-	    this.UserIdText.text = "";
-	    this.UserIdText.gameObject.SetActive(true);
-	    this.ChatPanel.gameObject.SetActive(false);
+        if (UserIdText != null)
+        {
+            this.UserIdText.text = "";
+            this.UserIdText.gameObject.SetActive(true);
+        }
+	    else
+        {
+            Debug.LogError("<Color=red><a>Missing</a></Color> userIdText Reference. Please set it up in GameObject 'Chat Panel'", this);
+        }
+        if (ChatPanel != null) {
+	        this.ChatPanel.gameObject.SetActive(false);
+        }
+        else
+        {
+            Debug.LogError("<Color=red><a>Missing</a></Color> userIdText Reference. Please set it up in GameObject 'Chat Panel'", this);
+        }
+
         chatEnabled = false;
         isChatConnected = false;
 
@@ -179,8 +197,16 @@ public class ChatGui : MonoBehaviour, IChatClientListener
         }
 	}
 
+    private void OnGUI()
+    {
+        if (!isChatEnabled)
+        {
+            GUI.contentColor = Color.black;
+            GUI.Label(new Rect(5, Screen.height - 25, 200, 25), "Press 'Enter' to chat");
+        }
+    }
 
-	public void OnEnterSend()
+    public void OnEnterSend()
 	{
 		if (Input.GetKey(KeyCode.Return) || Input.GetKey(KeyCode.KeypadEnter))
 		{
@@ -339,15 +365,16 @@ public class ChatGui : MonoBehaviour, IChatClientListener
 
         this.isChatConnected = true;
 
-        this.UserIdText.text = "Connected as "+ PhotonNetwork.NickName;
+        this.UserIdText.text = PhotonNetwork.NickName;
 
-		this.chatClient.SetOnlineStatus(ChatUserStatus.Online); // You can set your online state (without a mesage).
+        this.chatClient.SetOnlineStatus(ChatUserStatus.Online); // You can set your online state (without a mesage).
 
     }
 
 	public void OnDisconnected()
 	{
-        this.UnSubscribeCurrent();
+        //TODO May need this later
+        //this.UnSubscribeCurrent();
 
         this.isChatConnected = false;
     }
