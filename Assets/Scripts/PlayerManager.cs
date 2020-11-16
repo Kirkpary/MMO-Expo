@@ -101,6 +101,14 @@ namespace Com.Oregonstate.MMOExpo
             }
         }
 
+        void FixedUpdate()
+        {
+            if (photonView.IsMine && ChatGui.chatManager.IsChatConnected)
+            {
+                ChatGui.chatManager.SubscirbeToClosestBooth(transform.position);
+            }
+        }
+
 #if !UNITY_5_4_OR_NEWER
         void OnLevelWasLoaded(int level) 
         {
@@ -139,7 +147,7 @@ namespace Com.Oregonstate.MMOExpo
             float v = Input.GetAxis("Vertical");
             if (h == 0 && v == 0)
             {
-                if (Input.GetButtonDown("Fire1"))
+                if (Input.GetButtonDown("Fire1") && !ChatGui.isChatEnabled)
                 {
                     RaycastHit hit;
 
@@ -151,15 +159,19 @@ namespace Com.Oregonstate.MMOExpo
             }
             else
             {
-                agent.isStopped = true;
-                agent.ResetPath();
-                if (characterController != null) {
-                    characterController.Move(transform.TransformDirection(Vector3.forward) * v * (moveSpeed * Time.deltaTime));
-                    transform.Rotate(0, h * (rotationSpeed * Time.deltaTime), 0, Space.Self);
-                }
-                else
+                if (!ChatGui.isChatEnabled || !(Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D)))
                 {
-                    Debug.LogError("<Color=Red><a>Missing</a></Color> CharacterController Component on playerPrefab.", this);
+                    agent.isStopped = true;
+                    agent.ResetPath();
+                    if (characterController != null)
+                    {
+                        characterController.Move(transform.TransformDirection(Vector3.forward) * v * (moveSpeed * Time.deltaTime));
+                        transform.Rotate(0, h * (rotationSpeed * Time.deltaTime), 0, Space.Self);
+                    }
+                    else
+                    {
+                        Debug.LogError("<Color=Red><a>Missing</a></Color> CharacterController Component on playerPrefab.", this);
+                    }
                 }
             }
         }

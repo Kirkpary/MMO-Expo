@@ -15,10 +15,10 @@ GameObject:
   - component: {fileID: 6168802809710119873}
   m_Layer: 0
   m_Name: Booth
-  m_TagString: Untagged
+  m_TagString: Booth
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &9123127195852542141
 Transform:
