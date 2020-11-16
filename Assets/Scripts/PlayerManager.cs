@@ -159,7 +159,7 @@ namespace Com.Oregonstate.MMOExpo
             }
             else
             {
-                if (!ChatGui.isChatEnabled || !(Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D)))
+                if (!ChatGui.isChatEnabled || Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.RightArrow))
                 {
                     agent.isStopped = true;
                     agent.ResetPath();
