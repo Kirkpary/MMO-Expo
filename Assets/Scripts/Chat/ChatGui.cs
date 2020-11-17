@@ -643,7 +643,7 @@ public class ChatGui : MonoBehaviour, IChatClientListener
     public void SubscirbeToClosestBooth(Vector3 playerPosition)
     {
         String closestBoothName = null;
-        float smallestDistance = boothChatRange;
+        float smallestDistance = boothChatRange * boothChatRange;
         foreach (GameObject booth in booths)
         {
             float distance = (booth.transform.position - playerPosition).sqrMagnitude;
