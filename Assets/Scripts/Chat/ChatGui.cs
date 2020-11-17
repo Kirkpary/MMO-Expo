@@ -56,6 +56,9 @@ public class ChatGui : MonoBehaviour, IChatClientListener
     #endif
     protected internal ChatAppSettings chatAppSettings;
 
+    [Tooltip("Range of the porximity booth chat.")]
+    [Range(0, Mathf.Infinity)]
+    public float boothChatRange = 5;
     [Tooltip("Main chat panel that holds all the chat UI")]
 	public RectTransform ChatPanel;     // set in inspector (to enable/disable panel)
     [Tooltip("Chat input box")]
@@ -639,20 +642,20 @@ public class ChatGui : MonoBehaviour, IChatClientListener
     /// <param name="playerPosition"></param>
     public void SubscirbeToClosestBooth(Vector3 playerPosition)
     {
-        GameObject closestBooth = null;
-        float smallestDistance = Mathf.Infinity;
+        String closestBoothName = null;
+        float smallestDistance = boothChatRange;
         foreach (GameObject booth in booths)
         {
             float distance = (booth.transform.position - playerPosition).sqrMagnitude;
             if (distance < smallestDistance)
             {
-                closestBooth = booth;
+                closestBoothName = booth.name;
                 smallestDistance = distance;
             }
         }
 
         //TODO change to booth title
-        if (closestBooth.name != boothChannel)
+        if (closestBoothName != boothChannel)
         {
             // Unsubscribe from current booth channel
             string[] channels = { boothChannel };
@@ -663,9 +666,9 @@ public class ChatGui : MonoBehaviour, IChatClientListener
 
             // Subsribe to closest booth channel unless the user manually subscribed.
             // This also prevents the booth from being unsubscribed when the user manually subscribed to it.
-            if (closestBooth != null && !this.channelToggles.ContainsKey(closestBooth.name))
+            if (closestBoothName != null && !this.channelToggles.ContainsKey(closestBoothName))
             {
-                boothChannel = closestBooth.name;
+                boothChannel = closestBoothName;
                 channels[0] = boothChannel;
                 this.chatClient.Subscribe(channels);
             }
