@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections;
-
-using UnityEngine;
-using UnityEngine.SceneManagement;
+﻿using UnityEngine;
 
 using Photon.Pun;
 using Photon.Realtime;
@@ -18,8 +14,6 @@ namespace Com.Oregonstate.MMOExpo
         #endregion
 
         #region Private Fields
-        private bool leaveGame = false;
-        private bool switchRoom = false;
         #endregion
 
         #region MonoBehavior Callbacks
@@ -48,19 +42,6 @@ namespace Com.Oregonstate.MMOExpo
         #endregion
 
         #region Photon Callbacks
-        /// <summary>
-        /// Called when the local player left the room. We need to load the launcher scene.
-        /// </summary>
-        public override void OnLeftRoom()
-        {
-            if (leaveGame == true) {
-                SceneManager.LoadScene(0);
-            }
-            if (switchRoom == true) {
-                SceneManager.LoadScene(1);
-            }
-        }
-
         public override void OnPlayerEnteredRoom(Player other)
         {
             Debug.LogFormat("OnPlayerEnteredRoom() {0}", other.NickName); // not seen if you're the player connecting
@@ -83,32 +64,6 @@ namespace Com.Oregonstate.MMOExpo
 
                 LoadArena();
             }*/
-        }
-        #endregion
-
-        #region Private Methods
-        /*void LoadArena()
-        {
-            if (!PhotonNetwork.IsMasterClient)
-            {
-                Debug.LogError("PhotonNetwork : Trying to Load a level but we are not the master Client");
-            }
-            Debug.LogFormat("PhotonNetwork : Loading Level : {0}", PhotonNetwork.CurrentRoom.PlayerCount);
-            PhotonNetwork.LoadLevel("Room for " + PhotonNetwork.CurrentRoom.PlayerCount);
-        }*/
-        #endregion
-
-        #region Public Methods
-        public void LeaveGame_Button_Click()
-        {
-            leaveGame = true;
-            PhotonNetwork.LeaveRoom();
-        }
-
-        public void SwitchRoom_Button_Click()
-        {
-            switchRoom = true;
-            PhotonNetwork.LeaveRoom();
         }
         #endregion
     }
