@@ -299,7 +299,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   controlPanel: {fileID: 1334803194}
   progressLabel: {fileID: 1231752894}
-  roomName: SampleScene
+  roomName: WorldLobby
 --- !u!4 &834703681
 Transform:
   m_ObjectHideFlags: 0

@@ -17,11 +17,16 @@ namespace Com.Oregonstate.MMOExpo
         public GameObject playerPrefab;
         #endregion
 
+        #region Private Fields
+        private bool leaveGame = false;
+        private bool switchRoom = false;
+        #endregion
+
         #region MonoBehavior Callbacks
         private void Start()
-        {
+        {   
             Instance = this;
-
+            
             if (playerPrefab == null)
             {
                 Debug.LogError("<Color=red><a>Missing</a></Color> playerPrefab Reference. Please set it up in GameObject 'Game Manager'", this);
@@ -48,8 +53,12 @@ namespace Com.Oregonstate.MMOExpo
         /// </summary>
         public override void OnLeftRoom()
         {
-            // Load first scene in build settings
-            SceneManager.LoadScene(0);
+            if (leaveGame == true) {
+                SceneManager.LoadScene(0);
+            }
+            if (switchRoom == true) {
+                SceneManager.LoadScene(1);
+            }
         }
 
         public override void OnPlayerEnteredRoom(Player other)
@@ -90,8 +99,15 @@ namespace Com.Oregonstate.MMOExpo
         #endregion
 
         #region Public Methods
-        public void LeaveRoom()
+        public void LeaveGame_Button_Click()
         {
+            leaveGame = true;
+            PhotonNetwork.LeaveRoom();
+        }
+
+        public void SwitchRoom_Button_Click()
+        {
+            switchRoom = true;
             PhotonNetwork.LeaveRoom();
         }
         #endregion
