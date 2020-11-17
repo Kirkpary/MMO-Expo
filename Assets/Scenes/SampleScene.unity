@@ -248,6 +248,18 @@ PrefabInstance:
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1087833548743548491, guid: 29b52ba97a2ceb642a29dc79bcb713df, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1087833548743548491, guid: 29b52ba97a2ceb642a29dc79bcb713df, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1087833548743548491, guid: 29b52ba97a2ceb642a29dc79bcb713df, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1581049977014861128, guid: 29b52ba97a2ceb642a29dc79bcb713df, type: 3}
       propertyPath: m_Name
       value: Chat Prefab (Canvas)
