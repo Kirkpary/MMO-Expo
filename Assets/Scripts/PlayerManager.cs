@@ -50,9 +50,6 @@ namespace Com.Oregonstate.MMOExpo
             {
                 PlayerManager.LocalPlayerInstance = this.gameObject;
             }
-            // #Critical
-            // we flag as don't destroy on load so that instance survives level synchronization, thus giving a seamless experience when levels load.
-            DontDestroyOnLoad(this.gameObject);     //TODO Delete. Probably not needed for MMO
         }
 
         private void Start()

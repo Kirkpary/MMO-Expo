@@ -121,7 +121,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: Com.Oregonstate.MMOExpo.GameManager, Assembly-CSharp
+        m_TargetAssemblyTypeName: Com.Oregonstate.MMOExpo.Launcher, Assembly-CSharp
         m_MethodName: LeaveRoom
         m_Mode: 1
         m_Arguments:

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections;
-
-using UnityEngine;
-using UnityEngine.SceneManagement;
+﻿using UnityEngine;
 
 using Photon.Pun;
 using Photon.Realtime;
@@ -17,11 +13,14 @@ namespace Com.Oregonstate.MMOExpo
         public GameObject playerPrefab;
         #endregion
 
+        #region Private Fields
+        #endregion
+
         #region MonoBehavior Callbacks
         private void Start()
-        {
+        {   
             Instance = this;
-
+            
             if (playerPrefab == null)
             {
                 Debug.LogError("<Color=red><a>Missing</a></Color> playerPrefab Reference. Please set it up in GameObject 'Game Manager'", this);
@@ -43,15 +42,6 @@ namespace Com.Oregonstate.MMOExpo
         #endregion
 
         #region Photon Callbacks
-        /// <summary>
-        /// Called when the local player left the room. We need to load the launcher scene.
-        /// </summary>
-        public override void OnLeftRoom()
-        {
-            // Load first scene in build settings
-            SceneManager.LoadScene(0);
-        }
-
         public override void OnPlayerEnteredRoom(Player other)
         {
             Debug.LogFormat("OnPlayerEnteredRoom() {0}", other.NickName); // not seen if you're the player connecting
@@ -74,25 +64,6 @@ namespace Com.Oregonstate.MMOExpo
 
                 LoadArena();
             }*/
-        }
-        #endregion
-
-        #region Private Methods
-        /*void LoadArena()
-        {
-            if (!PhotonNetwork.IsMasterClient)
-            {
-                Debug.LogError("PhotonNetwork : Trying to Load a level but we are not the master Client");
-            }
-            Debug.LogFormat("PhotonNetwork : Loading Level : {0}", PhotonNetwork.CurrentRoom.PlayerCount);
-            PhotonNetwork.LoadLevel("Room for " + PhotonNetwork.CurrentRoom.PlayerCount);
-        }*/
-        #endregion
-
-        #region Public Methods
-        public void LeaveRoom()
-        {
-            PhotonNetwork.LeaveRoom();
         }
         #endregion
     }
