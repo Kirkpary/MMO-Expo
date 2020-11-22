@@ -139,7 +139,7 @@ GameObject:
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!81 &327569958
 AudioListener:
@@ -298,6 +298,18 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: WorldLobby
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1352914550}
+        m_TargetAssemblyTypeName: CharacterSelection, Assembly-CSharp
+        m_MethodName: StartGame
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &422383274
@@ -526,11 +538,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &880602859 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3953167543759569063, guid: 75c62f3b81b06cb4da843d1b74c595d1, type: 3}
-  m_PrefabInstance: {fileID: 8357756533631634955}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1025696495
 GameObject:
   m_ObjectHideFlags: 0
@@ -597,11 +604,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1156987948 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1537002025975375628, guid: 0bb820b314222d7438b1328cf7854345, type: 3}
-  m_PrefabInstance: {fileID: 4012612909921125613}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1175864419
 GameObject:
   m_ObjectHideFlags: 0
@@ -994,9 +996,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   characters:
-  - {fileID: 1540037231}
-  - {fileID: 880602859}
-  - {fileID: 1156987948}
+  - {fileID: 6964593652244199670, guid: d1d7a5f2ab64ae74e8d5e68965747db3, type: 3}
+  - {fileID: 3953167543759569063, guid: 75c62f3b81b06cb4da843d1b74c595d1, type: 3}
+  - {fileID: 1537002025975375628, guid: 0bb820b314222d7438b1328cf7854345, type: 3}
   selectedCharacter: 0
 --- !u!1 &1429370691
 GameObject:
@@ -1079,11 +1081,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1429370691}
   m_CullTransparentMesh: 0
---- !u!1 &1540037231 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6964593652244199670, guid: d1d7a5f2ab64ae74e8d5e68965747db3, type: 3}
-  m_PrefabInstance: {fileID: 6705183355458202298}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2010651454
 GameObject:
   m_ObjectHideFlags: 0
@@ -1341,6 +1338,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1352914549}
     m_Modifications:
+    - target: {fileID: -4474035027936088938, guid: 0bb820b314222d7438b1328cf7854345, type: 3}
+      propertyPath: viewIdField
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 1537002025975375628, guid: 0bb820b314222d7438b1328cf7854345, type: 3}
       propertyPath: m_Name
       value: Player Red
@@ -1407,6 +1408,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1352914549}
     m_Modifications:
+    - target: {fileID: -2479905314937244036, guid: d1d7a5f2ab64ae74e8d5e68965747db3, type: 3}
+      propertyPath: viewIdField
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 1916793649166565700, guid: d1d7a5f2ab64ae74e8d5e68965747db3, type: 3}
       propertyPath: m_LocalPosition.x
       value: 1
@@ -1455,6 +1460,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player Green
       objectReference: {fileID: 0}
+    - target: {fileID: 6964593652244199670, guid: d1d7a5f2ab64ae74e8d5e68965747db3, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d1d7a5f2ab64ae74e8d5e68965747db3, type: 3}
 --- !u!4 &6705183355458202299 stripped
@@ -1469,6 +1478,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1352914549}
     m_Modifications:
+    - target: {fileID: -3257298357383534942, guid: 75c62f3b81b06cb4da843d1b74c595d1, type: 3}
+      propertyPath: viewIdField
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1250690605291012847, guid: 75c62f3b81b06cb4da843d1b74c595d1, type: 3}
       propertyPath: m_LocalPosition.x
       value: 1
