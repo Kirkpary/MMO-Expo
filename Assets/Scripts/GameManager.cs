@@ -30,8 +30,7 @@ namespace Com.Oregonstate.MMOExpo
             {
                 if (PlayerManager.LocalPlayerInstance == null)
                 {
-                    Debug.Log("Printing PlayerPrefs");
-                    Debug.Log(PlayerPrefs.GetInt("selectedCharacter"));
+                    Debug.LogFormat("Printing PlayerPrefs: {0}", PlayerPrefs.GetInt("selectedCharacter"));
 
                     Debug.LogFormat("We are Instantiating LocalPlayer from {0}", SceneManagerHelper.ActiveSceneName);
                     // we're in a room. spawn a character for the local player. it gets synced by using PhotonNetwork.Instantiate

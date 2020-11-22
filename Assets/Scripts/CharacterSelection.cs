@@ -28,7 +28,6 @@ public class CharacterSelection : MonoBehaviour
     public void StartGame()
     {
         PlayerPrefs.SetInt("selectedCharacter", selectedCharacter);
-        Debug.Log("The selectedCharacter int is");
-        Debug.Log(PlayerPrefs.GetInt("selectedCharacter"));
+        Debug.LogFormat("The selectedCharacter int is {0}", PlayerPrefs.GetInt("selectedCharacter"));
     }
 }
