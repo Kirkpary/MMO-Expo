@@ -18,7 +18,14 @@ public class CharacterSelection : MonoBehaviour
             newPlayer.SetActive(false);
             characters.Add(newPlayer);
         }
-        characters[selectedCharacter].SetActive(true);
+        if (temp.Length > 0)
+        {
+            characters[selectedCharacter].SetActive(true);
+        }
+        else
+        {
+            Debug.LogError("<Color=red><a>Missing</a></Color> couldn't load playerPrefabs from Avatars folder. Please make sure there are prefabs in the 'Assets/Resources/Avatars' folder.", this);
+        }
     }
 
     public void NextCharacter()
