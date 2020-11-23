@@ -13,9 +13,9 @@ public class CharacterSelection : MonoBehaviour
         Debug.LogFormat("Avatars: {0}", temp.Length);
         foreach (GameObject character in temp)
         {
-            character.SetActive(false);
             GameObject newPlayer = Instantiate(character, gameObject.transform);
             newPlayer.name = character.name;
+            newPlayer.SetActive(false);
             characters.Add(newPlayer);
         }
         characters[selectedCharacter].SetActive(true);

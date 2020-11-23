@@ -127,7 +127,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PlayerUiPrefab: {fileID: 8732337277991191219, guid: a1c0f010ec799b946a35808e5c255e4d, type: 3}
-  characterController: {fileID: -2341317095846150557}
   moveSpeed: 4
   rotationSpeed: 150
 --- !u!114 &-4390587152511961200
