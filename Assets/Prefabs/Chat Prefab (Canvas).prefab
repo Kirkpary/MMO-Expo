@@ -1971,7 +1971,6 @@ GameObject:
   m_Component:
   - component: {fileID: 9072757733119049157}
   - component: {fileID: 9072757733119049158}
-  - component: {fileID: 3036403077947651826}
   m_Layer: 5
   m_Name: Chat Panel
   m_TagString: Untagged
@@ -2000,7 +1999,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 400, y: 0}
+  m_SizeDelta: {x: 300, y: 0}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!114 &9072757733119049158
 MonoBehaviour:
@@ -2012,18 +2011,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1f1563bc3f7cee84687e7bbfe5bbf611, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &3036403077947651826
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9072757733119049156}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 74aa3443179730642a3a1f05b58e0a4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &9072757733238314110
@@ -2464,7 +2451,7 @@ MonoBehaviour:
   m_MinWidth: -1
   m_MinHeight: 40
   m_PreferredWidth: -1
-  m_PreferredHeight: 40
+  m_PreferredHeight: -1
   m_FlexibleWidth: -1
   m_FlexibleHeight: -1
   m_LayoutPriority: 1

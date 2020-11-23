@@ -76,7 +76,6 @@ public class ChatGui : MonoBehaviour, IChatClientListener
     private GameObject[] booths;
     private string boothChannel;
 
-    //? May be a better way to make the Subscribe to closest booth function available to the player
     public static ChatGui chatManager;
     private bool isChatConnected = false;
     public bool IsChatConnected
@@ -84,28 +83,28 @@ public class ChatGui : MonoBehaviour, IChatClientListener
         get { return isChatConnected; }
     }
 
-	// private static string WelcomeText = "Welcome to chat. Type \\help to list commands.";
+	// private static string WelcomeText = "Welcome to chat. Type /help to list commands.";
 	private static string HelpText = "\n    -- HELP --\n" +
 		"To subscribe to channel(s) (channelnames are case sensitive) :  \n" +
-			"\t<color=#E07B00>\\subscribe</color> <color=green><list of channelnames></color>\n" +
+            "\t<color=#DC4405>/subscribe</color> <color=green><list of channelnames></color>\n" +
 			"\tor\n" +
-			"\t<color=#E07B00>\\s</color> <color=green><list of channelnames></color>\n" +
+            "\t<color=#DC4405>/s</color> <color=green><list of channelnames></color>\n" +
 			"\n" +
 			"To leave channel(s):\n" +
-			"\t<color=#E07B00>\\unsubscribe</color> <color=green><list of channelnames></color>\n" +
+            "\t<color=#DC4405>/unsubscribe</color> <color=green><list of channelnames></color>\n" +
 			"\tor\n" +
-			"\t<color=#E07B00>\\u</color> <color=green><list of channelnames></color>\n" +
+            "\t<color=#DC4405>/u</color> <color=green><list of channelnames></color>\n" +
 			"\n" +
 			"To switch the active channel\n" +
-			"\t<color=#E07B00>\\join</color> <color=green><channelname></color>\n" +
+            "\t<color=#DC4405>/join</color> <color=green><channelname></color>\n" +
 			"\tor\n" +
-			"\t<color=#E07B00>\\j</color> <color=green><channelname></color>\n" +
+            "\t<color=#DC4405>/j</color> <color=green><channelname></color>\n" +
 			"\n" +
 			"To send a private message: (username are case sensitive)\n" +
-			"\t\\<color=#E07B00>msg</color> <color=green><username></color> <color=green><message></color>\n" +
+            "\t<color=#DC4405>/msg</color> <color=green><username></color> <color=green><message></color>\n" +
 			"\n\n" +
 			"To clear the current chat tab (private chats get closed):\n" +
-			"\t<color=#E07B00>\\clear</color>";
+            "\t<color=#DC4405>/clear</color>";
 
 
 	public void Start()
@@ -262,22 +261,22 @@ public class ChatGui : MonoBehaviour, IChatClientListener
 		//UnityEngine.Debug.Log("selectedChannelName: " + selectedChannelName + " doingPrivateChat: " + doingPrivateChat + " privateChatTarget: " + privateChatTarget);
 
 
-		if (inputLine[0].Equals('\\'))
+		if (inputLine[0].Equals('/'))
 		{
 			string[] tokens = inputLine.Split(new char[] {' '}, 2);
-			if (tokens[0].Equals("\\help"))
+			if (tokens[0].Equals("/help"))
 			{
 			    this.PostHelpToCurrentChannel();
 			}
-			if ((tokens[0].Equals("\\subscribe") || tokens[0].Equals("\\s")) && !string.IsNullOrEmpty(tokens[1]))
+			if ((tokens[0].Equals("/subscribe") || tokens[0].Equals("/s")) && !string.IsNullOrEmpty(tokens[1]))
 			{
 				this.chatClient.Subscribe(tokens[1].Split(new char[] {' ', ','}));
 			}
-			else if ((tokens[0].Equals("\\unsubscribe") || tokens[0].Equals("\\u")) && !string.IsNullOrEmpty(tokens[1]))
+			else if ((tokens[0].Equals("/unsubscribe") || tokens[0].Equals("/u")) && !string.IsNullOrEmpty(tokens[1]))
 			{
 				this.chatClient.Unsubscribe(tokens[1].Split(new char[] {' ', ','}));
 			}
-			else if (tokens[0].Equals("\\clear"))
+			else if (tokens[0].Equals("/clear"))
 			{
 				if (doingPrivateChat)
 				{
@@ -292,7 +291,7 @@ public class ChatGui : MonoBehaviour, IChatClientListener
 					}
 				}
 			}
-			else if (tokens[0].Equals("\\msg") && !string.IsNullOrEmpty(tokens[1]))
+			else if (tokens[0].Equals("/msg") && !string.IsNullOrEmpty(tokens[1]))
 			{
 				string[] subtokens = tokens[1].Split(new char[] {' ', ','}, 2);
 				if (subtokens.Length < 2) return;
@@ -301,7 +300,7 @@ public class ChatGui : MonoBehaviour, IChatClientListener
 				string message = subtokens[1];
 				this.chatClient.SendPrivateMessage(targetUser, message);
 			}
-			else if ((tokens[0].Equals("\\join") || tokens[0].Equals("\\j")) && !string.IsNullOrEmpty(tokens[1]))
+			else if ((tokens[0].Equals("/join") || tokens[0].Equals("/j")) && !string.IsNullOrEmpty(tokens[1]))
 			{
 				string[] subtokens = tokens[1].Split(new char[] { ' ', ',' }, 2);
 
@@ -390,7 +389,6 @@ public class ChatGui : MonoBehaviour, IChatClientListener
 
 	public void OnSubscribed(string[] channels, bool[] results)
 	{
-		// in this demo, we simply send a message into each channel. This is NOT a must have!
 		foreach (string channel in channels)
 		{
             //? Welcome message
