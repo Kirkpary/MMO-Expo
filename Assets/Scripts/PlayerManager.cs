@@ -15,6 +15,7 @@ namespace Com.Oregonstate.MMOExpo
     public class PlayerManager : MonoBehaviourPunCallbacks, IPunObservable
     {
         #region Private Fields
+        CharacterController characterController;
         NavMeshAgent agent;
         GraphicRaycaster graphicRaycaster;
         PointerEventData pointerEventData;
@@ -27,8 +28,6 @@ namespace Com.Oregonstate.MMOExpo
         [Tooltip("The Player's UI GameObject Prefab")]
         [SerializeField]
         public GameObject PlayerUiPrefab;
-        [SerializeField]
-        public CharacterController characterController;
         [SerializeField]
         public float moveSpeed = 0.01f;
         [SerializeField]
@@ -65,6 +64,7 @@ namespace Com.Oregonstate.MMOExpo
 
         private void Start()
         {
+            characterController = GetComponent<CharacterController>();
             agent = GetComponent<NavMeshAgent>();
 
             CameraWork _cameraWork = this.gameObject.GetComponent<CameraWork>();

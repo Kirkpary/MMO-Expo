@@ -9,8 +9,6 @@ namespace Com.Oregonstate.MMOExpo
     {
         #region Public Fields
         public static GameManager Instance;
-        [Tooltip("The prefab to use for representing the player")]
-        public GameObject playerPrefab;
         #endregion
 
         #region Private Fields
@@ -21,17 +19,19 @@ namespace Com.Oregonstate.MMOExpo
         {   
             Instance = this;
             
-            if (playerPrefab == null)
+            if (PlayerPrefs.GetString("selectedCharacter", "") == "")
             {
-                Debug.LogError("<Color=red><a>Missing</a></Color> playerPrefab Reference. Please set it up in GameObject 'Game Manager'", this);
+                Debug.LogError("<Color=red><a>Missing</a></Color> playerPrefab Reference. Please set it up in Scene 'CharacterSelector' in GameObject 'Characters'", this);
             }
             else
             {
                 if (PlayerManager.LocalPlayerInstance == null)
                 {
+                    Debug.LogFormat("Printing PlayerPrefs: {0}", PlayerPrefs.GetString("selectedCharacter"));
+
                     Debug.LogFormat("We are Instantiating LocalPlayer from {0}", SceneManagerHelper.ActiveSceneName);
                     // we're in a room. spawn a character for the local player. it gets synced by using PhotonNetwork.Instantiate
-                    PhotonNetwork.Instantiate(this.playerPrefab.name, new Vector3(0f, 5f, 0f), Quaternion.identity, 0);
+                    PhotonNetwork.Instantiate("Avatars/" + PlayerPrefs.GetString("selectedCharacter"), new Vector3(0f, 5f, 0f), Quaternion.identity, 0);
                 }
                 else
                 {
