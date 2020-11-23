@@ -214,7 +214,9 @@ public class ChatGui : MonoBehaviour, IChatClientListener
 		{
 		    this.SendChatMessage(this.InputFieldChat.text);
 			this.InputFieldChat.text = "";
-		}
+            InputFieldChat.Select();
+            InputFieldChat.ActivateInputField();
+        }
 	}
 
 	public void OnClickSend()
@@ -223,7 +225,9 @@ public class ChatGui : MonoBehaviour, IChatClientListener
 		{
 		    this.SendChatMessage(this.InputFieldChat.text);
 			this.InputFieldChat.text = "";
-		}
+            InputFieldChat.Select();
+            InputFieldChat.ActivateInputField();
+        }
 	}
 
 
@@ -598,6 +602,8 @@ public class ChatGui : MonoBehaviour, IChatClientListener
     {
         this.ChatPanel.gameObject.SetActive(true);
         chatEnabled = true;
+        InputFieldChat.Select();
+        InputFieldChat.ActivateInputField();
     }
 
     public void HideChat()
