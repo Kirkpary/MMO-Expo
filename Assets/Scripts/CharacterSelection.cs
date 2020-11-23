@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
+using System.Linq;
 
 public class CharacterSelection : MonoBehaviour
 {
@@ -9,8 +10,7 @@ public class CharacterSelection : MonoBehaviour
 
     private void Start()
     {
-        Object[] temp = Resources.LoadAll("Avatars", typeof(GameObject));
-        Debug.LogFormat("Avatars: {0}", temp.Length);
+        var temp = Resources.LoadAll("Avatars", typeof(GameObject)).Cast<GameObject>();
         foreach (GameObject character in temp)
         {
             GameObject newPlayer = Instantiate(character, gameObject.transform);
@@ -18,14 +18,7 @@ public class CharacterSelection : MonoBehaviour
             newPlayer.SetActive(false);
             characters.Add(newPlayer);
         }
-        if (temp.Length > 0)
-        {
-            characters[selectedCharacter].SetActive(true);
-        }
-        else
-        {
-            Debug.LogError("<Color=red><a>Missing</a></Color> couldn't load playerPrefabs from Avatars folder. Please make sure there are prefabs in the 'Assets/Resources/Avatars' folder.", this);
-        }
+        characters[selectedCharacter].SetActive(true);
     }
 
     public void NextCharacter()
