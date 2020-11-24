@@ -34,6 +34,6 @@ public class FpsCounter : MonoBehaviour
 
     void OnGUI()
     {
-        GUI.Label(new Rect(5, 5, width, height), label);
+        GUI.Label(new Rect(Screen.width - width - 5, 5, width, height), label);
     }
 }

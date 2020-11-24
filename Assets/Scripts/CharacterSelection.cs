@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
+using System.Linq;
 
 public class CharacterSelection : MonoBehaviour
 {
@@ -9,8 +10,7 @@ public class CharacterSelection : MonoBehaviour
 
     private void Start()
     {
-        Object[] temp = Resources.LoadAll("Avatars", typeof(GameObject));
-        Debug.LogFormat("Avatars: {0}", temp.Length);
+        var temp = Resources.LoadAll("Avatars", typeof(GameObject)).Cast<GameObject>();
         foreach (GameObject character in temp)
         {
             GameObject newPlayer = Instantiate(character, gameObject.transform);

@@ -1,5 +1,8 @@
 ﻿using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UI;
+using UnityEngine.EventSystems;
+using System.Collections.Generic;
 
 using Photon.Pun;
 
@@ -14,6 +17,9 @@ namespace Com.Oregonstate.MMOExpo
         #region Private Fields
         CharacterController characterController;
         NavMeshAgent agent;
+        GraphicRaycaster graphicRaycaster;
+        PointerEventData pointerEventData;
+        EventSystem eventSystem;
         #endregion
 
         #region Public Fields
@@ -47,6 +53,11 @@ namespace Com.Oregonstate.MMOExpo
             // used in GameManager.cs: we keep track of the localPlayer instance to prevent instantiation when levels are synchrononized
             if (photonView.IsMine)
             {
+                // Get the Raycaster from the Canvas
+                graphicRaycaster = GameObject.FindObjectOfType<Canvas>().GetComponent<GraphicRaycaster>();
+                // Get the Event System form the Scene
+                eventSystem = GetComponent<EventSystem>();
+
                 PlayerManager.LocalPlayerInstance = this.gameObject;
             }
         }
@@ -98,6 +109,14 @@ namespace Com.Oregonstate.MMOExpo
             }
         }
 
+        void FixedUpdate()
+        {
+            if (photonView.IsMine && ChatGui.chatManager.IsChatConnected)
+            {
+                ChatGui.chatManager.SubscirbeToClosestBooth(transform.position);
+            }
+        }
+
 #if !UNITY_5_4_OR_NEWER
         void OnLevelWasLoaded(int level) 
         {
@@ -107,6 +126,11 @@ namespace Com.Oregonstate.MMOExpo
 
         void CalledOnLevelWasLoaded(int level)
         {
+            // Get the Raycaster from the Canvas
+            graphicRaycaster = GameObject.FindObjectOfType<Canvas>().GetComponent<GraphicRaycaster>();
+            // Get the Event System form the Scene
+            eventSystem = GetComponent<EventSystem>();
+
             // check if we are outside the Arena and if it's the case, spawn around the center of the arena in a safe zone
             if (!Physics.Raycast(transform.position, -Vector3.up, 5f))
             {
@@ -138,25 +162,41 @@ namespace Com.Oregonstate.MMOExpo
             {
                 if (Input.GetButtonDown("Fire1"))
                 {
-                    RaycastHit hit;
+                    // Check for UI click
+                    pointerEventData = new PointerEventData(eventSystem);
+                    pointerEventData.position = Input.mousePosition;
 
-                    if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, 100))
+                    List<RaycastResult> results = new List<RaycastResult>();
+
+                    graphicRaycaster.Raycast(pointerEventData, results);
+
+                    // Only set destination if the ui is not clicked on
+                    if (results.Count <= 0)
                     {
-                        agent.destination = hit.point;
+                        RaycastHit hit;
+
+                        if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, 100))
+                        {
+                            agent.destination = hit.point;
+                        }
                     }
                 }
             }
             else
             {
-                agent.isStopped = true;
-                agent.ResetPath();
-                if (characterController != null) {
-                    characterController.Move(transform.TransformDirection(Vector3.forward) * v * (moveSpeed * Time.deltaTime));
-                    transform.Rotate(0, h * (rotationSpeed * Time.deltaTime), 0, Space.Self);
-                }
-                else
+                if (!ChatGui.isChatEnabled || Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.RightArrow))
                 {
-                    Debug.LogError("<Color=Red><a>Missing</a></Color> CharacterController Component on playerPrefab.", this);
+                    agent.isStopped = true;
+                    agent.ResetPath();
+                    if (characterController != null)
+                    {
+                        characterController.Move(transform.TransformDirection(Vector3.forward) * v * (moveSpeed * Time.deltaTime));
+                        transform.Rotate(0, h * (rotationSpeed * Time.deltaTime), 0, Space.Self);
+                    }
+                    else
+                    {
+                        Debug.LogError("<Color=Red><a>Missing</a></Color> CharacterController Component on playerPrefab.", this);
+                    }
                 }
             }
         }
