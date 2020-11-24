@@ -284,7 +284,26 @@ public class ChatGui : MonoBehaviour, IChatClientListener
 			{
 				if (doingPrivateChat)
 				{
-					this.chatClient.PrivateChannels.Remove(this.selectedChannelName);
+                    if (this.channelToggles.ContainsKey(selectedChannelName))
+                    {
+                        GameObject t = this.channelToggles[selectedChannelName];
+                        Destroy(t.gameObject);
+
+                        this.channelToggles.Remove(selectedChannelName);
+
+                        Debug.Log("Removed private channel toggle '" + selectedChannelName + "'.");
+                    }
+                    this.chatClient.PrivateChannels.Remove(this.selectedChannelName);
+                    if (this.channelToggles.Count > 0)
+                    {
+                        List<String> keys = new List<String>(this.channelToggles.Keys);
+                        this.ShowChannel(keys[0]);
+                        this.selectedChannelName = keys[0];
+                    }
+                    else
+                    {
+                        this.CurrentChannelText.text = "";
+                    }
 				}
 				else
 				{
@@ -292,7 +311,8 @@ public class ChatGui : MonoBehaviour, IChatClientListener
 					if (this.chatClient.TryGetChannel(this.selectedChannelName, doingPrivateChat, out channel))
 					{
 						channel.ClearMessages();
-					}
+                        this.CurrentChannelText.text = "";
+                    }
 				}
 			}
 			else if (tokens[0].Equals("/msg") && !string.IsNullOrEmpty(tokens[1]))
