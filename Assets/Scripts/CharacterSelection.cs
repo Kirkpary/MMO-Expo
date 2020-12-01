@@ -1,7 +1,6 @@
-﻿using UnityEngine;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.IO;
+using UnityEngine;
 
 public class CharacterSelection : MonoBehaviour
 {
@@ -25,49 +24,40 @@ public class CharacterSelection : MonoBehaviour
         characters[selectedCharacter].SetActive(true);
     }
 
-    void DestroyWithTag(string destroyTag)
-    {
-        GameObject[] destroyObject;
-        destroyObject = GameObject.FindGameObjectsWithTag(destroyTag);
-        foreach (GameObject oneObject in destroyObject)
-        {
-            Debug.LogFormat("Removing gameObject: {0}", oneObject);
-            characters.Remove(oneObject);
-        }
-    }
+    //void DestroyWithTag(string destroyTag)
+    //{
+        //GameObject[] destroyObject = GameObject.FindGameObjectsWithTag(destroyTag);
+        //Debug.LogFormat("Count of destroyObject: {0}", destroyObject.Length);
+
+        //foreach (GameObject oneObject in destroyObject)
+        //{
+        //    Debug.LogFormat("Removing gameObject: {0}", oneObject);
+        //    characters.Remove(oneObject);
+        //    Destroy(oneObject);
+        //}
+
+        //foreach (GameObject oneObject in characters)
+        //{
+        //    if (oneObject.tag == destroyTag)
+        //    {
+        //        characters.Remove(oneObject);
+        //        Destroy(oneObject);
+        //    }
+        //}
+    //}
 
     // This function should be callen only when the gender button is clicked.
     // It will unload the previously loaded prefabs
     // Then load the selected gender prefabs
     private void ChangeGender()
     {
-        List<string> charNames = new List<string>();
-        // Get the prefab folder directory opposite to the selected gender
-        string directory = "Assets\\Resources\\";
-        string tempGender = "Men";
-        
-        if (gender == "Men")
-        {
-            tempGender = "Women";
-        }
 
-        string path = directory + tempGender;
+        // DestroyWithTag("Loaded");
 
-        //Get the names of the files in the directory
-        //foreach (string file in Directory.GetFiles(path, "*.prefab"))
-        //{
-        //    string tmpStr1;
-        //    string tmpStr2;
+        GameObject[] destroyObject = GameObject.FindGameObjectsWithTag("Loaded");
+        Debug.LogFormat("Count of destroyObject: {0}", destroyObject.Length);
 
-        //    // Trim the string to be only the file name,
-        //    tmpStr1 = file.Remove(0, 24);
-        //    tmpStr2 = tmpStr1.Remove(tmpStr1.IndexOf("."));
-
-        //    Debug.LogFormat("Pringint trimmed filename: {0}", tmpStr2);
-        //    charNames.Add(file);
-        //}
-
-        DestroyWithTag("Loaded");
+        selectedCharacter = characters.Count;
 
         var temp = Resources.LoadAll(gender, typeof(GameObject)).Cast<GameObject>();
         foreach (GameObject character in temp)
@@ -75,17 +65,23 @@ public class CharacterSelection : MonoBehaviour
             print(character);
             GameObject newPlayer = Instantiate(character, gameObject.transform);
             newPlayer.name = character.name;
-
+            newPlayer.tag = "Loaded";
             newPlayer.SetActive(false);
             characters.Add(newPlayer);
         }
-        selectedCharacter = 0;
         Debug.LogFormat("The selectedChar is: {0} and characters.Count is: {1}", selectedCharacter, characters.Count);
         characters[selectedCharacter].SetActive(true);
+
+        foreach (GameObject oneObject in destroyObject)
+        {
+            Debug.LogFormat("Removing gameObject: {0}", oneObject);
+            characters.Remove(oneObject);
+            Destroy(oneObject);
+        }
     }
 
     public void NextCharacter()
-    {   
+    {
         characters[selectedCharacter].SetActive(false);
         selectedCharacter = (selectedCharacter + 1) % characters.Count;
         Debug.LogFormat("The selectedChar is: {0} and characters.Count is: {1}", selectedCharacter, characters.Count);
@@ -106,14 +102,22 @@ public class CharacterSelection : MonoBehaviour
 
     public void MenCharacter()
     {
+        string tmpGender = gender;
         gender = "Men";
-        ChangeGender();
+        if (tmpGender != gender)
+        {
+            ChangeGender();
+        }
     }
 
     public void WomenCharacter()
     {
+        string tmpGender = gender;
         gender = "Women";
-        ChangeGender();
+        if (tmpGender != gender)
+        {
+            ChangeGender();
+        }
     }
 
     public void StartGame()
