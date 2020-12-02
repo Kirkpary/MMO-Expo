@@ -3,20 +3,22 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+
 namespace Com.Oregonstate.MMOExpo
 {
     public class PortalTeleporterScript : MonoBehaviour
     {
+        public Launcher launcher;
 
         void OnTriggerEnter (Collider other) 
         {
             if (SceneManager.GetActiveScene().name == "CS_Room")
             {
-                Application.LoadLevel("ECE_Room");
+                launcher.Connect("ECE_Room");
             }
             else
             {
-                Application.LoadLevel("CS_Room");
+                launcher.Connect("CS_Room");
             }
         }
     }

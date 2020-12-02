@@ -17,7 +17,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/ECE_Room.unity
     guid: abe7dc9d5512121418307a9fb9f6b45a
-  - enabled: 1
-    path: Assets/Scenes/CS_ECE_Room.unity
-    guid: e02103816006cdb478b31ee789c250e3
+  - enabled: 0
+    path: 
+    guid: 00000000000000000000000000000000
   m_configObjects: {}
