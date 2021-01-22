@@ -7,7 +7,7 @@ public class CharacterSelection : MonoBehaviour
     // All the characters options goes into this list
     private List<GameObject> characters = new List<GameObject>();
     private int selectedCharacter = 0;
-    private string gender = "Men";
+    private static string gender = "Men";
 
     private void Start()
     {
@@ -91,6 +91,11 @@ public class CharacterSelection : MonoBehaviour
         {
             ChangeGender();
         }
+    }
+
+    public static string getSelGender()
+    {
+        return CharacterSelection.gender;
     }
 
     public void StartGame()
