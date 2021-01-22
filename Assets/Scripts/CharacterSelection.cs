@@ -21,43 +21,23 @@ public class CharacterSelection : MonoBehaviour
             newPlayer.SetActive(false);
             characters.Add(newPlayer);
         }
-        characters[selectedCharacter].SetActive(true);
+        characters[selectedCharacter].SetActive(true);        
     }
 
-    //void DestroyWithTag(string destroyTag)
-    //{
-        //GameObject[] destroyObject = GameObject.FindGameObjectsWithTag(destroyTag);
-        //Debug.LogFormat("Count of destroyObject: {0}", destroyObject.Length);
 
-        //foreach (GameObject oneObject in destroyObject)
-        //{
-        //    Debug.LogFormat("Removing gameObject: {0}", oneObject);
-        //    characters.Remove(oneObject);
-        //    Destroy(oneObject);
-        //}
-
-        //foreach (GameObject oneObject in characters)
-        //{
-        //    if (oneObject.tag == destroyTag)
-        //    {
-        //        characters.Remove(oneObject);
-        //        Destroy(oneObject);
-        //    }
-        //}
-    //}
 
     // This function should be callen only when the gender button is clicked.
     // It will unload the previously loaded prefabs
     // Then load the selected gender prefabs
     private void ChangeGender()
     {
+        foreach (GameObject c in characters.ToList())
+        {
+            Destroy(c);
+            characters.Clear();
+        }
+        selectedCharacter = 0;
 
-        // DestroyWithTag("Loaded");
-
-        GameObject[] destroyObject = GameObject.FindGameObjectsWithTag("Loaded");
-        Debug.LogFormat("Count of destroyObject: {0}", destroyObject.Length);
-
-        selectedCharacter = characters.Count;
 
         var temp = Resources.LoadAll(gender, typeof(GameObject)).Cast<GameObject>();
         foreach (GameObject character in temp)
@@ -71,13 +51,6 @@ public class CharacterSelection : MonoBehaviour
         }
         Debug.LogFormat("The selectedChar is: {0} and characters.Count is: {1}", selectedCharacter, characters.Count);
         characters[selectedCharacter].SetActive(true);
-
-        foreach (GameObject oneObject in destroyObject)
-        {
-            Debug.LogFormat("Removing gameObject: {0}", oneObject);
-            characters.Remove(oneObject);
-            Destroy(oneObject);
-        }
     }
 
     public void NextCharacter()
