@@ -73,6 +73,9 @@ public class ChatGui : MonoBehaviour, IChatClientListener
     [Tooltip("Text object to display the current user ID. Not currently part of the chat panel.")]
 	public Text UserIdText; // set in inspector
 
+    [Tooltip("Text object that tells the user how to open the chat.")]
+    public Text OpenChatPrompt;
+
     private GameObject[] booths;
     private string boothChannel;
 
@@ -198,15 +201,6 @@ public class ChatGui : MonoBehaviour, IChatClientListener
             ShowChat();
         }
 	}
-
-    private void OnGUI()
-    {
-        if (!isChatEnabled)
-        {
-            GUI.contentColor = Color.black;
-            GUI.Label(new Rect(5, Screen.height - 25, 200, 25), "Press 'Enter' to chat");
-        }
-    }
 
     public void OnEnterSend()
 	{
@@ -395,6 +389,8 @@ public class ChatGui : MonoBehaviour, IChatClientListener
 
         this.chatClient.SetOnlineStatus(ChatUserStatus.Online); // You can set your online state (without a mesage).
 
+        this.OpenChatPrompt.enabled = true;
+
     }
 
 	public void OnDisconnected()
@@ -403,6 +399,8 @@ public class ChatGui : MonoBehaviour, IChatClientListener
         //this.UnSubscribeCurrent();
 
         this.isChatConnected = false;
+
+        this.OpenChatPrompt.enabled = false;
     }
 
 	public void OnChatStateChange(ChatState state)
@@ -621,6 +619,7 @@ public class ChatGui : MonoBehaviour, IChatClientListener
     public void ShowChat()
     {
         this.ChatPanel.gameObject.SetActive(true);
+        this.OpenChatPrompt.enabled = false;
         chatEnabled = true;
         InputFieldChat.Select();
         InputFieldChat.ActivateInputField();
@@ -629,6 +628,7 @@ public class ChatGui : MonoBehaviour, IChatClientListener
     public void HideChat()
     {
         this.ChatPanel.gameObject.SetActive(false);
+        this.OpenChatPrompt.enabled = true;
         chatEnabled = false;
     }
 
