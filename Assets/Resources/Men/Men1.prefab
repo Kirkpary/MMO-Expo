@@ -12,15 +12,15 @@ GameObject:
   - component: {fileID: 33718462556574640}
   - component: {fileID: 23759752699054724}
   - component: {fileID: 8057374659868565073}
-  - component: {fileID: 5222643671333888312}
   - component: {fileID: -1045417213798986623}
+  - component: {fileID: 5222643671333888312}
   - component: {fileID: -4412570719863389538}
   - component: {fileID: 6132418063507846177}
   - component: {fileID: -7233582039295037014}
   - component: {fileID: 285035973496458179}
   - component: {fileID: 6204146097781565624}
   m_Layer: 0
-  m_Name: SM_Bean_Cop_01 1
+  m_Name: Men1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -102,18 +102,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1.1359106, y: 2.1222806, z: 1.183502}
   m_Center: {x: -0.0019368529, y: 1.0611403, z: 0.07858753}
---- !u!114 &5222643671333888312
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1283017171755564}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: adbe77e6516064648ae0014ae1392b84, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &-1045417213798986623
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -129,6 +117,18 @@ MonoBehaviour:
   PlayerUiPrefab: {fileID: 0}
   moveSpeed: 0.01
   rotationSpeed: 0.4
+--- !u!114 &5222643671333888312
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1283017171755564}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: adbe77e6516064648ae0014ae1392b84, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &-4412570719863389538
 MonoBehaviour:
   m_ObjectHideFlags: 0

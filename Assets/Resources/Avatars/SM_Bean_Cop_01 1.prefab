@@ -12,10 +12,10 @@ GameObject:
   - component: {fileID: 33718462556574640}
   - component: {fileID: 23759752699054724}
   - component: {fileID: 8057374659868565073}
-  - component: {fileID: 5222643671333888312}
   - component: {fileID: -1045417213798986623}
-  - component: {fileID: -4412570719863389538}
+  - component: {fileID: 5222643671333888312}
   - component: {fileID: 6132418063507846177}
+  - component: {fileID: -4412570719863389538}
   - component: {fileID: -7233582039295037014}
   - component: {fileID: 285035973496458179}
   - component: {fileID: 6204146097781565624}
@@ -102,18 +102,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1.1359106, y: 2.1222806, z: 1.183502}
   m_Center: {x: -0.0019368529, y: 1.0611403, z: 0.07858753}
---- !u!114 &5222643671333888312
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1283017171755564}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: adbe77e6516064648ae0014ae1392b84, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &-1045417213798986623
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -129,23 +117,18 @@ MonoBehaviour:
   PlayerUiPrefab: {fileID: 0}
   moveSpeed: 0.01
   rotationSpeed: 0.4
---- !u!114 &-4412570719863389538
+--- !u!114 &5222643671333888312
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1283017171755564}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c04ed9b2e59935d499ae428bde78c013, type: 3}
+  m_Script: {fileID: 11500000, guid: adbe77e6516064648ae0014ae1392b84, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  distance: 0
-  height: 10
-  centerOffset: {x: 0, y: 0, z: 0}
-  followOnStart: 0
-  smoothSpeed: 2
 --- !u!143 &6132418063507846177
 CharacterController:
   m_ObjectHideFlags: 0
@@ -164,6 +147,23 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &-4412570719863389538
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1283017171755564}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c04ed9b2e59935d499ae428bde78c013, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  distance: 0
+  height: 10
+  centerOffset: {x: 0, y: 0, z: 0}
+  followOnStart: 0
+  smoothSpeed: 2
 --- !u!114 &-7233582039295037014
 MonoBehaviour:
   m_ObjectHideFlags: 0
