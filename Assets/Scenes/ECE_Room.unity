@@ -172,12 +172,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
+  m_ReferenceResolution: {x: 960, y: 600}
   m_ScreenMatchMode: 0
-  m_MatchWidthOrHeight: 0
+  m_MatchWidthOrHeight: 1
   m_PhysicalUnit: 3
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
@@ -237,7 +237,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d52ae898320be8448a8fbf3dbe5b097b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  canvas: {fileID: 0}
+  canvas: {fileID: 95459745}
   maxFPS: -1
 --- !u!1001 &215129499
 PrefabInstance:
@@ -1356,24 +1356,40 @@ PrefabInstance:
       propertyPath: m_SizeDelta.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 9072757732861393143, guid: 29b52ba97a2ceb642a29dc79bcb713df, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 9072757733412424847, guid: 29b52ba97a2ceb642a29dc79bcb713df, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9072757733412424847, guid: 29b52ba97a2ceb642a29dc79bcb713df, type: 3}
       propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9072757733412424847, guid: 29b52ba97a2ceb642a29dc79bcb713df, type: 3}
+      propertyPath: m_AnchorMin.y
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9072757733462805731, guid: 29b52ba97a2ceb642a29dc79bcb713df, type: 3}
       propertyPath: m_SizeDelta.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 9072757733462805731, guid: 29b52ba97a2ceb642a29dc79bcb713df, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0.00044611926
+      objectReference: {fileID: 0}
     - target: {fileID: 9072757734248342964, guid: 29b52ba97a2ceb642a29dc79bcb713df, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9072757734248342964, guid: 29b52ba97a2ceb642a29dc79bcb713df, type: 3}
       propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9072757734248342964, guid: 29b52ba97a2ceb642a29dc79bcb713df, type: 3}
+      propertyPath: m_AnchorMin.y
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
