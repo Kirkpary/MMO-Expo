@@ -1,4 +1,6 @@
 ﻿using UnityEngine;
+using System.Collections;
+using System.IO;
 
 using Photon.Pun;
 using Photon.Realtime;
@@ -12,12 +14,20 @@ namespace Com.Oregonstate.MMOExpo
         #endregion
 
         #region Private Fields
+        string JsonPath;
+        string JsonString;
         #endregion
 
         #region MonoBehavior Callbacks
         private void Start()
         {   
             Instance = this;
+
+            // Reading JSON file for this room (CS_Room)
+            JsonPath = Application.streamingAssetsPath + "/CS_Room.json";
+            JsonString = File.ReadAllText(JsonPath);
+            Room CS_Room = JsonUtility.FromJson<Room>(JsonString);
+            Debug.Log(CS_Room.NumBooths);
             
             if (PlayerPrefs.GetString("selectedCharacter", "") == "")
             {
@@ -45,26 +55,18 @@ namespace Com.Oregonstate.MMOExpo
         public override void OnPlayerEnteredRoom(Player other)
         {
             Debug.LogFormat("OnPlayerEnteredRoom() {0}", other.NickName); // not seen if you're the player connecting
-
-            /*if (PhotonNetwork.IsMasterClient)
-            {
-                Debug.LogFormat("OnPlayerEnteredRoom IsMasterClent {0}", PhotonNetwork.IsMasterClient); // called before OnPlayerLeftRoom
-
-                LoadArena();
-            }*/
         }
 
         public override void OnPlayerLeftRoom(Player other)
         {
             Debug.LogFormat("OnPlayerLeftRoom() {0}", other.NickName);
-
-            /*if (PhotonNetwork.IsMasterClient)
-            {
-                Debug.LogFormat("OnPlayerLeftRoom IsMasterClient {0}", PhotonNetwork.IsMasterClient);
-
-                LoadArena();
-            }*/
         }
         #endregion
+    }
+
+    [System.Serializable]
+    public class Room 
+    {
+        public int NumBooths;
     }
 }
