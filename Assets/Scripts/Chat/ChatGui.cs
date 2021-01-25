@@ -76,7 +76,7 @@ public class ChatGui : MonoBehaviour, IChatClientListener
     [Tooltip("Text object that tells the user how to open the chat.")]
     public Text OpenChatPrompt;
 
-    private GameObject[] booths;
+    private static GameObject[] booths = null;
     private string boothChannel;
 
     public static ChatGui chatManager;
@@ -153,9 +153,6 @@ public class ChatGui : MonoBehaviour, IChatClientListener
             ChannelsToJoinOnConnect.Add(SceneManagerHelper.ActiveSceneName);
             Connect();
         }
-
-        // Get a list of booths
-        booths = GameObject.FindGameObjectsWithTag("Booth");
 	}
 
 	public void Connect()
@@ -660,12 +657,20 @@ public class ChatGui : MonoBehaviour, IChatClientListener
         }
     }
 
+    public static void FindBoothsForChat()
+    {
+        booths = GameObject.FindGameObjectsWithTag("Booth");
+    }
+
     /// <summary>
     /// Subscribe to the booth channel that is closest and unsubscribe from the previous booth. Does lots of distance calculations use sparingly.
     /// </summary>
     /// <param name="playerPosition"></param>
     public void SubscirbeToClosestBooth(Vector3 playerPosition)
     {
+        if (booths == null)
+            return;
+
         String closestBoothName = null;
         float smallestDistance = boothChatRange * boothChatRange;
         foreach (GameObject booth in booths)

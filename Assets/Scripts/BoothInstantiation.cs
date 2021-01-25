@@ -61,6 +61,8 @@ namespace Com.Oregonstate.MMOExpo
             for (int i=0; i<CS_Room.Length; i++) {
                 Instantiate(myPrefab, new Vector3(CS_Room[i].CoordX, CS_Room[i].CoordY, CS_Room[i].CoordZ), Quaternion.identity);
             }
+
+            ChatGui.FindBoothsForChat();
         }
     }
 }
