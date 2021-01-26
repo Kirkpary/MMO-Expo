@@ -63,14 +63,14 @@ namespace Com.Oregonstate.MMOExpo
                 JsonPath = Application.streamingAssetsPath + "/ECE_Room.json";
             }
             JsonString = File.ReadAllText(JsonPath);
-            Booth[] CS_Room = JsonHelper.FromJson<Booth>(JsonString); // List of all booths
+            Booth[] Booth_List = JsonHelper.FromJson<Booth>(JsonString); // List of all booths
 
             // Instantiate booths
-            for (int i=0; i<CS_Room.Length; i++) {
-                Instantiate(myPrefab, new Vector3(CS_Room[i].CoordX, CS_Room[i].CoordY, CS_Room[i].CoordZ), Quaternion.identity);
+            for (int i=0; i<Booth_List.Length; i++) {
+                Instantiate(myPrefab, new Vector3(Booth_List[i].CoordX, Booth_List[i].CoordY, Booth_List[i].CoordZ), Quaternion.identity);
             }
 
-            ChatGui.FindBoothsForChat();
+            ChatGui.FindBoothsForChat(Booth_List);
         }
     }
 }
