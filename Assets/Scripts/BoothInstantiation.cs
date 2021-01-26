@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.IO;
+using UnityEngine.SceneManagement;
 
 namespace Com.Oregonstate.MMOExpo
 {
@@ -53,7 +54,14 @@ namespace Com.Oregonstate.MMOExpo
         void Start()
         {
             // Reading the JSON file for this room
-            JsonPath = Application.streamingAssetsPath + "/CS_Room.json";
+            if (SceneManager.GetActiveScene().name == "CS_Room")
+            {
+                JsonPath = Application.streamingAssetsPath + "/CS_Room.json";
+            }
+            else 
+            {
+                JsonPath = Application.streamingAssetsPath + "/ECE_Room.json";
+            }
             JsonString = File.ReadAllText(JsonPath);
             Booth[] CS_Room = JsonHelper.FromJson<Booth>(JsonString); // List of all booths
 
