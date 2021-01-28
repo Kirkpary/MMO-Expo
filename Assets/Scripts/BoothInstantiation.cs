@@ -67,10 +67,11 @@ namespace Com.Oregonstate.MMOExpo
 
             // Instantiate booths
             for (int i=0; i<Booth_List.Length; i++) {
-                Instantiate(myPrefab, new Vector3(Booth_List[i].CoordX, Booth_List[i].CoordY, Booth_List[i].CoordZ), Quaternion.identity);
+                GameObject temp = Instantiate(myPrefab, new Vector3(Booth_List[i].CoordX, Booth_List[i].CoordY, Booth_List[i].CoordZ), Quaternion.identity);
+                temp.name = Booth_List[i].BoothName;
             }
 
-            ChatGui.FindBoothsForChat(Booth_List);
+            ChatGui.FindBoothsForChat();
         }
     }
 }
