@@ -20,7 +20,7 @@ GameObject:
   - component: {fileID: 2417082545988966236}
   - component: {fileID: -1865124247398021694}
   m_Layer: 0
-  m_Name: Men2
+  m_Name: New3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -114,9 +114,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b54278d2319451a409b1660c6621d2e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PlayerUiPrefab: {fileID: 0}
-  moveSpeed: 0.01
-  rotationSpeed: 0.4
+  PlayerUiPrefab: {fileID: 8732337277991191219, guid: a1c0f010ec799b946a35808e5c255e4d, type: 3}
+  moveSpeed: 4
+  rotationSpeed: 150
 --- !u!114 &2814257541421264614
 MonoBehaviour:
   m_ObjectHideFlags: 0
