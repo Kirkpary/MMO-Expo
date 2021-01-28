@@ -27,12 +27,11 @@ namespace Com.Oregonstate.MMOExpo
             {
                 if (PlayerManager.LocalPlayerInstance == null)
                 {
-                    Debug.LogFormat("Printing Selected Gender: {0}", CharacterSelection.getSelGender());
                     Debug.LogFormat("Printing PlayerPrefs: {0}", PlayerPrefs.GetString("selectedCharacter"));
 
                     Debug.LogFormat("We are Instantiating LocalPlayer from {0}", SceneManagerHelper.ActiveSceneName);
                     // we're in a room. spawn a character for the local player. it gets synced by using PhotonNetwork.Instantiate
-                    PhotonNetwork.Instantiate(CharacterSelection.getSelGender() + "/" + PlayerPrefs.GetString("selectedCharacter"), new Vector3(0f, 1f, 0f), Quaternion.identity, 0);
+                    PhotonNetwork.Instantiate("Avatars/" + PlayerPrefs.GetString("selectedCharacter"), new Vector3(0f, 1f, 0f), Quaternion.identity, 0);
                 }
                 else
                 {

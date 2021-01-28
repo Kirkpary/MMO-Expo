@@ -7,11 +7,10 @@ public class CharacterSelection : MonoBehaviour
     // All the characters options goes into this list
     private List<GameObject> characters = new List<GameObject>();
     private int selectedCharacter = 0;
-    private static string gender = "Men";
 
     private void Start()
     {
-        var temp = Resources.LoadAll(gender, typeof(GameObject)).Cast<GameObject>();
+        var temp = Resources.LoadAll("Avatars", typeof(GameObject)).Cast<GameObject>();
         foreach (GameObject character in temp)
         {
             print(character);
@@ -21,35 +20,6 @@ public class CharacterSelection : MonoBehaviour
             newPlayer.SetActive(false);
             characters.Add(newPlayer);
         }
-        characters[selectedCharacter].SetActive(true);        
-    }
-
-
-
-    // This function should be callen only when the gender button is clicked.
-    // It will unload the previously loaded prefabs
-    // Then load the selected gender prefabs
-    private void ChangeGender()
-    {
-        foreach (GameObject c in characters.ToList())
-        {
-            Destroy(c);
-            characters.Clear();
-        }
-        selectedCharacter = 0;
-
-
-        var temp = Resources.LoadAll(gender, typeof(GameObject)).Cast<GameObject>();
-        foreach (GameObject character in temp)
-        {
-            print(character);
-            GameObject newPlayer = Instantiate(character, gameObject.transform);
-            newPlayer.name = character.name;
-            newPlayer.tag = "Loaded";
-            newPlayer.SetActive(false);
-            characters.Add(newPlayer);
-        }
-        Debug.LogFormat("The selectedChar is: {0} and characters.Count is: {1}", selectedCharacter, characters.Count);
         characters[selectedCharacter].SetActive(true);
     }
 
@@ -71,31 +41,6 @@ public class CharacterSelection : MonoBehaviour
         }
         Debug.LogFormat("The selectedChar is: {0} and characters.Count is: {1}", selectedCharacter, characters.Count);
         characters[selectedCharacter].SetActive(true);
-    }
-
-    public void MenCharacter()
-    {
-        string tmpGender = gender;
-        gender = "Men";
-        if (tmpGender != gender)
-        {
-            ChangeGender();
-        }
-    }
-
-    public void WomenCharacter()
-    {
-        string tmpGender = gender;
-        gender = "Women";
-        if (tmpGender != gender)
-        {
-            ChangeGender();
-        }
-    }
-
-    public static string getSelGender()
-    {
-        return CharacterSelection.gender;
     }
 
     public void StartGame()
