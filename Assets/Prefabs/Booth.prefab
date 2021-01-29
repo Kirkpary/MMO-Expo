@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 8256072478346209850}
   - component: {fileID: 5688227940671745337}
   - component: {fileID: 6168802809710119873}
+  - component: {fileID: 7835574860400466271}
   m_Layer: 0
   m_Name: Booth
   m_TagString: Booth
@@ -112,3 +113,17 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &7835574860400466271
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 793875795066024077}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c6381af9a6133454f8befe0bb9c24f6a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  BoothUI: {fileID: 2886626858810997606, guid: fad543a52bceb2d47b993ba422682f75, type: 3}
+  BoothHover: {fileID: 749333023403379370, guid: 5553652291a338149bfa4806388b73a8, type: 3}

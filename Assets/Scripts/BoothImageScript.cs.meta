@@ -1,0 +1,13 @@
+fileFormatVersion: 2
+guid: c6381af9a6133454f8befe0bb9c24f6a
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - BoothUI: {fileID: 2886626858810997606, guid: fad543a52bceb2d47b993ba422682f75, type: 3}
+  - BoothHover: {fileID: 749333023403379370, guid: 5553652291a338149bfa4806388b73a8, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
