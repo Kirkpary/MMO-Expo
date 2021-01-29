@@ -1307,7 +1307,7 @@ function _emscripten_asm_const_ii(code, a0) {
  return ASM_CONSTS[code](a0);
 }
 STATIC_BASE = GLOBAL_BASE;
-STATICTOP = STATIC_BASE + 2965664;
+STATICTOP = STATIC_BASE + 2974640;
 __ATINIT__.push({
  func: (function() {
   __GLOBAL__sub_I_AccessibilityScriptingClasses_cpp();
@@ -3237,7 +3237,7 @@ __ATINIT__.push({
   ___emscripten_environ_constructor();
  })
 });
-var STATIC_BUMP = 2965664;
+var STATIC_BUMP = 2974640;
 Module["STATIC_BASE"] = STATIC_BASE;
 Module["STATIC_BUMP"] = STATIC_BUMP;
 var tempDoublePtr = STATICTOP;
@@ -3547,6 +3547,10 @@ function _JS_SystemInfo_GetPreferredDevicePixelRatio() {
 function _JS_SystemInfo_GetScreenSize(outWidth, outHeight) {
  HEAPF64[outWidth >> 3] = Module.SystemInfo.width;
  HEAPF64[outHeight >> 3] = Module.SystemInfo.height;
+}
+function _JS_SystemInfo_GetStreamingAssetsURL(buffer, bufferSize) {
+ if (buffer) stringToUTF8(Module.streamingAssetsUrl, buffer, bufferSize);
+ return lengthBytesUTF8(Module.streamingAssetsUrl);
 }
 function _JS_SystemInfo_HasCursorLock() {
  return Module.SystemInfo.hasCursorLock;
@@ -15840,8 +15844,8 @@ function nullFunc_vjji(x) {
  err("Build with ASSERTIONS=2 for more info.");
  abort(x);
 }
-Module["wasmTableSize"] = 81666;
-Module["wasmMaxTableSize"] = 81666;
+Module["wasmTableSize"] = 81668;
+Module["wasmMaxTableSize"] = 81668;
 function invoke_dd(index, a1) {
  var sp = stackSave();
  try {
@@ -18825,6 +18829,7 @@ Module.asmLibraryArg = {
  "_JS_SystemInfo_GetOS": _JS_SystemInfo_GetOS,
  "_JS_SystemInfo_GetPreferredDevicePixelRatio": _JS_SystemInfo_GetPreferredDevicePixelRatio,
  "_JS_SystemInfo_GetScreenSize": _JS_SystemInfo_GetScreenSize,
+ "_JS_SystemInfo_GetStreamingAssetsURL": _JS_SystemInfo_GetStreamingAssetsURL,
  "_JS_SystemInfo_HasCursorLock": _JS_SystemInfo_HasCursorLock,
  "_JS_SystemInfo_HasFullscreen": _JS_SystemInfo_HasFullscreen,
  "_JS_SystemInfo_HasWebGL": _JS_SystemInfo_HasWebGL,
@@ -22235,6 +22240,12 @@ asm["_llvm_bswap_i32"] = (function() {
  assert(!runtimeExited, "the runtime was exited (use NO_EXIT_RUNTIME to keep it alive after main() exits)");
  return real__llvm_bswap_i32.apply(null, arguments);
 });
+var real__llvm_ctlz_i64 = asm["_llvm_ctlz_i64"];
+asm["_llvm_ctlz_i64"] = (function() {
+ assert(runtimeInitialized, "you need to wait for the runtime to be ready (e.g. wait for main() to be called)");
+ assert(!runtimeExited, "the runtime was exited (use NO_EXIT_RUNTIME to keep it alive after main() exits)");
+ return real__llvm_ctlz_i64.apply(null, arguments);
+});
 var real__llvm_ctpop_i32 = asm["_llvm_ctpop_i32"];
 asm["_llvm_ctpop_i32"] = (function() {
  assert(runtimeInitialized, "you need to wait for the runtime to be ready (e.g. wait for main() to be called)");
@@ -24888,6 +24899,11 @@ var _llvm_bswap_i32 = Module["_llvm_bswap_i32"] = (function() {
  assert(runtimeInitialized, "you need to wait for the runtime to be ready (e.g. wait for main() to be called)");
  assert(!runtimeExited, "the runtime was exited (use NO_EXIT_RUNTIME to keep it alive after main() exits)");
  return Module["asm"]["_llvm_bswap_i32"].apply(null, arguments);
+});
+var _llvm_ctlz_i64 = Module["_llvm_ctlz_i64"] = (function() {
+ assert(runtimeInitialized, "you need to wait for the runtime to be ready (e.g. wait for main() to be called)");
+ assert(!runtimeExited, "the runtime was exited (use NO_EXIT_RUNTIME to keep it alive after main() exits)");
+ return Module["asm"]["_llvm_ctlz_i64"].apply(null, arguments);
 });
 var _llvm_ctpop_i32 = Module["_llvm_ctpop_i32"] = (function() {
  assert(runtimeInitialized, "you need to wait for the runtime to be ready (e.g. wait for main() to be called)");
