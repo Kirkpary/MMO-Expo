@@ -28,8 +28,7 @@ namespace Com.Oregonstate.MMOExpo
         [Tooltip("The Player's UI GameObject Prefab")]
         [SerializeField]
         public GameObject PlayerUiPrefab;
-        [SerializeField]
-        public float rotationSpeed = 150.0f;
+        [Tooltip("Enable if testing without connection to photon")]
         public bool OfflineDebugging = false;
         #endregion
 
@@ -189,7 +188,7 @@ namespace Com.Oregonstate.MMOExpo
                     {
                         agent.isStopped = true;
                         agent.ResetPath();
-                        transform.Rotate(0, h * (rotationSpeed * Time.deltaTime), 0, Space.Self);
+                        transform.Rotate(0, h * (agent.angularSpeed * Time.deltaTime), 0, Space.Self);
                         agent.Move(transform.forward * v * agent.speed * Time.deltaTime);
                     }
                 }
