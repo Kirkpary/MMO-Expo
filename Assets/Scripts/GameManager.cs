@@ -11,9 +11,6 @@ namespace Com.Oregonstate.MMOExpo
         public static GameManager Instance;
         #endregion
 
-        #region Private Fields
-        #endregion
-
         #region MonoBehavior Callbacks
         private void Start()
         {   
@@ -31,7 +28,7 @@ namespace Com.Oregonstate.MMOExpo
 
                     Debug.LogFormat("We are Instantiating LocalPlayer from {0}", SceneManagerHelper.ActiveSceneName);
                     // we're in a room. spawn a character for the local player. it gets synced by using PhotonNetwork.Instantiate
-                    PhotonNetwork.Instantiate("Avatars/" + PlayerPrefs.GetString("selectedCharacter"), new Vector3(0f, 5f, 0f), Quaternion.identity, 0);
+                    PhotonNetwork.Instantiate("Avatars/" + PlayerPrefs.GetString("selectedCharacter"), new Vector3(0f, 1f, 0f), Quaternion.identity, 0);
                 }
                 else
                 {
@@ -45,25 +42,11 @@ namespace Com.Oregonstate.MMOExpo
         public override void OnPlayerEnteredRoom(Player other)
         {
             Debug.LogFormat("OnPlayerEnteredRoom() {0}", other.NickName); // not seen if you're the player connecting
-
-            /*if (PhotonNetwork.IsMasterClient)
-            {
-                Debug.LogFormat("OnPlayerEnteredRoom IsMasterClent {0}", PhotonNetwork.IsMasterClient); // called before OnPlayerLeftRoom
-
-                LoadArena();
-            }*/
         }
 
         public override void OnPlayerLeftRoom(Player other)
         {
             Debug.LogFormat("OnPlayerLeftRoom() {0}", other.NickName);
-
-            /*if (PhotonNetwork.IsMasterClient)
-            {
-                Debug.LogFormat("OnPlayerLeftRoom IsMasterClient {0}", PhotonNetwork.IsMasterClient);
-
-                LoadArena();
-            }*/
         }
         #endregion
     }

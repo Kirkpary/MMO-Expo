@@ -1,6 +1,6 @@
-﻿using UnityEngine;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
+using UnityEngine;
 
 public class CharacterSelection : MonoBehaviour
 {
@@ -13,8 +13,10 @@ public class CharacterSelection : MonoBehaviour
         var temp = Resources.LoadAll("Avatars", typeof(GameObject)).Cast<GameObject>();
         foreach (GameObject character in temp)
         {
+            print(character);
             GameObject newPlayer = Instantiate(character, gameObject.transform);
             newPlayer.name = character.name;
+            newPlayer.tag = "Loaded";
             newPlayer.SetActive(false);
             characters.Add(newPlayer);
         }
@@ -25,6 +27,7 @@ public class CharacterSelection : MonoBehaviour
     {
         characters[selectedCharacter].SetActive(false);
         selectedCharacter = (selectedCharacter + 1) % characters.Count;
+        Debug.LogFormat("The selectedChar is: {0} and characters.Count is: {1}", selectedCharacter, characters.Count);
         characters[selectedCharacter].SetActive(true);
     }
 
@@ -36,6 +39,7 @@ public class CharacterSelection : MonoBehaviour
         {
             selectedCharacter += characters.Count;
         }
+        Debug.LogFormat("The selectedChar is: {0} and characters.Count is: {1}", selectedCharacter, characters.Count);
         characters[selectedCharacter].SetActive(true);
     }
 
