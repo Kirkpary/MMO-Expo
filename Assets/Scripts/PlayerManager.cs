@@ -28,10 +28,8 @@ namespace Com.Oregonstate.MMOExpo
         [Tooltip("The Player's UI GameObject Prefab")]
         [SerializeField]
         public GameObject PlayerUiPrefab;
-        [SerializeField]
-        public float moveSpeed = 0.01f;
-        [SerializeField]
-        public float rotationSpeed = 0.4f;
+        [Tooltip("Enable if testing without connection to photon")]
+        public bool OfflineDebugging = false;
         #endregion
 
         #region Private Methods
@@ -51,7 +49,7 @@ namespace Com.Oregonstate.MMOExpo
         {
             // #Important
             // used in GameManager.cs: we keep track of the localPlayer instance to prevent instantiation when levels are synchrononized
-            if (photonView.IsMine)
+            if (photonView.IsMine || OfflineDebugging)
             {
                 // Get the Raycaster from the Canvas
                 graphicRaycaster = GameObject.FindObjectOfType<Canvas>().GetComponent<GraphicRaycaster>();
@@ -92,7 +90,7 @@ namespace Com.Oregonstate.MMOExpo
             }
             else
             {
-                Debug.LogWarning("<Color=red><a>Missing</a></Color> PlayerUiPrefab reference on player Prefab.", this);
+                Debug.LogWarning("<Color=Yellow><a>Missing</a></Color> PlayerUiPrefab reference on player Prefab.", this);
             }
 
 #if UNITY_5_4_OR_NEWER
@@ -103,7 +101,7 @@ namespace Com.Oregonstate.MMOExpo
 
         void Update()
         {
-            if (photonView.IsMine)
+            if (photonView.IsMine || OfflineDebugging)
             {
                 ProcessInputs();
             }
@@ -156,48 +154,48 @@ namespace Com.Oregonstate.MMOExpo
         /// </summary>
         void ProcessInputs()
         {
-            float h = Input.GetAxis("Horizontal");
-            float v = Input.GetAxis("Vertical");
-            if (h == 0 && v == 0)
+            if (agent != null)
             {
-                if (Input.GetButtonDown("Fire1"))
+                float h = Input.GetAxis("Horizontal");
+                float v = Input.GetAxis("Vertical");
+                if (h == 0 && v == 0)
                 {
-                    // Check for UI click
-                    pointerEventData = new PointerEventData(eventSystem);
-                    pointerEventData.position = Input.mousePosition;
-
-                    List<RaycastResult> results = new List<RaycastResult>();
-
-                    graphicRaycaster.Raycast(pointerEventData, results);
-
-                    // Only set destination if the ui is not clicked on
-                    if (results.Count <= 0)
+                    if (Input.GetButtonDown("Fire1"))
                     {
-                        RaycastHit hit;
+                        // Check for UI click
+                        pointerEventData = new PointerEventData(eventSystem);
+                        pointerEventData.position = Input.mousePosition;
 
-                        if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, 100))
+                        List<RaycastResult> results = new List<RaycastResult>();
+
+                        graphicRaycaster.Raycast(pointerEventData, results);
+
+                        // Only set destination if the ui is not clicked on
+                        if (results.Count <= 0)
                         {
-                            agent.destination = hit.point;
+                            RaycastHit hit;
+
+                            if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, 100))
+                            {
+                                agent.destination = hit.point;
+                            }
                         }
+                    }
+                }
+                else
+                {
+                    if (!ChatGui.isChatEnabled || Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.RightArrow))
+                    {
+                        agent.isStopped = true;
+                        agent.ResetPath();
+                        transform.Rotate(0, h * (agent.angularSpeed * Time.deltaTime), 0, Space.Self);
+                        agent.Move(transform.forward * v * agent.speed * Time.deltaTime);
                     }
                 }
             }
             else
             {
-                if (!ChatGui.isChatEnabled || Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.RightArrow))
-                {
-                    agent.isStopped = true;
-                    agent.ResetPath();
-                    if (characterController != null)
-                    {
-                        characterController.Move(transform.TransformDirection(Vector3.forward) * v * (moveSpeed * Time.deltaTime));
-                        transform.Rotate(0, h * (rotationSpeed * Time.deltaTime), 0, Space.Self);
-                    }
-                    else
-                    {
-                        Debug.LogError("<Color=Red><a>Missing</a></Color> CharacterController Component on playerPrefab.", this);
-                    }
-                }
+                Debug.LogError("<Color=Red><a>Missing</a></Color> NavMeshAgent Component on playerPrefab.", this);
             }
         }
         #endregion
@@ -207,6 +205,6 @@ namespace Com.Oregonstate.MMOExpo
         {
             // Send and recieve custom variables
         }
-#endregion
+        #endregion
     }
 }
