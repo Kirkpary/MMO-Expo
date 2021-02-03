@@ -145,6 +145,7 @@ MonoBehaviour:
   centerOffset: {x: 0, y: 0, z: 0}
   followOnStart: 0
   smoothSpeed: 2
+  RotateCamera: 0
 --- !u!114 &-7233582039295037014
 MonoBehaviour:
   m_ObjectHideFlags: 0
