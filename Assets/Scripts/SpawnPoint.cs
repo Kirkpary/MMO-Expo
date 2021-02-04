@@ -14,8 +14,8 @@ namespace Com.Oregonstate.MMOExpo
             Vector3 position = transform.position;
             if (PrefabMesh != null && PrefabTransform != null)
             {
-                position.y += PrefabMesh.sharedMesh.bounds.extents.y;
-                Gizmos.DrawWireMesh(PrefabMesh.sharedMesh, -1, position, Quaternion.identity, PrefabTransform.localScale);
+                position.y += PrefabMesh.sharedMesh.bounds.extents.y - PrefabMesh.sharedMesh.bounds.center.y;
+                Gizmos.DrawWireMesh(PrefabMesh.sharedMesh, -1, position, transform.rotation, PrefabTransform.localScale);
             }
         }
     }

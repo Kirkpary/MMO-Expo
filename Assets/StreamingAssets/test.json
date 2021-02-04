@@ -2,15 +2,12 @@
     "Items": [
         {
             "BoothName": "Booth_1"
-        },
-        {
+		},
+		{
             "BoothName": "Booth_2"
-        },
-        {
+		},
+		{
             "BoothName": "Booth_3"
-        },
-        {
-            "BoothName": "Booth_4"
-        }
-    ]
+		}
+	]
 }
