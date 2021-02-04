@@ -1,8 +1,7 @@
 name: Actions 😎
 
 on:
-  pull_request: {}
-  push: { branches: [main] }
+  push: { branches: [main, themed-scenes] }
 
 env:
   UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
@@ -27,9 +26,9 @@ jobs:
       # Test
       - name: Run tests
         id: myTestStep
-        uses: webbertakken/unity-test-runner@v1.7
+        uses: game-ci/unity-test-runner@v2.0-alpha-2
         with:
-          customParameters: '-nographics' # <--- Remove when test runner is working for Unity 2020
+          #customParameters: '-nographics' # <--- Remove when test runner is working for Unity 2020
           unityVersion: 2020.1.10f1
       # Test Results
       - name: Upload test results
@@ -39,12 +38,12 @@ jobs:
             path: artifacts
       # Build
       - name: Build project
-        uses: webbertakken/unity-builder@v1.5
+        uses: game-ci/unity-builder@v2.0-alpha-6
         with:
           unityVersion: 2020.1.10f1
           targetPlatform: WebGL
           versioning: None  # <--- Change to semantic versioning later
-          customParameters: '-nographics' # <--- Remove when unity builder is working for Unity 2020
+          #customParameters: '-nographics' # <--- Remove when unity builder is working for Unity 2020
 
       # Output
       - name: Upload build
