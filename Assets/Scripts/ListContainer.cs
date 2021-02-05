@@ -13,7 +13,7 @@ public class ListContainer : MonoBehaviour
         Debug.Log("The name of boothTemplate is: " + boothTemplate.name);
         Debug.Log("The name of this.transform is: " + this.transform.name);
 
-        for (int i = 0; i < 5; i++)
+        for (int i = 0; i < 10; i++)
         {
             g = Instantiate(boothTemplate, this.transform);
         }
