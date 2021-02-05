@@ -78,14 +78,19 @@ namespace Com.Oregonstate.MMOExpo
             else {
                 string JsonString = www.downloadHandler.text; // Show results as text
                 Booth[] Booth_List = JsonHelper.FromJson<Booth>(JsonString); // List of all booths
+                GameObject[] temp = new GameObject[Booth_List.Length+1]; 
+                
+                // Fixed name for Information Booth
+                temp[Booth_List.Length] = myPrefab;
+                temp[Booth_List.Length].name = "Information Booth";
 
                 // Instantiate booths
                 for (int i=0; i<Booth_List.Length; i++) {
-                    GameObject temp = Instantiate(myPrefab, new Vector3(Booth_List[i].CoordX, Booth_List[i].CoordY, Booth_List[i].CoordZ), Quaternion.identity);
-                    temp.name = Booth_List[i].BoothName;
+                    temp[i] = Instantiate(myPrefab, new Vector3(Booth_List[i].CoordX, Booth_List[i].CoordY, Booth_List[i].CoordZ), Quaternion.identity);
+                    temp[i].name = Booth_List[i].BoothName;
                 }
 
-                ChatGui.FindBoothsForChat();
+                ChatGui.FindBoothsForChat(ref temp);
             }
         }
     }

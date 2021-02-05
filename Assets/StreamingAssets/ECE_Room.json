@@ -4,31 +4,31 @@
             "BoothName": "Booth_1",
             "CoordX": -5,
             "CoordY": 1,
-            "CoordZ": 8
+            "CoordZ": 12
         },
         {
             "BoothName": "Booth_2",
             "CoordX": 5,
             "CoordY": 1,
-            "CoordZ": 8
+            "CoordZ": 12
         },
         {
             "BoothName": "Booth_3",
             "CoordX": 0,
             "CoordY": 1,
-            "CoordZ": 8
+            "CoordZ": 12
         },
         {
             "BoothName": "Booth_4",
             "CoordX": 10,
             "CoordY": 1,
-            "CoordZ": 8
+            "CoordZ": 12
         },
         {
             "BoothName": "Booth_5",
             "CoordX": -10,
             "CoordY": 1,
-            "CoordZ": 8
+            "CoordZ": 12
         }
     ]
 }
