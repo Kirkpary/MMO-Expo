@@ -9,6 +9,7 @@ namespace Com.Oregonstate.MMOExpo
     {
         #region Public Fields
         public static GameManager Instance;
+        public GameObject PlayerSpawn;
         #endregion
 
         #region MonoBehavior Callbacks
@@ -28,7 +29,18 @@ namespace Com.Oregonstate.MMOExpo
 
                     Debug.LogFormat("We are Instantiating LocalPlayer from {0}", SceneManagerHelper.ActiveSceneName);
                     // we're in a room. spawn a character for the local player. it gets synced by using PhotonNetwork.Instantiate
-                    PhotonNetwork.Instantiate("Avatars/" + PlayerPrefs.GetString("selectedCharacter"), new Vector3(0f, 1f, 0f), Quaternion.identity, 0);
+                    Vector3 position = new Vector3(0f, 1f, 0f);
+                    Quaternion rotation = Quaternion.identity;
+                    if (PlayerSpawn != null)
+                    {
+                        position = PlayerSpawn.transform.position;
+                        rotation = PlayerSpawn.transform.rotation;
+                    }
+                    else
+                    {
+                        Debug.LogWarning("<Color=yellow><a>Missing</a></Color> PlayerSpawn Reference. Defaulting to spawn at world coord (0, 1, 0). Please set it up in GameObject 'GameManager'", this);
+                    }
+                    PhotonNetwork.Instantiate("Avatars/" + PlayerPrefs.GetString("selectedCharacter"), position, rotation, 0);
                 }
                 else
                 {

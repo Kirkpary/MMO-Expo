@@ -152,7 +152,7 @@ namespace Com.Oregonstate.MMOExpo
 			else
 			{
 				// Add the chat for the current room to the join on connect list
-				ChannelsToJoinOnConnect.Add(SceneManagerHelper.ActiveSceneName);
+				ChannelsToJoinOnConnect.Add(PhotonNetwork.CurrentRoom.Name);
 				Connect();
 			}
 		}
@@ -377,9 +377,9 @@ namespace Com.Oregonstate.MMOExpo
 				this.chatClient.Subscribe(this.ChannelsToJoinOnConnect.ToArray(), this.HistoryLengthToFetch);
 			}
 
-			if (this.channelToggles.ContainsKey(SceneManagerHelper.ActiveSceneName))
+			if (this.channelToggles.ContainsKey(PhotonNetwork.CurrentRoom.Name))
 			{
-				this.ShowChannel(SceneManagerHelper.ActiveSceneName);
+				this.ShowChannel(PhotonNetwork.CurrentRoom.Name);
 			}
 
 			this.isChatConnected = true;
