@@ -6,14 +6,14 @@ using UnityEngine;
 
 public class SearchScript : MonoBehaviour
 {
-    public GameObject popUpContainer;
+    public GameObject popUpPanel;
     private List<GameObject> boothList = new List<GameObject>();
     private int firstTimeOpen = 0;
  
     // Start is called before the first frame update
     void Start()
     {
-        popUpContainer.SetActive(false);
+        popUpPanel.SetActive(false);
         
         // Get the booth template
         
@@ -40,13 +40,13 @@ public class SearchScript : MonoBehaviour
         }
 
         Debug.Log("Button");
-        popUpContainer.SetActive(true);
+        popUpPanel.SetActive(true);
         Debug.Log("The number of booths is: " + boothList.Count);
     }
 
     public void CloseSearchContainer()
     {
-        popUpContainer.SetActive(false);
+        popUpPanel.SetActive(false);
     }
 
     void displayList(List<GameObject> boothList)
