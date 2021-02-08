@@ -6,25 +6,12 @@ using UnityEngine.Networking;
 
 namespace Com.Oregonstate.MMOExpo
 {
-    [Serializable]
-    public class Room
-    {
-        public string SceneName;
-        public Booth[] Items;
-    }
-
-    // Class object that has matching fields with the Json file nested array
-    [Serializable]
-    public class Booth
-    {
-        public string BoothName;
-    }
-
     // Helper class to process Json arrays
     public static class JsonHelper
     {
         public static IEnumerator JsonUrlToObject<T>(string JsonPath, Action<T> callback)
         {
+            Debug.Log("Json download started.");
             UnityWebRequest www = new UnityWebRequest(JsonPath);
             www.downloadHandler = new DownloadHandlerBuffer();
             yield return www.SendWebRequest();
@@ -35,6 +22,7 @@ namespace Com.Oregonstate.MMOExpo
             }
             else
             {
+                Debug.Log("Json download succeded.");
                 string JsonString = www.downloadHandler.text; // Show results as text
                 callback(JsonUtility.FromJson<T>(JsonString)); // List of all booths
             }

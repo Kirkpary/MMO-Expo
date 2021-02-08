@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
-using System;
+using System.IO;
 using UnityEngine.SceneManagement;
 using UnityEngine.Networking;
 using Photon.Pun;
@@ -26,7 +26,21 @@ namespace Com.Oregonstate.MMOExpo
                 if (PhotonNetwork.InRoom)
                 {
                     JsonPath = Application.streamingAssetsPath + "/" + PhotonNetwork.CurrentRoom.Name + ".json";
-                    StartCoroutine(JsonHelper.JsonUrlToObject<Room>(JsonPath, InstantiateBooth));
+                    if (File.Exists(JsonPath))
+                    {
+                        Debug.Log("Json file already exists. Using existing file.", this);
+                        StreamReader reader = new StreamReader(JsonPath);
+                        JsonString = reader.ReadToEnd();
+                        reader.Close();
+                        Room roomObj = JsonUtility.FromJson<Room>(JsonString);
+                        InstantiateBooth(roomObj);
+                    }
+                    else
+                    {
+                        Debug.Log("Json file missing. Downloading from server.", this);
+                        StartCoroutine(JsonHelper.JsonUrlToObject<Room>(JsonPath, InstantiateBooth));
+                    }
+                    
                 }
             }
             else

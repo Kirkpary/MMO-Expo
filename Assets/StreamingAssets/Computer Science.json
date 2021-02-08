@@ -1,0 +1,17 @@
+{
+	"SceneName": "beach",
+    "Items": [
+        {
+            "BoothName": "Booth 1"
+        },
+        {
+            "BoothName": "Booth 2"
+        },
+        {
+            "BoothName": "Booth 3"
+        },
+        {
+            "BoothName": "Booth 4"
+        }
+    ]
+}

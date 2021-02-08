@@ -670,7 +670,7 @@ namespace Com.Oregonstate.MMOExpo
 		/// <param name="playerPosition"></param>
 		public void SubscirbeToClosestBooth(Vector3 playerPosition)
 		{
-			if (booths == null)
+			if (booths == null || booths[0] == null)
 				return;
 
 			String closestBoothName = null;
