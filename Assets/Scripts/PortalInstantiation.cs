@@ -15,7 +15,7 @@ namespace Com.Oregonstate.MMOExpo
         void Start()
         {
             JsonPath = Application.streamingAssetsPath + "/RoomList.json";
-            StartCoroutine(JsonHelper.JsonUrlToObject<RoomList>(JsonPath, InstantiateObjects));
+            StartCoroutine(JsonHelper.JsonUrlToObject<RoomList>(JsonPath, false, InstantiateObjects));
         }
 
         void InstantiateObjects(RoomList roomList)

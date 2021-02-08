@@ -125,7 +125,7 @@ namespace Com.Oregonstate.MMOExpo
             SceneName = roomName;
 
             string JsonPath = Application.streamingAssetsPath + "/" + roomName + ".json";
-            StartCoroutine(JsonHelper.JsonUrlToObject<Room>(JsonPath, (roomObj) =>
+            StartCoroutine(JsonHelper.JsonUrlToObject<Room>(JsonPath, false, (roomObj) =>
             {
                 // Load scene when json is done downloading and parsing
                 if (roomObj.SceneName != null)

@@ -9,6 +9,7 @@ namespace Com.Oregonstate.MMOExpo
     {
         #region Public Fields
         public static GameManager Instance;
+        [Tooltip("Optional: Default is (0, 1, 0)")]
         public GameObject PlayerSpawn;
         #endregion
 
