@@ -17,6 +17,8 @@ public class ListContainer : MonoBehaviour
         for (int i = 0; i < 10; i++)
         {
             g = Instantiate(boothTemplate, this.transform);
+            g.transform.GetChild(0).GetComponent<Text>().text = "Booth " + i.ToString();
+            g.transform.GetChild(1).GetComponent<Text>().text = "Description about booth " + i.ToString();
         }
         Destroy(boothTemplate);
     }
