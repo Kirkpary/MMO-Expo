@@ -80,9 +80,8 @@ namespace Com.Oregonstate.MMOExpo
                 Booth[] Booth_List = JsonHelper.FromJson<Booth>(JsonString); // List of all booths
                 GameObject[] temp = new GameObject[Booth_List.Length+1]; 
                 
-                // Fixed name for Information Booth
+                // Add Information Booth object
                 temp[Booth_List.Length] = myPrefab;
-                temp[Booth_List.Length].name = "Information Booth";
 
                 // Instantiate booths
                 for (int i=0; i<Booth_List.Length; i++) {
