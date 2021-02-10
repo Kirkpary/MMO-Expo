@@ -43,5 +43,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a682731ad5d9d5f48a4b1312af8ea7c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PrefabMesh: {fileID: 981106385900415657, guid: d032f8a39848bd64984c260b15ab87fc, type: 3}
-  PrefabTransform: {fileID: 9123127195852542141, guid: d032f8a39848bd64984c260b15ab87fc, type: 3}
+  PrefabMesh: {fileID: 793397348027105764, guid: 28560baded6bb564dbde5199363d3300, type: 3}

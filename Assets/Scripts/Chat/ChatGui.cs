@@ -659,9 +659,9 @@ namespace Com.Oregonstate.MMOExpo
 			}
 		}
 
-		public static void FindBoothsForChat(ref GameObject[] temp)
+		public static void FindBoothsForChat()
 		{
-			booths = temp;
+            booths = GameObject.FindGameObjectsWithTag("Booth");
 		}
 
 		/// <summary>

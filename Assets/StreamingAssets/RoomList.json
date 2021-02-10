@@ -2,6 +2,8 @@
 	"RoomNames": [
 		"Computer Science",
 		"Electrical Engineering",
-		"Mechanical Engineering"
+		"Mechanical Engineering",
+		"CS_Room",
+		"ECE_Room"
 	]
 }

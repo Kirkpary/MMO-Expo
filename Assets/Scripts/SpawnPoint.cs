@@ -6,16 +6,26 @@ namespace Com.Oregonstate.MMOExpo
 {
     public class SpawnPoint : MonoBehaviour
     {
-        public MeshFilter PrefabMesh;
-        public Transform PrefabTransform;
+        [Tooltip("Mesh filters are gathered from all the children and rendered as a gizmo wireframe.")]
+        public GameObject PrefabMesh;
 
         private void OnDrawGizmos()
         {
-            Vector3 position = transform.position;
-            if (PrefabMesh != null && PrefabTransform != null)
+            if (PrefabMesh != null)
             {
-                position.y += PrefabMesh.sharedMesh.bounds.extents.y - PrefabMesh.sharedMesh.bounds.center.y;
-                Gizmos.DrawWireMesh(PrefabMesh.sharedMesh, -1, position, transform.rotation, PrefabTransform.localScale);
+                MeshFilter[] meshes = PrefabMesh.GetComponentsInChildren<MeshFilter>();
+
+                for (int i = 0; i < meshes.Length; i++)
+                {
+                    // Change gizmo to local coordinates so the whole wirefram rotates with the spawn point
+                    Gizmos.matrix = this.transform.localToWorldMatrix;
+                    Transform t = meshes[i].gameObject.GetComponent<Transform>();
+                    Gizmos.DrawWireMesh(meshes[i].sharedMesh, -1, t.position, t.rotation, t.localScale);
+                }
+            }
+            else
+            {
+                Debug.LogWarning("<Color=yellow><a>Missing</a></Color> PrefabMesh Reference. Please set it up in GameObject '" + this.name + "'", this);
             }
         }
     }
