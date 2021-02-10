@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-
+ 
 public class CharacterSelection : MonoBehaviour
 {
     // All the characters options goes into this list

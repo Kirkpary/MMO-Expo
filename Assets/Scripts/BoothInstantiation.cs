@@ -47,6 +47,18 @@ namespace Com.Oregonstate.MMOExpo
         public void InstantiateBooth(Room roomObj)
         {
             _BoothList = roomObj.Items;
+            GameObject[] temp;
+            if (_BoothList.Length < spawnList.Length - 1) {
+                temp = new GameObject[_BoothList.Length + 1];
+                // Add Information Booth object
+                temp[_BoothList.Length] = myPrefab;
+            }
+            else
+            {
+                temp = new GameObject[spawnList.Length];
+                // Add Information Booth object
+                temp[spawnList.Length - 1] = myPrefab;
+            }
 
             Mesh prefabMesh = myPrefab.GetComponent<MeshFilter>().sharedMesh;
             Transform[] spawnList = SpawnpointListParent.GetComponentsInChildren<Transform>();  // List of spawn points including parent. perent is skipped later
@@ -57,7 +69,7 @@ namespace Com.Oregonstate.MMOExpo
             }
 
             // Instantiate booths
-            for (int i = 0; i < _BoothList.Length && i < spawnList.Length - 1; i++)
+            for (int i = 0; i < temp.Length - 1; i++)
             {
                 // Get position and rotation of spawn point
                 int RaycastOffset = 1;
@@ -83,11 +95,11 @@ namespace Com.Oregonstate.MMOExpo
                 position.y += prefabMesh.bounds.extents.y - prefabMesh.bounds.center.y;
 
                 // Create booth
-                GameObject temp = Instantiate(myPrefab, new Vector3(position.x, position.y, position.z), rotation);
-                temp.name = _BoothList[i].BoothName;
+                temp[i] = Instantiate(myPrefab, new Vector3(position.x, position.y, position.z), rotation);
+                temp[i].name = _BoothList[i].BoothName;
             }
 
-            ChatGui.FindBoothsForChat();
+            ChatGui.FindBoothsForChat(ref temp);
         }
     }
 }
