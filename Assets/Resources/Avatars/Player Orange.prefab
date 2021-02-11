@@ -19,9 +19,9 @@ GameObject:
   - component: {fileID: -1325509706152874041}
   - component: {fileID: -7803284000237718081}
   - component: {fileID: -2875248825324454561}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Player Orange
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -140,11 +140,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c04ed9b2e59935d499ae428bde78c013, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  distance: 0
-  height: 10
-  centerOffset: {x: 0, y: 0, z: 0}
+  distance: 5
+  height: 3
+  centerOffset: {x: 0, y: 2, z: 0}
   followOnStart: 0
-  smoothSpeed: 2
+  smoothSpeed: 4
+  RotateCamera: 1
 --- !u!114 &-2479905314937244036
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -194,10 +195,10 @@ NavMeshAgent:
   m_Enabled: 0
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 3.5
+  m_Speed: 4
   m_Acceleration: 8
   avoidancePriority: 50
-  m_AngularSpeed: 120
+  m_AngularSpeed: 150
   m_StoppingDistance: 0
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1

@@ -38,6 +38,8 @@ namespace Com.Oregonstate.MMOExpo
         [SerializeField]
         private float smoothSpeed = 2f;
 
+        public bool RotateCamera = false;
+
         // cached transform of the target
         Transform cameraTransform;
 
@@ -110,7 +112,10 @@ namespace Com.Oregonstate.MMOExpo
 
             //TODO Not needed for top down camera
             // ALways point the camera at the player
-            //cameraTransform.LookAt(this.transform.position + centerOffset);
+            if (RotateCamera)
+            {
+                cameraTransform.LookAt(this.transform.position + centerOffset);
+            }
         }
 
 
@@ -124,7 +129,10 @@ namespace Com.Oregonstate.MMOExpo
 
             //TODO Not needed for top down camera
             // ALways point the camera at the player
-            //cameraTransform.LookAt(this.transform.position + centerOffset);
+            if (RotateCamera)
+            {
+                cameraTransform.LookAt(this.transform.position + centerOffset);
+            }
         }
         #endregion
     }
