@@ -19,6 +19,7 @@ namespace Com.Oregonstate.MMOExpo
     public class Booth
     {
         public string BoothName;
+        public string Description;
     }
     #endregion
 

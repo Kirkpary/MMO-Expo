@@ -1,4 +1,5 @@
-﻿using Photon.Pun;
+﻿using Com.Oregonstate.MMOExpo;
+using Photon.Pun;
 using Photon.Realtime;
 using System;
 using System.Collections.Generic;
@@ -12,6 +13,7 @@ public class SearchScript : MonoBehaviour
     public InputField searchBoothInputField;
     public GameObject scrollViewContent;
     private List<GameObject> boothList = new List<GameObject>();
+
 
     // Start is called before the first frame update
     void Start()
@@ -40,6 +42,7 @@ public class SearchScript : MonoBehaviour
 
     public void OpenSearchContainer()
     {
+
         Debug.Log("Search button clicked");
         popUpPanel.SetActive(true);
         Debug.Log("The size of boothList is: " + boothList.Count);

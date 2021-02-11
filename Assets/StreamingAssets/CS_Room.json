@@ -2,16 +2,20 @@
 	"SceneName": "CS_Room",
     "Items": [
         {
-            "BoothName": "Booth_1"
+          "BoothName": "MMO Expo",
+          "Description":  "Virtual expo"
         },
         {
-            "BoothName": "Booth_2"
+          "BoothName": "AI Tree",
+          "Description":  "Scanning trees with picture"
         },
         {
-            "BoothName": "Booth_3"
+            "BoothName": "Del Perro",
+          "Description":  "Project tracker website"
         },
         {
-            "BoothName": "Booth_4"
+            "BoothName": "GFR Club",
+          "Description":  "Racing club"
         }
     ]
 }
