@@ -2,12 +2,37 @@
 using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine;
+using System;
 using Com.Oregonstate.MMOExpo;
+
+public static class BoothButtonExtension
+{
+    public static void AddEventListener<T>(this Button button, T p, Action<T> OnClick)
+    {
+        button.onClick.AddListener(delegate ()
+        {
+            OnClick(p);
+        });
+    }
+}
 
 public class ListContainer : MonoBehaviour
 { 
     // Start is called before the first frame update
     void Start()
+    {
+        JsonHelper.GetBoothPicture();
+        Debug.Log("Drawing search UI");
+        DrawUI();
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+
+    }
+
+    void DrawUI()
     {
         GameObject boothTemplate = transform.GetChild(0).gameObject;
         GameObject g;
@@ -20,15 +45,15 @@ public class ListContainer : MonoBehaviour
             g = Instantiate(boothTemplate, this.transform);
             g.transform.GetChild(0).GetComponent<Text>().text = BoothInstantiation.BoothList[i].BoothName;
             g.transform.GetChild(1).GetComponent<Text>().text = BoothInstantiation.BoothList[i].Description;
+            g.transform.GetChild(2).GetComponent<Image>().sprite = BoothInstantiation.BoothList[i].Picture;
+
+            g.GetComponent<Button>().AddEventListener(i, ItemClicked);
         }
         Destroy(boothTemplate);
     }
 
-    // Update is called once per frame
-    void Update()
+    void ItemClicked(int itemIndex)
     {
-        
+        Debug.Log("The name of the booth that was clicked is: " + BoothInstantiation.BoothList[itemIndex].BoothName);
     }
-
-
 }

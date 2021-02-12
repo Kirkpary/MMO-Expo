@@ -20,6 +20,8 @@ namespace Com.Oregonstate.MMOExpo
     {
         public string BoothName;
         public string Description;
+        public Sprite Picture;
+        public string PictureURL;
     }
     #endregion
 
@@ -86,6 +88,27 @@ namespace Com.Oregonstate.MMOExpo
                     Debug.Log("Json download succeded.");
                     string JsonString = www.downloadHandler.text; // Show results as text
                     callback(JsonUtility.FromJson<T>(JsonString)); // List of all booths
+                }
+            }
+        }
+
+        public static IEnumerator GetBoothPicture()
+        {
+            Debug.Log("Getting pictures from the JSON file");
+            for (int i = 0; i < BoothInstantiation.BoothList.Length; i++)
+            {
+                UnityWebRequest www = UnityWebRequestTexture.GetTexture(BoothInstantiation.BoothList[i].PictureURL);
+                yield return www.SendWebRequest();
+
+                if (www.isNetworkError || www.isHttpError)
+                {
+                    Debug.Log(www.error);
+                }
+                else
+                {
+                    Debug.Log("Setting picture of booth i: " + i);
+                    Texture2D tx = ((DownloadHandlerTexture)www.downloadHandler).texture;
+                    Sprite newSprite = Sprite.Create(tx, new Rect(0, 0, tx.width, tx.height), new Vector2(tx.width / 2, tx.height / 2));
                 }
             }
         }

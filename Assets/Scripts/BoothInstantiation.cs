@@ -36,6 +36,7 @@ namespace Com.Oregonstate.MMOExpo
                 {
                     JsonPath = Application.streamingAssetsPath + "/" + PhotonNetwork.CurrentRoom.Name + ".json";
                     StartCoroutine(JsonHelper.JsonUrlToObject<Room>(JsonPath, true, InstantiateBooth));
+                    // StartCoroutine(JsonHelper.GetBoothPicture());
                 }
             }
             else

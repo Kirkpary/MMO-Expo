@@ -46,7 +46,6 @@ public class SearchScript : MonoBehaviour
         Debug.Log("Search button clicked");
         popUpPanel.SetActive(true);
         Debug.Log("The size of boothList is: " + boothList.Count);
-
     }
 
     public void CloseSearchContainer()
