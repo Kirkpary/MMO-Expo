@@ -54,6 +54,9 @@ public class ListContainer : MonoBehaviour
 
     void ItemClicked(int itemIndex)
     {
-        Debug.Log("The name of the booth that was clicked is: " + BoothInstantiation.BoothList[itemIndex].BoothName);
+        Debug.Log("Teleporting player model to the booth: " + BoothInstantiation.BoothList[itemIndex].BoothName);
+
+        GameObject destinationBooth = GameObject.Find(BoothInstantiation.BoothList[itemIndex].BoothName);
+        GameManager.PlayerModel.transform.position = destinationBooth.transform.position + destinationBooth.transform.forward * (-4);
     }
 }

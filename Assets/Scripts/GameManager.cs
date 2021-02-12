@@ -11,6 +11,7 @@ namespace Com.Oregonstate.MMOExpo
         public static GameManager Instance;
         [Tooltip("Optional: Default is (0, 1, 0)")]
         public GameObject PlayerSpawn;
+        public static GameObject PlayerModel;
         #endregion
 
         #region MonoBehavior Callbacks
@@ -41,7 +42,7 @@ namespace Com.Oregonstate.MMOExpo
                     {
                         Debug.LogWarning("<Color=yellow><a>Missing</a></Color> PlayerSpawn Reference. Defaulting to spawn at world coord (0, 1, 0). Please set it up in GameObject 'GameManager'", this);
                     }
-                    PhotonNetwork.Instantiate("Avatars/" + PlayerPrefs.GetString("selectedCharacter"), position, rotation, 0);
+                    PlayerModel = PhotonNetwork.Instantiate("Avatars/" + PlayerPrefs.GetString("selectedCharacter"), position, rotation, 0);
                 }
                 else
                 {

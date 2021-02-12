@@ -6,11 +6,10 @@ public class CharacterSelection : MonoBehaviour
 {
     // All the characters options goes into this list
     private List<GameObject> characters = new List<GameObject>();
-    private int selectedCharacter;
+    private int selectedCharacter = 0;
 
     private void Start()
     {
-        selectedCharacter = 0;
         var temp = Resources.LoadAll("Avatars", typeof(GameObject)).Cast<GameObject>();
         foreach (GameObject character in temp)
         {
