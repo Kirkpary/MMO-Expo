@@ -1,11 +1,17 @@
-﻿using UnityEngine;
+﻿using System;
+
+using UnityEngine;
 using UnityEngine.SceneManagement;
 
 using Photon.Pun;
 using Photon.Realtime;
+using System.Collections;
+using UnityEngine.Networking;
 
 namespace Com.Oregonstate.MMOExpo
 {
+    
+
     public class Launcher : MonoBehaviourPunCallbacks
     {
         #region Private Serializable Fields
@@ -41,6 +47,7 @@ namespace Com.Oregonstate.MMOExpo
         /// </summary>
         bool switchRoom;
         bool leaveGame;
+        string SceneName = "";
         #endregion
 
         #region MonoBehavior Callbacks
@@ -91,7 +98,7 @@ namespace Com.Oregonstate.MMOExpo
                 if(PhotonNetwork.CurrentRoom == null)
                 {
                     // #Critical we need at this point to attempt joining a Random Room. If it fails, we'll get notified in OnJoinRandomFailed() and we'll create one.
-                    PhotonNetwork.JoinRoom(roomName);
+                    JoinRoom(roomName);
                 }
                 else
                 {
@@ -107,6 +114,32 @@ namespace Com.Oregonstate.MMOExpo
                 isConnecting = PhotonNetwork.ConnectUsingSettings();
                 PhotonNetwork.GameVersion = gameVersion;
             }
+        }
+
+        /// <summary>
+        /// Return to the main menu.
+        /// </summary>
+        public void JoinRoom(string roomName)
+        {
+            // Default scenename to roomName
+            SceneName = roomName;
+
+            string JsonPath = Application.streamingAssetsPath + "/" + roomName + ".json";
+            StartCoroutine(JsonHelper.JsonUrlToObject<Room>(JsonPath, false, (roomObj) =>
+            {
+                // Load scene when json is done downloading and parsing
+                if (roomObj.SceneName != null)
+                {
+                    //PhotonNetwork.LoadLevel(roomObj.SceneName);
+                    SceneName = roomObj.SceneName;
+                }
+                else
+                {
+                    Debug.LogError(JsonPath + " is missing or contains an invalid scene.", this);
+                }
+            }));
+
+            PhotonNetwork.JoinRoom(roomName);
         }
 
         /// <summary>
@@ -129,7 +162,7 @@ namespace Com.Oregonstate.MMOExpo
             if (isConnecting || switchRoom)
             {
                 // #Critical: The first we try to do is to join a potential exisitng room. If there is, good, else, we'll be called back with OnJoinRandomFailed()
-                PhotonNetwork.JoinRoom(roomName);
+                JoinRoom(roomName);
                 isConnecting = false;
                 switchRoom = false;
             }
@@ -164,8 +197,7 @@ namespace Com.Oregonstate.MMOExpo
 
             Debug.Log("Load '" + roomName + "'");
             // #Critical
-            // Load the level with the same name as the current room
-            PhotonNetwork.LoadLevel(roomName);
+            PhotonNetwork.LoadLevel(SceneName);
         }
 
         /// <summary>
