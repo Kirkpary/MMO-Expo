@@ -12,13 +12,19 @@ public class SearchScript : MonoBehaviour
     public GameObject popUpPanel;
     public InputField searchBoothInputField;
     public GameObject scrollViewContent;
+
     private List<GameObject> boothList = new List<GameObject>();
 
+    private static bool searchPanelEnabled = false;
+    public static bool isSearchPanelEnabled { 
+        get { return searchPanelEnabled; } 
+    }
 
     // Start is called before the first frame update
     void Start()
     {
         popUpPanel.SetActive(false);
+        searchPanelEnabled = false;
 
         Transform[] booths = scrollViewContent.GetComponentsInChildren<Transform>();
         foreach (Transform booth in booths)
@@ -42,8 +48,8 @@ public class SearchScript : MonoBehaviour
 
     public void OpenSearchContainer()
     {
-
         Debug.Log("Search button clicked");
+        searchPanelEnabled = true;
         popUpPanel.SetActive(true);
         Debug.Log("The size of boothList is: " + boothList.Count);
     }
@@ -51,6 +57,8 @@ public class SearchScript : MonoBehaviour
     public void CloseSearchContainer()
     {
         popUpPanel.SetActive(false);
+        searchPanelEnabled = false;
+
     }
 
     public void SearchPanelOnValueChanged()
