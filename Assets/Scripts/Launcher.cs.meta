@@ -3,7 +3,10 @@ guid: 4458ddc62dd39e24d93c360e2739ee73
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - progressLabel: {instanceID: 0}
+  - controlPanel: {instanceID: 0}
+  - searchPanel: {fileID: 1178460016945974514, guid: 2d0f294786b4d8843aa791f28664374a, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
