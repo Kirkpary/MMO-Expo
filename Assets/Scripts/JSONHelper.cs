@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 using UnityEngine.Networking;
+using UnityEngine.UI;
 
 namespace Com.Oregonstate.MMOExpo
 {
@@ -32,6 +33,7 @@ namespace Com.Oregonstate.MMOExpo
         public string[] RoomNames;
     }
     #endregion
+
 
     /// <summary>
     /// Helper class to process Json arrays
@@ -107,8 +109,9 @@ namespace Com.Oregonstate.MMOExpo
                 else
                 {
                     Debug.Log("Setting picture of booth i: " + i);
-                    Texture2D tx = ((DownloadHandlerTexture)www.downloadHandler).texture;
+                    Texture2D tx = ((DownloadHandlerTexture)www.downloadHandler).texture as Texture2D;
                     Sprite newSprite = Sprite.Create(tx, new Rect(0, 0, tx.width, tx.height), new Vector2(tx.width / 2, tx.height / 2));
+                    BoothInstantiation.BoothList[i].Picture = newSprite;
                 }
             }
         }

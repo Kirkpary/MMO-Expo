@@ -2079,9 +2079,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1178460016945974515}
-        m_TargetAssemblyTypeName: SearchScript, Assembly-CSharp
-        m_MethodName: OpenSearchContainer
+      - m_Target: {fileID: 1178460017791928897}
+        m_TargetAssemblyTypeName: ListContainer, Assembly-CSharp
+        m_MethodName: DrawUI
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

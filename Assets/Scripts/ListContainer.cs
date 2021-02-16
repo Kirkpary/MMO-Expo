@@ -21,9 +21,10 @@ public class ListContainer : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        JsonHelper.GetBoothPicture();
+        //JsonHelper.GetBoothPicture();
         Debug.Log("Drawing search UI");
-        DrawUI();
+        //DrawUI();
+        Invoke("DrawUI", 1);
     }
 
     // Update is called once per frame
@@ -32,7 +33,7 @@ public class ListContainer : MonoBehaviour
 
     }
 
-    void DrawUI()
+    public void DrawUI()
     {
         GameObject boothTemplate = transform.GetChild(0).gameObject;
         GameObject g;
