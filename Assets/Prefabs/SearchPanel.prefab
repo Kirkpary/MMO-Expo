@@ -622,7 +622,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1178460016535053810
 RectTransform:
   m_ObjectHideFlags: 0
@@ -916,7 +916,7 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -976,7 +976,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1178460016715958868
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1077,7 +1077,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1178460016574436441}
   m_HandleRect: {fileID: 1178460016574436440}
   m_Direction: 0
-  m_Value: 1
+  m_Value: 0
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -1333,9 +1333,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Search
-
-'
+  m_Text: Search
 --- !u!1 &1178460017307427429
 GameObject:
   m_ObjectHideFlags: 0
@@ -1921,8 +1919,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d14fa1223ec646c4bae236d9c70c9f8c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  img: {fileID: 0}
-  defaultImage: {fileID: 21300000, guid: 89157e9b8cac02c4eace940174600dca, type: 3}
 --- !u!114 &1178460017791928896
 MonoBehaviour:
   m_ObjectHideFlags: 0
