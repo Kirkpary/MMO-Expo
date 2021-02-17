@@ -12,6 +12,9 @@ public class SearchScript : MonoBehaviour
     public GameObject popUpPanel;
     public InputField searchBoothInputField;
     public GameObject scrollViewContent;
+    
+    public Transform searchScrollViewContent;
+    public static GameObject boothTemplate;
 
     private List<GameObject> boothList = new List<GameObject>();
 
@@ -25,6 +28,10 @@ public class SearchScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        searchScrollViewContent = GameObject.FindGameObjectWithTag("ScrollViewContent").transform;
+        boothTemplate = GameObject.Find("BoothTemplate");
+        
+
         popUpPanel.SetActive(false);
         searchPanelEnabled = false;
 
@@ -42,16 +49,11 @@ public class SearchScript : MonoBehaviour
         searchBoothInputField.onValueChanged.AddListener(delegate { SearchPanelOnValueChanged(); });
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     public void OpenSearchContainer()
     {
         if (firstTimeOpen)
         {
+            boothTemplate.SetActive(true);
             Transform[] booths = scrollViewContent.GetComponentsInChildren<Transform>();
             foreach (Transform booth in booths)
             {
@@ -62,6 +64,7 @@ public class SearchScript : MonoBehaviour
                 }
             }
             firstTimeOpen = false;
+            StartCoroutine(BoothPictureHelper.GetBoothPicture(searchScrollViewContent, boothTemplate));
         }
 
         Debug.Log("Search button clicked");

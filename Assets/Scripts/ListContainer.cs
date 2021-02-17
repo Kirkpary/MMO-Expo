@@ -37,7 +37,6 @@ public class ListContainer : MonoBehaviour
         //GameObject boothTemplate = transform.GetChild(0).gameObject;
         //GameObject boothTemplate = GameObject.Find("BoothTemplate");
         //Debug.Log("The name of the parent of the boothTemplate is: " + boothTemplate.transform.parent.gameObject.name);
-
         GameObject g;
 
         //Debug.Log("The name of boothTemplate is: " + boothTemplate.name);
@@ -52,7 +51,7 @@ public class ListContainer : MonoBehaviour
 
             g.GetComponent<Button>().AddEventListener(i, ItemClicked);
         }
-        Destroy(boothTemplate);
+        SearchScript.boothTemplate.SetActive(false);
     }
 
     static void ItemClicked(int itemIndex)

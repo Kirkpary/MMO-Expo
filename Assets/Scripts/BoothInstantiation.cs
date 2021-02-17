@@ -37,9 +37,6 @@ namespace Com.Oregonstate.MMOExpo
                     JsonPath = Application.streamingAssetsPath + "/" + PhotonNetwork.CurrentRoom.Name + ".json";
                     StartCoroutine(JsonHelper.JsonUrlToObject<Room>(JsonPath, true, InstantiateBooth));
 
-                    Transform parent = GameObject.FindGameObjectWithTag("ScrollViewContent").transform;
-                    GameObject boothTemplate = GameObject.Find("BoothTemplate");
-                    StartCoroutine(BoothPictureHelper.GetBoothPicture(parent, boothTemplate));
                 }
             }
             else
