@@ -2,19 +2,24 @@
 	"SceneName": "desert",
     "Items": [
         {
-            "BoothName": "Booth 1"
+            "BoothName": "MMO Expo",
+          "Description": "Virtual expo",
+           "PictureURL": "https://cdn.pixabay.com/photo/2017/02/20/18/03/cat-2083492_960_720.jpg"
         },
         {
-            "BoothName": "Booth 2"
+            "BoothName": "AI Tree",
+          "Description": "Find trees using AI",
+           "PictureURL": "https://cdn.pixabay.com/photo/2015/11/07/11/34/kitten-1031261_960_720.jpg"
         },
         {
-            "BoothName": "Booth 3"
+            "BoothName": "Del Perro",
+          "Description": "Project tracker website",
+           "PictureURL": "https://cdn.pixabay.com/photo/2017/02/15/12/12/cat-2068462_960_720.jpg"
         },
         {
-            "BoothName": "Booth 4"
-        },
-        {
-            "BoothName": "Booth 5"
+            "BoothName": "GFR Club",
+          "Description": "Racing club",
+           "PictureURL": "https://cdn.pixabay.com/photo/2018/04/20/17/18/cat-3336579_960_720.jpg"
         }
     ]
 }
