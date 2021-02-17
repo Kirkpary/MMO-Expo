@@ -20,21 +20,23 @@ public class SearchScript : MonoBehaviour
         get { return searchPanelEnabled; } 
     }
 
+    private bool firstTimeOpen = true;
+
     // Start is called before the first frame update
     void Start()
     {
         popUpPanel.SetActive(false);
         searchPanelEnabled = false;
 
-        Transform[] booths = scrollViewContent.GetComponentsInChildren<Transform>();
-        foreach (Transform booth in booths)
-        {
-            if (booth.gameObject.name == "BoothTemplate(Clone)")
-            {
-                boothList.Add(booth.gameObject);
-                Debug.Log("Adding booth to boothList wtih name: " + booth.gameObject.name);
-            }
-        }
+        //Transform[] booths = scrollViewContent.GetComponentsInChildren<Transform>();
+        //foreach (Transform booth in booths)
+        //{
+        //    if (booth.gameObject.name == "BoothTemplate(Clone)")
+        //    {
+        //        boothList.Add(booth.gameObject);
+        //        Debug.Log("Adding booth to boothList wtih name: " + booth.gameObject.name);
+        //    }
+        //}
 
         // Initialize input field
         searchBoothInputField.onValueChanged.AddListener(delegate { SearchPanelOnValueChanged(); });
@@ -48,6 +50,20 @@ public class SearchScript : MonoBehaviour
 
     public void OpenSearchContainer()
     {
+        if (firstTimeOpen)
+        {
+            Transform[] booths = scrollViewContent.GetComponentsInChildren<Transform>();
+            foreach (Transform booth in booths)
+            {
+                if (booth.gameObject.name == "BoothTemplate(Clone)")
+                {
+                    boothList.Add(booth.gameObject);
+                    Debug.Log("Adding booth to boothList wtih name: " + booth.gameObject.name);
+                }
+            }
+            firstTimeOpen = false;
+        }
+
         Debug.Log("Search button clicked");
         searchPanelEnabled = true;
         popUpPanel.SetActive(true);

@@ -38,8 +38,8 @@ public class ListContainer : MonoBehaviour
         GameObject boothTemplate = transform.GetChild(0).gameObject;
         GameObject g;
 
-        Debug.Log("The name of boothTemplate is: " + boothTemplate.name);
-        Debug.Log("The name of this.transform is: " + this.transform.name);
+        //Debug.Log("The name of boothTemplate is: " + boothTemplate.name);
+        //Debug.Log("The name of this.transform is: " + this.transform.name);
 
         for (int i = 0; i < BoothInstantiation.BoothList.Length; i++)
         {
