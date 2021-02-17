@@ -205,6 +205,10 @@ PrefabInstance:
       propertyPath: m_SizeDelta.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1178460017791928957, guid: 2d0f294786b4d8843aa791f28664374a, type: 3}
+      propertyPath: m_TagString
+      value: ScrollViewContent
+      objectReference: {fileID: 0}
     - target: {fileID: 1178460017926317013, guid: 2d0f294786b4d8843aa791f28664374a, type: 3}
       propertyPath: m_RootOrder
       value: 3

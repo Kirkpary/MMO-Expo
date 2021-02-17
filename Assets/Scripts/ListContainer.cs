@@ -22,9 +22,8 @@ public class ListContainer : MonoBehaviour
     void Start()
     {
         //JsonHelper.GetBoothPicture();
-        Debug.Log("Drawing search UI");
+        //Debug.Log("Drawing search UI");
         //DrawUI();
-        Invoke("DrawUI", 1);
     }
 
     // Update is called once per frame
@@ -33,9 +32,12 @@ public class ListContainer : MonoBehaviour
 
     }
 
-    public void DrawUI()
+    public static void DrawUI(Transform parent, GameObject boothTemplate)
     {
-        GameObject boothTemplate = transform.GetChild(0).gameObject;
+        //GameObject boothTemplate = transform.GetChild(0).gameObject;
+        //GameObject boothTemplate = GameObject.Find("BoothTemplate");
+        //Debug.Log("The name of the parent of the boothTemplate is: " + boothTemplate.transform.parent.gameObject.name);
+
         GameObject g;
 
         //Debug.Log("The name of boothTemplate is: " + boothTemplate.name);
@@ -43,7 +45,7 @@ public class ListContainer : MonoBehaviour
 
         for (int i = 0; i < BoothInstantiation.BoothList.Length; i++)
         {
-            g = Instantiate(boothTemplate, this.transform);
+            g = Instantiate(boothTemplate, parent);
             g.transform.GetChild(0).GetComponent<Text>().text = BoothInstantiation.BoothList[i].BoothName;
             g.transform.GetChild(1).GetComponent<Text>().text = BoothInstantiation.BoothList[i].Description;
             g.transform.GetChild(2).GetComponent<Image>().sprite = BoothInstantiation.BoothList[i].Picture;
@@ -53,7 +55,7 @@ public class ListContainer : MonoBehaviour
         Destroy(boothTemplate);
     }
 
-    void ItemClicked(int itemIndex)
+    static void ItemClicked(int itemIndex)
     {
         Debug.Log("Teleporting player model to the booth: " + BoothInstantiation.BoothList[itemIndex].BoothName);
 

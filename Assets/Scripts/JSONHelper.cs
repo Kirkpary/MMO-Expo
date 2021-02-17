@@ -94,7 +94,11 @@ namespace Com.Oregonstate.MMOExpo
             }
         }
 
-        public static IEnumerator GetBoothPicture()
+    }
+
+    public static class BoothPictureHelper
+    {
+        public static IEnumerator GetBoothPicture(Transform parent, GameObject boothTemplate)
         {
             Debug.Log("Getting pictures from the JSON file");
             for (int i = 0; i < BoothInstantiation.BoothList.Length; i++)
@@ -114,6 +118,8 @@ namespace Com.Oregonstate.MMOExpo
                     BoothInstantiation.BoothList[i].Picture = newSprite;
                 }
             }
+            // ListContainer.DrawUI();
+            ListContainer.DrawUI(parent, boothTemplate);
         }
     }
 }
