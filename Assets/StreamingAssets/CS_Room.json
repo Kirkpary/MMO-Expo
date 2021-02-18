@@ -2,16 +2,16 @@
 	"SceneName": "CS_Room",
     "Items": [
         {
-            "BoothName": "Booth_1"
+            "BoothName": "Booth 1"
         },
         {
-            "BoothName": "Booth_2"
+            "BoothName": "Booth 2"
         },
         {
-            "BoothName": "Booth_3"
+            "BoothName": "Booth 3"
         },
         {
-            "BoothName": "Booth_4"
+            "BoothName": "Booth 4"
         }
     ]
 }

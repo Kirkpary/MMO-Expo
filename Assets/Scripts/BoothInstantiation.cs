@@ -16,6 +16,7 @@ namespace Com.Oregonstate.MMOExpo
         [Tooltip("Collider for Object that the prefab needs to be leveled on.")]
         public Collider Ground;
         private string JsonPath;
+        //public ChangeBoothName setName;
         [HideInInspector]
         // Make json booth list available to other objects
         public static Booth[] BoothList
@@ -89,7 +90,10 @@ namespace Com.Oregonstate.MMOExpo
 
                 // Create booth
                 GameObject temp = Instantiate(BoothPrefab, new Vector3(position.x, position.y, position.z), rotation);
-                temp.name = _BoothList[i].BoothName;
+                temp.name = _BoothList[i].BoothName;      
+
+                //ChangeBoothName.SetName(temp.name);
+                //setName.SetName(temp.name);          
             }
 
             ChatGui.FindBoothsForChat();
