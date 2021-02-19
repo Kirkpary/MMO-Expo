@@ -42,12 +42,12 @@ public class ListContainer : MonoBehaviour
         //Debug.Log("The name of boothTemplate is: " + boothTemplate.name);
         //Debug.Log("The name of this.transform is: " + this.transform.name);
 
-        for (int i = 0; i < BoothInstantiation.BoothList.Length; i++)
+        for (int i = 0; i < JsonHelper.BoothList.Length; i++)
         {
             g = Instantiate(boothTemplate, parent);
-            g.transform.GetChild(0).GetComponent<Text>().text = BoothInstantiation.BoothList[i].BoothName;
-            g.transform.GetChild(1).GetComponent<Text>().text = BoothInstantiation.BoothList[i].Description;
-            g.transform.GetChild(2).GetComponent<Image>().sprite = BoothInstantiation.BoothList[i].Picture;
+            g.transform.GetChild(0).GetComponent<Text>().text = JsonHelper.BoothList[i].BoothName;
+            g.transform.GetChild(1).GetComponent<Text>().text = JsonHelper.BoothList[i].Description;
+            g.transform.GetChild(2).GetComponent<Image>().sprite = JsonHelper.BoothList[i].Picture;
 
             g.GetComponent<Button>().AddEventListener(i, ItemClicked);
         }
@@ -56,9 +56,9 @@ public class ListContainer : MonoBehaviour
 
     static void ItemClicked(int itemIndex)
     {
-        Debug.Log("Teleporting player model to the booth: " + BoothInstantiation.BoothList[itemIndex].BoothName);
+        Debug.Log("Teleporting player model to the booth: " + JsonHelper.BoothList[itemIndex].BoothName);
 
-        GameObject destinationBooth = GameObject.Find(BoothInstantiation.BoothList[itemIndex].BoothName);
+        GameObject destinationBooth = GameObject.Find(JsonHelper.BoothList[itemIndex].BoothName);
         GameManager.PlayerModel.transform.position = destinationBooth.transform.position + destinationBooth.transform.forward * (-4);
     }
 }

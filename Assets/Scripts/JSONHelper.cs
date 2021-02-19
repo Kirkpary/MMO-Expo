@@ -41,6 +41,10 @@ namespace Com.Oregonstate.MMOExpo
    
     public static class JsonHelper
     {
+        [HideInInspector]
+        // Make json booth list available to other objects
+        public static Booth[] BoothList;
+
         /// <summary>
         /// Function to read/download json with passed in path.
         /// </summary>
@@ -101,9 +105,9 @@ namespace Com.Oregonstate.MMOExpo
         public static IEnumerator GetBoothPicture(Transform parent, GameObject boothTemplate)
         {
             Debug.Log("Getting pictures from the JSON file");
-            for (int i = 0; i < BoothInstantiation.BoothList.Length; i++)
+            for (int i = 0; i < JsonHelper.BoothList.Length; i++)
             {
-                UnityWebRequest www = UnityWebRequestTexture.GetTexture(BoothInstantiation.BoothList[i].PictureURL);
+                UnityWebRequest www = UnityWebRequestTexture.GetTexture(JsonHelper.BoothList[i].PictureURL);
                 yield return www.SendWebRequest();
 
                 if (www.isNetworkError || www.isHttpError)
@@ -115,7 +119,7 @@ namespace Com.Oregonstate.MMOExpo
                     Debug.Log("Setting picture of booth i: " + i);
                     Texture2D tx = ((DownloadHandlerTexture)www.downloadHandler).texture as Texture2D;
                     Sprite newSprite = Sprite.Create(tx, new Rect(0, 0, tx.width, tx.height), new Vector2(tx.width / 2, tx.height / 2));
-                    BoothInstantiation.BoothList[i].Picture = newSprite;
+                    JsonHelper.BoothList[i].Picture = newSprite;
                 }
             }
             // ListContainer.DrawUI();

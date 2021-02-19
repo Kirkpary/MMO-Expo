@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 using System.IO;
 using UnityEngine.SceneManagement;
@@ -15,49 +15,32 @@ namespace Com.Oregonstate.MMOExpo
         public GameObject SpawnpointListParent;
         [Tooltip("Collider for Object that the prefab needs to be leveled on.")]
         public Collider Ground;
-        private string JsonPath;
-        [HideInInspector]
-        // Make json booth list available to other objects
-        public static Booth[] BoothList
-        {
-            get
-            {
-                return _BoothList;
-            }
-        }
-        private static Booth[] _BoothList;
 
         void Start()
         {
             // Reading the JSON file for this room
             if (SpawnpointListParent != null && BoothPrefab != null)
             {
-                if (PhotonNetwork.InRoom)
-                {
-                    JsonPath = Application.streamingAssetsPath + "/" + PhotonNetwork.CurrentRoom.Name + ".json";
-                    StartCoroutine(JsonHelper.JsonUrlToObject<Room>(JsonPath, true, InstantiateBooth));
-
-                }
+                InstantiateBooths();
             }
             else
             {
-                Debug.LogWarning("<Color=yellow><a>Missing</a></Color> myPrefab or SpawnpointListParent Reference. Please set it up in GameObject '" + this.name + "'", this);
+                Debug.LogWarning("<Color=yellow><a>Missing</a></Color> myPrefab or SpawnpointListParent Reference. Booth spawning disabled. Please set it up in GameObject '" + this.name + "'", this);
             }
         }
 
-        public void InstantiateBooth(Room roomObj)
+        public void InstantiateBooths()
         {
-            _BoothList = roomObj.Items;
             // Get the transforms for the spawn points. List of spawn points including parent. perent is skipped later
             Transform[] spawnList = SpawnpointListParent.GetComponentsInChildren<Transform>();
 
-            if (_BoothList.Length > spawnList.Length - 1)
+            if (JsonHelper.BoothList.Length > spawnList.Length - 1)
             {
-                Debug.LogWarning("Maximum number of booths exceeded. Add more spawn points. There are " + _BoothList.Length + " booths and " + (spawnList.Length - 1) + " booth spawn points.", this);
+                Debug.LogWarning("Maximum number of booths exceeded. Add more spawn points. There are " + JsonHelper.BoothList.Length + " booths and " + (spawnList.Length - 1) + " booth spawn points.", this);
             }
 
             // Instantiate booths
-            for (int i = 0; i < _BoothList.Length && i < spawnList.Length - 1; i++)
+            for (int i = 0; i < JsonHelper.BoothList.Length && i < spawnList.Length - 1; i++)
             {
                 // Get position and rotation of spawn point
                 Vector3 position = spawnList[i + 1].position;
@@ -90,7 +73,7 @@ namespace Com.Oregonstate.MMOExpo
 
                 // Create booth
                 GameObject temp = Instantiate(BoothPrefab, new Vector3(position.x, position.y, position.z), rotation);
-                temp.name = _BoothList[i].BoothName;
+                temp.name = JsonHelper.BoothList[i].BoothName;
             }
 
             ChatGui.FindBoothsForChat();
