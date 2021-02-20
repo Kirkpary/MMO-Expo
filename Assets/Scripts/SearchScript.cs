@@ -32,6 +32,9 @@ public class SearchScript : MonoBehaviour
         searchScrollViewContent = GameObject.FindGameObjectWithTag("ScrollViewContent").transform;
         boothTemplate = GameObject.Find("BoothTemplate");
 
+        ListContainer.DrawUI(searchScrollViewContent, boothTemplate);
+
+
         popUpPanel.SetActive(false);
         searchPanelEnabled = false;
 
@@ -43,7 +46,6 @@ public class SearchScript : MonoBehaviour
     {
         if (firstTimeOpen)
         {
-            ListContainer.DrawUI(searchScrollViewContent, boothTemplate);
 
             // Get the booths were instantiated by DrawUI
             // The search functionality is based on the boothList array.
