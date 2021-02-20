@@ -102,7 +102,7 @@ namespace Com.Oregonstate.MMOExpo
 
     public static class BoothPictureHelper
     {
-        public static IEnumerator GetBoothPicture(Transform parent, GameObject boothTemplate)
+        public static IEnumerator GetBoothPicture()
         {
             Debug.Log("Getting pictures from the JSON file");
             for (int i = 0; i < JsonHelper.BoothList.Length; i++)
@@ -123,7 +123,7 @@ namespace Com.Oregonstate.MMOExpo
                 }
             }
             // ListContainer.DrawUI();
-            ListContainer.DrawUI(parent, boothTemplate);
+            ListContainer.DrawUIPicture();
         }
     }
 }
