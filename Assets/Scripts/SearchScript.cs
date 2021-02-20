@@ -32,19 +32,8 @@ public class SearchScript : MonoBehaviour
         searchScrollViewContent = GameObject.FindGameObjectWithTag("ScrollViewContent").transform;
         boothTemplate = GameObject.Find("BoothTemplate");
 
-
         popUpPanel.SetActive(false);
         searchPanelEnabled = false;
-
-        //Transform[] booths = scrollViewContent.GetComponentsInChildren<Transform>();
-        //foreach (Transform booth in booths)
-        //{
-        //    if (booth.gameObject.name == "BoothTemplate(Clone)")
-        //    {
-        //        boothList.Add(booth.gameObject);
-        //        Debug.Log("Adding booth to boothList wtih name: " + booth.gameObject.name);
-        //    }
-        //}
 
         // Initialize input field
         searchBoothInputField.onValueChanged.AddListener(delegate { SearchPanelOnValueChanged(); });
@@ -56,7 +45,6 @@ public class SearchScript : MonoBehaviour
         {
             ListContainer.DrawUI(searchScrollViewContent, boothTemplate);
 
-            //boothTemplate.SetActive(true);
             Transform[] booths = scrollViewContent.GetComponentsInChildren<Transform>();
             foreach (Transform booth in booths)
             {
@@ -86,14 +74,8 @@ public class SearchScript : MonoBehaviour
     public void SearchPanelOnValueChanged()
     {
         // All the text search is performed in lower case
-
         Debug.Log("SeachPanel text input value changed: " + searchBoothInputField.text);
         string searchText = searchBoothInputField.text.ToLower();
-
-        //
-        // GameObject boothNameText = boothList[0].transform.GetChild(0).gameObject;
-        // Text boothNameText = boothList[0].GetComponentInChildren<Text>();
-        // Debug.Log("The name of boothNameText is: " + boothNameText.text);
 
 
         // Restart the filter list
@@ -101,7 +83,6 @@ public class SearchScript : MonoBehaviour
         {
             boothList[i].SetActive(true);
         }
-
 
         // Check that the input field string is not empty
         if (!String.IsNullOrEmpty(searchText))

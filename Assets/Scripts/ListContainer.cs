@@ -21,9 +21,7 @@ public class ListContainer : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //JsonHelper.GetBoothPicture();
-        //Debug.Log("Drawing search UI");
-        //DrawUI();
+
     }
 
     // Update is called once per frame
