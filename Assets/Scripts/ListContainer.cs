@@ -30,13 +30,17 @@ public class ListContainer : MonoBehaviour
 
     }
 
-    public static void DrawUI(Transform parent, GameObject boothTemplate)
+    /// <summary>
+    /// Function to populate the scroll view list that is inside the search panel.
+    /// It will take the information available from the JSONHelper BoothList.
+    /// </summary>
+    public static void DrawUI(Transform scrollViewContent, GameObject boothTemplate)
     {
         GameObject g;
 
         for (int i = 0; i < JsonHelper.BoothList.Length; i++)
         {
-            g = Instantiate(boothTemplate, parent);
+            g = Instantiate(boothTemplate, scrollViewContent);
             g.transform.GetChild(0).GetComponent<Text>().text = JsonHelper.BoothList[i].BoothName;
             g.transform.GetChild(1).GetComponent<Text>().text = JsonHelper.BoothList[i].Description;
 
@@ -45,6 +49,11 @@ public class ListContainer : MonoBehaviour
         Destroy(boothTemplate);
     }
 
+    /// <summary>
+    /// Takes the Sprite Picture stored in the JSONHelper Boothlist
+    /// to populate the icon that is in each element of the scroll view list
+    /// in the search panel.
+    /// </summary>
     public static void DrawUIPicture()
     {
         GameObject g;
@@ -58,6 +67,9 @@ public class ListContainer : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Teleports the player to the correct booth.
+    /// </summary>
     static void ItemClicked(int itemIndex)
     {
         Debug.Log("Teleporting player model to the booth: " + JsonHelper.BoothList[itemIndex].BoothName);

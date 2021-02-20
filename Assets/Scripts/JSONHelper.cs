@@ -100,6 +100,10 @@ namespace Com.Oregonstate.MMOExpo
 
     }
 
+    /// <summary>
+    /// Function to get the picture URL stored in the JSONHelper BoothList array for each booth
+    /// to download the picture and store it on the Sprite Picture.
+    /// </summary>
     public static class BoothPictureHelper
     {
         public static IEnumerator GetBoothPicture()

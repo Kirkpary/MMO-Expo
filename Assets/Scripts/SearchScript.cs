@@ -45,6 +45,8 @@ public class SearchScript : MonoBehaviour
         {
             ListContainer.DrawUI(searchScrollViewContent, boothTemplate);
 
+            // Get the booths were instantiated by DrawUI
+            // The search functionality is based on the boothList array.
             Transform[] booths = scrollViewContent.GetComponentsInChildren<Transform>();
             foreach (Transform booth in booths)
             {
@@ -57,6 +59,7 @@ public class SearchScript : MonoBehaviour
             StartCoroutine(BoothPictureHelper.GetBoothPicture());
             firstTimeOpen = false;
         }
+
 
         Debug.Log("Search button clicked");
         searchPanelEnabled = true;
