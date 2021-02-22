@@ -84,5 +84,11 @@ public class ListContainer : MonoBehaviour
 
         // The user character teleports to the booth
         agent.Warp(destinationBooth.transform.position + destinationBooth.transform.forward * (-4));
+
+        // The step size is equal to the rotation that the player can do when teleported
+        var step = 180;
+        GameManager.PlayerModel.transform.rotation = 
+            Quaternion.RotateTowards(GameManager.PlayerModel.transform.rotation, destinationBooth.transform.rotation, step);
+        
     }
 }
