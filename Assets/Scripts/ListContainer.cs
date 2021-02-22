@@ -4,6 +4,7 @@ using UnityEngine.UI;
 using UnityEngine;
 using System;
 using Com.Oregonstate.MMOExpo;
+using UnityEngine.AI;
 
 public static class BoothButtonExtension
 {
@@ -75,6 +76,13 @@ public class ListContainer : MonoBehaviour
         Debug.Log("Teleporting player model to the booth: " + JsonHelper.BoothList[itemIndex].BoothName);
 
         GameObject destinationBooth = GameObject.Find(JsonHelper.BoothList[itemIndex].BoothName);
-        GameManager.PlayerModel.transform.position = destinationBooth.transform.position + destinationBooth.transform.forward * (-4);
+        //GameManager.PlayerModel.transform.position = destinationBooth.transform.position + destinationBooth.transform.forward * (-4);
+        NavMeshAgent agent = GameManager.PlayerModel.GetComponent<NavMeshAgent>();
+
+        // The user character walks to booth
+        // agent.destination = destinationBooth.transform.position + destinationBooth.transform.forward * (-4);
+
+        // The user character teleports to the booth
+        agent.Warp(destinationBooth.transform.position + destinationBooth.transform.forward * (-4));
     }
 }
