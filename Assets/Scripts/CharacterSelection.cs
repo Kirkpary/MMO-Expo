@@ -10,11 +10,13 @@ public class CharacterSelection : MonoBehaviour
 
     private void Start()
     {
+        Transform parent = GameObject.Find("Characters").GetComponent<Transform>();
         var temp = Resources.LoadAll("Avatars", typeof(GameObject)).Cast<GameObject>();
         foreach (GameObject character in temp)
         {
             print(character);
-            GameObject newPlayer = Instantiate(character, gameObject.transform);
+            GameObject newPlayer = Instantiate(character, gameObject.transform.position, gameObject.transform.rotation);
+            newPlayer.transform.SetParent(parent);
             newPlayer.name = character.name;
             newPlayer.tag = "Loaded";
             newPlayer.SetActive(false);

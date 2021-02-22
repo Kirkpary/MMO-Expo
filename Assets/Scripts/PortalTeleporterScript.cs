@@ -9,16 +9,19 @@ namespace Com.Oregonstate.MMOExpo
     public class PortalTeleporterScript : MonoBehaviour
     {
         public Launcher launcher;
+        public string RoomName = "";
+        private string DefaultWorld = "WorldLobby";
 
         void OnTriggerEnter (Collider other) 
         {
-            if (SceneManager.GetActiveScene().name == "CS_Room")
+            if (RoomName != "")
             {
-                launcher.Connect("ECE_Room");
+                launcher.Connect(RoomName);
             }
             else
             {
-                launcher.Connect("CS_Room");
+                Debug.Log("No RoomName specified. Defaulting to " + DefaultWorld + ".", this);
+                launcher.Connect(DefaultWorld);
             }
         }
     }
