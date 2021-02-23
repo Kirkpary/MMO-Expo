@@ -111,19 +111,22 @@ namespace Com.Oregonstate.MMOExpo
             Debug.Log("Getting pictures from the JSON file");
             for (int i = 0; i < JsonHelper.BoothList.Length; i++)
             {
-                UnityWebRequest www = UnityWebRequestTexture.GetTexture(JsonHelper.BoothList[i].PictureURL);
-                yield return www.SendWebRequest();
+                if (JsonHelper.BoothList[i].PictureURL != null)
+                {
+                    UnityWebRequest www = UnityWebRequestTexture.GetTexture(JsonHelper.BoothList[i].PictureURL);
+                    yield return www.SendWebRequest();
 
-                if (www.isNetworkError || www.isHttpError)
-                {
-                    Debug.Log(www.error);
-                }
-                else
-                {
-                    Debug.Log("Setting picture of booth i: " + i);
-                    Texture2D tx = ((DownloadHandlerTexture)www.downloadHandler).texture as Texture2D;
-                    Sprite newSprite = Sprite.Create(tx, new Rect(0, 0, tx.width, tx.height), new Vector2(tx.width / 2, tx.height / 2));
-                    JsonHelper.BoothList[i].Picture = newSprite;
+                    if (www.isNetworkError || www.isHttpError)
+                    {
+                        Debug.Log(www.error);
+                    }
+                    else
+                    {
+                        Debug.Log("Setting picture of booth i: " + i);
+                        Texture2D tx = ((DownloadHandlerTexture)www.downloadHandler).texture as Texture2D;
+                        Sprite newSprite = Sprite.Create(tx, new Rect(0, 0, tx.width, tx.height), new Vector2(tx.width / 2, tx.height / 2));
+                        JsonHelper.BoothList[i].Picture = newSprite;
+                    }
                 }
             }
             // ListContainer.DrawUI();
