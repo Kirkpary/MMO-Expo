@@ -103,7 +103,10 @@ namespace Com.Oregonstate.MMOExpo
         {
             if (photonView.IsMine || OfflineDebugging)
             {
-                ProcessInputs();
+                if (!SearchScript.isSearchPanelEnabled)
+                {
+                    ProcessInputs();
+                }
             }
         }
 

@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Booth
   - Loaded
+  - ScrollViewContent
   layers:
   - Default
   - TransparentFX
