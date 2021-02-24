@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 using UnityEngine.Networking;
+using UnityEngine.UI;
 
 namespace Com.Oregonstate.MMOExpo
 {
@@ -19,6 +20,9 @@ namespace Com.Oregonstate.MMOExpo
     public class Booth
     {
         public string BoothName;
+        public string Description;
+        public Sprite Picture;
+        public string PictureURL;
     }
     #endregion
 
@@ -30,12 +34,17 @@ namespace Com.Oregonstate.MMOExpo
     }
     #endregion
 
+
     /// <summary>
     /// Helper class to process Json arrays
     /// </summary>
    
     public static class JsonHelper
     {
+        [HideInInspector]
+        // Make json booth list available to other objects
+        public static Booth[] BoothList;
+
         /// <summary>
         /// Function to read/download json with passed in path.
         /// </summary>
@@ -87,6 +96,41 @@ namespace Com.Oregonstate.MMOExpo
                     callback(JsonUtility.FromJson<T>(JsonString)); // List of all booths
                 }
             }
+        }
+
+    }
+
+    /// <summary>
+    /// Function to get the picture URL stored in the JSONHelper BoothList array for each booth
+    /// to download the picture and store it on the Sprite Picture.
+    /// </summary>
+    public static class BoothPictureHelper
+    {
+        public static IEnumerator GetBoothPicture()
+        {
+            Debug.Log("Getting pictures from the JSON file");
+            for (int i = 0; i < JsonHelper.BoothList.Length; i++)
+            {
+                if (JsonHelper.BoothList[i].PictureURL != null)
+                {
+                    UnityWebRequest www = UnityWebRequestTexture.GetTexture(JsonHelper.BoothList[i].PictureURL);
+                    yield return www.SendWebRequest();
+
+                    if (www.isNetworkError || www.isHttpError)
+                    {
+                        Debug.Log(www.error);
+                    }
+                    else
+                    {
+                        Debug.Log("Setting picture of booth i: " + i);
+                        Texture2D tx = ((DownloadHandlerTexture)www.downloadHandler).texture as Texture2D;
+                        Sprite newSprite = Sprite.Create(tx, new Rect(0, 0, tx.width, tx.height), new Vector2(tx.width / 2, tx.height / 2));
+                        JsonHelper.BoothList[i].Picture = newSprite;
+                    }
+                }
+            }
+            // ListContainer.DrawUI();
+            ListContainer.DrawUIPicture();
         }
     }
 }

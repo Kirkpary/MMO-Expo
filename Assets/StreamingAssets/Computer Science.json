@@ -2,16 +2,24 @@
 	"SceneName": "beach",
     "Items": [
         {
-            "BoothName": "Booth 1"
+            "BoothName": "Project",
+          "Description": "Description about project",
+           "PictureURL": "https://images.unsplash.com/photo-1591017320663-dc3334ff1dcc?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1100&q=80"
         },
         {
-            "BoothName": "Booth 2"
+            "BoothName": "AI",
+          "Description": "Description about AI",
+           "PictureURL": "https://images.unsplash.com/photo-1549308423-a9b1b61cd4b1?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1100&q=80"
         },
         {
-            "BoothName": "Booth 3"
+            "BoothName": "Music Arena",
+          "Description": "Description about Music Arena",
+           "PictureURL": "https://images.unsplash.com/photo-1605336012114-2b9472e724b1?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1100&q=80"
         },
         {
-            "BoothName": "Booth 4"
+            "BoothName": "Booth 4",
+          "Description": "Description about Booth 4",
+           "PictureURL": "https://images.unsplash.com/photo-1452721226468-f95fb66ebf83?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1100&q=80"
         }
     ]
 }
