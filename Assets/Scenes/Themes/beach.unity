@@ -199,7 +199,7 @@ PrefabInstance:
     - target: {fileID: 341156074025569238, guid: 58419480ac7f4014e985b85574f9a438, type: 3}
       propertyPath: PrefabMesh
       value: 
-      objectReference: {fileID: 2187196052043208720, guid: d032f8a39848bd64984c260b15ab87fc, type: 3}
+      objectReference: {fileID: 1992380617159989032, guid: 715e26039b7bdb34eb312782247f1204, type: 3}
     - target: {fileID: 6371473890641431848, guid: 58419480ac7f4014e985b85574f9a438, type: 3}
       propertyPath: m_Name
       value: Booth Spawn
@@ -265,7 +265,7 @@ PrefabInstance:
     - target: {fileID: 341156074025569238, guid: 58419480ac7f4014e985b85574f9a438, type: 3}
       propertyPath: PrefabMesh
       value: 
-      objectReference: {fileID: 2187196052043208720, guid: d032f8a39848bd64984c260b15ab87fc, type: 3}
+      objectReference: {fileID: 1992380617159989032, guid: 715e26039b7bdb34eb312782247f1204, type: 3}
     - target: {fileID: 6371473890641431848, guid: 58419480ac7f4014e985b85574f9a438, type: 3}
       propertyPath: m_Name
       value: Booth Spawn (2)
@@ -407,7 +407,7 @@ PrefabInstance:
     - target: {fileID: 341156074025569238, guid: 58419480ac7f4014e985b85574f9a438, type: 3}
       propertyPath: PrefabMesh
       value: 
-      objectReference: {fileID: 2187196052043208720, guid: d032f8a39848bd64984c260b15ab87fc, type: 3}
+      objectReference: {fileID: 1992380617159989032, guid: 715e26039b7bdb34eb312782247f1204, type: 3}
     - target: {fileID: 6371473890641431848, guid: 58419480ac7f4014e985b85574f9a438, type: 3}
       propertyPath: m_Name
       value: Booth Spawn (7)
@@ -473,7 +473,7 @@ PrefabInstance:
     - target: {fileID: 341156074025569238, guid: 58419480ac7f4014e985b85574f9a438, type: 3}
       propertyPath: PrefabMesh
       value: 
-      objectReference: {fileID: 2187196052043208720, guid: d032f8a39848bd64984c260b15ab87fc, type: 3}
+      objectReference: {fileID: 1992380617159989032, guid: 715e26039b7bdb34eb312782247f1204, type: 3}
     - target: {fileID: 6371473890641431848, guid: 58419480ac7f4014e985b85574f9a438, type: 3}
       propertyPath: m_Name
       value: Booth Spawn (15)
@@ -539,7 +539,7 @@ PrefabInstance:
     - target: {fileID: 341156074025569238, guid: 58419480ac7f4014e985b85574f9a438, type: 3}
       propertyPath: PrefabMesh
       value: 
-      objectReference: {fileID: 2187196052043208720, guid: d032f8a39848bd64984c260b15ab87fc, type: 3}
+      objectReference: {fileID: 1992380617159989032, guid: 715e26039b7bdb34eb312782247f1204, type: 3}
     - target: {fileID: 6371473890641431848, guid: 58419480ac7f4014e985b85574f9a438, type: 3}
       propertyPath: m_Name
       value: Booth Spawn (3)
@@ -722,7 +722,7 @@ PrefabInstance:
     - target: {fileID: 341156074025569238, guid: 58419480ac7f4014e985b85574f9a438, type: 3}
       propertyPath: PrefabMesh
       value: 
-      objectReference: {fileID: 2187196052043208720, guid: d032f8a39848bd64984c260b15ab87fc, type: 3}
+      objectReference: {fileID: 1992380617159989032, guid: 715e26039b7bdb34eb312782247f1204, type: 3}
     - target: {fileID: 6371473890641431848, guid: 58419480ac7f4014e985b85574f9a438, type: 3}
       propertyPath: m_Name
       value: Booth Spawn (22)
@@ -928,8 +928,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 467742546}
-  m_LocalRotation: {x: 0.11761282, y: 0.4016599, z: 0.052116834, w: -0.9067086}
-  m_LocalPosition: {x: -98.50513, y: 165.65619, z: -132.84692}
+  m_LocalRotation: {x: -0.22575472, y: 0.06949127, z: 0.01614728, w: 0.97156835}
+  m_LocalPosition: {x: -127.237854, y: 141.48022, z: -210.35168}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -945,7 +945,7 @@ PrefabInstance:
     - target: {fileID: 341156074025569238, guid: 58419480ac7f4014e985b85574f9a438, type: 3}
       propertyPath: PrefabMesh
       value: 
-      objectReference: {fileID: 2187196052043208720, guid: d032f8a39848bd64984c260b15ab87fc, type: 3}
+      objectReference: {fileID: 1992380617159989032, guid: 715e26039b7bdb34eb312782247f1204, type: 3}
     - target: {fileID: 6371473890641431848, guid: 58419480ac7f4014e985b85574f9a438, type: 3}
       propertyPath: m_Name
       value: Booth Spawn (19)
@@ -1085,7 +1085,7 @@ PrefabInstance:
     - target: {fileID: 341156074025569238, guid: 58419480ac7f4014e985b85574f9a438, type: 3}
       propertyPath: PrefabMesh
       value: 
-      objectReference: {fileID: 2187196052043208720, guid: d032f8a39848bd64984c260b15ab87fc, type: 3}
+      objectReference: {fileID: 1992380617159989032, guid: 715e26039b7bdb34eb312782247f1204, type: 3}
     - target: {fileID: 6371473890641431848, guid: 58419480ac7f4014e985b85574f9a438, type: 3}
       propertyPath: m_Name
       value: Booth Spawn (4)
@@ -1151,7 +1151,7 @@ PrefabInstance:
     - target: {fileID: 341156074025569238, guid: 58419480ac7f4014e985b85574f9a438, type: 3}
       propertyPath: PrefabMesh
       value: 
-      objectReference: {fileID: 2187196052043208720, guid: d032f8a39848bd64984c260b15ab87fc, type: 3}
+      objectReference: {fileID: 1992380617159989032, guid: 715e26039b7bdb34eb312782247f1204, type: 3}
     - target: {fileID: 6371473890641431848, guid: 58419480ac7f4014e985b85574f9a438, type: 3}
       propertyPath: m_Name
       value: Booth Spawn (6)
@@ -1231,7 +1231,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 694269610}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -115.3, y: 170.3, z: -118.8}
+  m_LocalPosition: {x: -125, y: 172.1, z: -131.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 70689736}
@@ -1729,7 +1729,7 @@ PrefabInstance:
     - target: {fileID: 341156074025569238, guid: 58419480ac7f4014e985b85574f9a438, type: 3}
       propertyPath: PrefabMesh
       value: 
-      objectReference: {fileID: 2187196052043208720, guid: d032f8a39848bd64984c260b15ab87fc, type: 3}
+      objectReference: {fileID: 1992380617159989032, guid: 715e26039b7bdb34eb312782247f1204, type: 3}
     - target: {fileID: 6371473890641431848, guid: 58419480ac7f4014e985b85574f9a438, type: 3}
       propertyPath: m_Name
       value: Booth Spawn (21)
@@ -1795,7 +1795,7 @@ PrefabInstance:
     - target: {fileID: 341156074025569238, guid: 58419480ac7f4014e985b85574f9a438, type: 3}
       propertyPath: PrefabMesh
       value: 
-      objectReference: {fileID: 2187196052043208720, guid: d032f8a39848bd64984c260b15ab87fc, type: 3}
+      objectReference: {fileID: 1992380617159989032, guid: 715e26039b7bdb34eb312782247f1204, type: 3}
     - target: {fileID: 6371473890641431848, guid: 58419480ac7f4014e985b85574f9a438, type: 3}
       propertyPath: m_Name
       value: Booth Spawn (17)
@@ -1861,7 +1861,7 @@ PrefabInstance:
     - target: {fileID: 341156074025569238, guid: 58419480ac7f4014e985b85574f9a438, type: 3}
       propertyPath: PrefabMesh
       value: 
-      objectReference: {fileID: 2187196052043208720, guid: d032f8a39848bd64984c260b15ab87fc, type: 3}
+      objectReference: {fileID: 1992380617159989032, guid: 715e26039b7bdb34eb312782247f1204, type: 3}
     - target: {fileID: 6371473890641431848, guid: 58419480ac7f4014e985b85574f9a438, type: 3}
       propertyPath: m_Name
       value: Booth Spawn (10)
@@ -1927,7 +1927,7 @@ PrefabInstance:
     - target: {fileID: 341156074025569238, guid: 58419480ac7f4014e985b85574f9a438, type: 3}
       propertyPath: PrefabMesh
       value: 
-      objectReference: {fileID: 2187196052043208720, guid: d032f8a39848bd64984c260b15ab87fc, type: 3}
+      objectReference: {fileID: 1992380617159989032, guid: 715e26039b7bdb34eb312782247f1204, type: 3}
     - target: {fileID: 6371473890641431848, guid: 58419480ac7f4014e985b85574f9a438, type: 3}
       propertyPath: m_Name
       value: Booth Spawn (12)
@@ -1993,7 +1993,7 @@ PrefabInstance:
     - target: {fileID: 341156074025569238, guid: 58419480ac7f4014e985b85574f9a438, type: 3}
       propertyPath: PrefabMesh
       value: 
-      objectReference: {fileID: 2187196052043208720, guid: d032f8a39848bd64984c260b15ab87fc, type: 3}
+      objectReference: {fileID: 1992380617159989032, guid: 715e26039b7bdb34eb312782247f1204, type: 3}
     - target: {fileID: 6371473890641431848, guid: 58419480ac7f4014e985b85574f9a438, type: 3}
       propertyPath: m_Name
       value: Booth Spawn (11)
@@ -2059,7 +2059,7 @@ PrefabInstance:
     - target: {fileID: 341156074025569238, guid: 58419480ac7f4014e985b85574f9a438, type: 3}
       propertyPath: PrefabMesh
       value: 
-      objectReference: {fileID: 2187196052043208720, guid: d032f8a39848bd64984c260b15ab87fc, type: 3}
+      objectReference: {fileID: 1992380617159989032, guid: 715e26039b7bdb34eb312782247f1204, type: 3}
     - target: {fileID: 6371473890641431848, guid: 58419480ac7f4014e985b85574f9a438, type: 3}
       propertyPath: m_Name
       value: Booth Spawn (8)
@@ -2249,7 +2249,7 @@ PrefabInstance:
     - target: {fileID: 341156074025569238, guid: 58419480ac7f4014e985b85574f9a438, type: 3}
       propertyPath: PrefabMesh
       value: 
-      objectReference: {fileID: 2187196052043208720, guid: d032f8a39848bd64984c260b15ab87fc, type: 3}
+      objectReference: {fileID: 1992380617159989032, guid: 715e26039b7bdb34eb312782247f1204, type: 3}
     - target: {fileID: 6371473890641431848, guid: 58419480ac7f4014e985b85574f9a438, type: 3}
       propertyPath: m_Name
       value: Booth Spawn (18)
@@ -2315,7 +2315,7 @@ PrefabInstance:
     - target: {fileID: 341156074025569238, guid: 58419480ac7f4014e985b85574f9a438, type: 3}
       propertyPath: PrefabMesh
       value: 
-      objectReference: {fileID: 2187196052043208720, guid: d032f8a39848bd64984c260b15ab87fc, type: 3}
+      objectReference: {fileID: 1992380617159989032, guid: 715e26039b7bdb34eb312782247f1204, type: 3}
     - target: {fileID: 6371473890641431848, guid: 58419480ac7f4014e985b85574f9a438, type: 3}
       propertyPath: m_Name
       value: Booth Spawn (16)
@@ -2381,7 +2381,7 @@ PrefabInstance:
     - target: {fileID: 341156074025569238, guid: 58419480ac7f4014e985b85574f9a438, type: 3}
       propertyPath: PrefabMesh
       value: 
-      objectReference: {fileID: 2187196052043208720, guid: d032f8a39848bd64984c260b15ab87fc, type: 3}
+      objectReference: {fileID: 1992380617159989032, guid: 715e26039b7bdb34eb312782247f1204, type: 3}
     - target: {fileID: 6371473890641431848, guid: 58419480ac7f4014e985b85574f9a438, type: 3}
       propertyPath: m_Name
       value: Booth Spawn (20)
@@ -2447,7 +2447,7 @@ PrefabInstance:
     - target: {fileID: 341156074025569238, guid: 58419480ac7f4014e985b85574f9a438, type: 3}
       propertyPath: PrefabMesh
       value: 
-      objectReference: {fileID: 2187196052043208720, guid: d032f8a39848bd64984c260b15ab87fc, type: 3}
+      objectReference: {fileID: 1992380617159989032, guid: 715e26039b7bdb34eb312782247f1204, type: 3}
     - target: {fileID: 6371473890641431848, guid: 58419480ac7f4014e985b85574f9a438, type: 3}
       propertyPath: m_Name
       value: Booth Spawn (5)
@@ -2654,7 +2654,7 @@ PrefabInstance:
     - target: {fileID: 341156074025569238, guid: 58419480ac7f4014e985b85574f9a438, type: 3}
       propertyPath: PrefabMesh
       value: 
-      objectReference: {fileID: 2187196052043208720, guid: d032f8a39848bd64984c260b15ab87fc, type: 3}
+      objectReference: {fileID: 1992380617159989032, guid: 715e26039b7bdb34eb312782247f1204, type: 3}
     - target: {fileID: 6371473890641431848, guid: 58419480ac7f4014e985b85574f9a438, type: 3}
       propertyPath: m_Name
       value: Booth Spawn (14)
@@ -2822,7 +2822,7 @@ PrefabInstance:
     - target: {fileID: 341156074025569238, guid: 58419480ac7f4014e985b85574f9a438, type: 3}
       propertyPath: PrefabMesh
       value: 
-      objectReference: {fileID: 2187196052043208720, guid: d032f8a39848bd64984c260b15ab87fc, type: 3}
+      objectReference: {fileID: 1992380617159989032, guid: 715e26039b7bdb34eb312782247f1204, type: 3}
     - target: {fileID: 6371473890641431848, guid: 58419480ac7f4014e985b85574f9a438, type: 3}
       propertyPath: m_Name
       value: Booth Spawn (9)
@@ -3013,7 +3013,7 @@ PrefabInstance:
     - target: {fileID: 8734612556655352598, guid: 5c4640ff4a35ca64b902de59d608148a, type: 3}
       propertyPath: BoothPrefab
       value: 
-      objectReference: {fileID: 2187196052043208720, guid: d032f8a39848bd64984c260b15ab87fc, type: 3}
+      objectReference: {fileID: 1992380617159989032, guid: 715e26039b7bdb34eb312782247f1204, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5c4640ff4a35ca64b902de59d608148a, type: 3}
 --- !u!1001 &2014242569
@@ -3026,7 +3026,7 @@ PrefabInstance:
     - target: {fileID: 341156074025569238, guid: 58419480ac7f4014e985b85574f9a438, type: 3}
       propertyPath: PrefabMesh
       value: 
-      objectReference: {fileID: 2187196052043208720, guid: d032f8a39848bd64984c260b15ab87fc, type: 3}
+      objectReference: {fileID: 1992380617159989032, guid: 715e26039b7bdb34eb312782247f1204, type: 3}
     - target: {fileID: 6371473890641431848, guid: 58419480ac7f4014e985b85574f9a438, type: 3}
       propertyPath: m_Name
       value: Booth Spawn (23)
@@ -3092,7 +3092,7 @@ PrefabInstance:
     - target: {fileID: 341156074025569238, guid: 58419480ac7f4014e985b85574f9a438, type: 3}
       propertyPath: PrefabMesh
       value: 
-      objectReference: {fileID: 2187196052043208720, guid: d032f8a39848bd64984c260b15ab87fc, type: 3}
+      objectReference: {fileID: 1992380617159989032, guid: 715e26039b7bdb34eb312782247f1204, type: 3}
     - target: {fileID: 6371473890641431848, guid: 58419480ac7f4014e985b85574f9a438, type: 3}
       propertyPath: m_Name
       value: Booth Spawn (1)
@@ -3158,7 +3158,7 @@ PrefabInstance:
     - target: {fileID: 341156074025569238, guid: 58419480ac7f4014e985b85574f9a438, type: 3}
       propertyPath: PrefabMesh
       value: 
-      objectReference: {fileID: 2187196052043208720, guid: d032f8a39848bd64984c260b15ab87fc, type: 3}
+      objectReference: {fileID: 1992380617159989032, guid: 715e26039b7bdb34eb312782247f1204, type: 3}
     - target: {fileID: 6371473890641431848, guid: 58419480ac7f4014e985b85574f9a438, type: 3}
       propertyPath: m_Name
       value: Booth Spawn (13)
