@@ -73,6 +73,7 @@ namespace Com.Oregonstate.MMOExpo
 
                 // Create booth
                 GameObject temp = Instantiate(BoothPrefab, new Vector3(position.x, position.y, position.z), rotation);
+
                 temp.name = JsonHelper.BoothList[i].BoothName;
             }
 
