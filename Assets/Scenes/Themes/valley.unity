@@ -8572,7 +8572,7 @@ PrefabInstance:
     - target: {fileID: 8734612556655352598, guid: 5c4640ff4a35ca64b902de59d608148a, type: 3}
       propertyPath: Ground
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 718546317}
     - target: {fileID: 8734612556655352598, guid: 5c4640ff4a35ca64b902de59d608148a, type: 3}
       propertyPath: myPrefab
       value: 

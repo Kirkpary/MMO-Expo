@@ -26,4 +26,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Themes/valley.unity
     guid: 529757691fdb5c543ae1e48d4a7d76f3
+  - enabled: 1
+    path: Assets/Scenes/Themes/forest.unity
+    guid: fab4b190eaded4440a0bfcab6c751b33
   m_configObjects: {}
