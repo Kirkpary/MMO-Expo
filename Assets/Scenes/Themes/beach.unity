@@ -2794,20 +2794,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4458ddc62dd39e24d93c360e2739ee73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1001 &1687238177
+--- !u!1001 &1644163899
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 1734444871}
     m_Modifications:
-    - target: {fileID: 2626598310746849645, guid: 8c1269a1a173d5b40a32a605e7f62fa1, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 400
-      objectReference: {fileID: 0}
-    - target: {fileID: 2626598310746849645, guid: 8c1269a1a173d5b40a32a605e7f62fa1, type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 400
+    - target: {fileID: 6391962471971606089, guid: 8c1269a1a173d5b40a32a605e7f62fa1, type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6391962471971606094, guid: 8c1269a1a173d5b40a32a605e7f62fa1, type: 3}
       propertyPath: m_Name
@@ -2867,11 +2863,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6391962471971606095, guid: 8c1269a1a173d5b40a32a605e7f62fa1, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 500
+      value: 400
       objectReference: {fileID: 0}
     - target: {fileID: 6391962471971606095, guid: 8c1269a1a173d5b40a32a605e7f62fa1, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 500
+      value: 400
       objectReference: {fileID: 0}
     - target: {fileID: 6391962471971606095, guid: 8c1269a1a173d5b40a32a605e7f62fa1, type: 3}
       propertyPath: m_AnchorMin.x
@@ -2899,10 +2895,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8c1269a1a173d5b40a32a605e7f62fa1, type: 3}
---- !u!224 &1687238178 stripped
+--- !u!224 &1644163900 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 6391962471971606095, guid: 8c1269a1a173d5b40a32a605e7f62fa1, type: 3}
-  m_PrefabInstance: {fileID: 1687238177}
+  m_PrefabInstance: {fileID: 1644163899}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1722089367
 PrefabInstance:
@@ -3065,7 +3061,7 @@ RectTransform:
   - {fileID: 950246740}
   - {fileID: 1421823508}
   - {fileID: 694867320}
-  - {fileID: 1687238178}
+  - {fileID: 1644163900}
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
