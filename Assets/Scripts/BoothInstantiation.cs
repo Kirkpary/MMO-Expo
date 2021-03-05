@@ -78,6 +78,7 @@ namespace Com.Oregonstate.MMOExpo
             }
 
             ChatGui.FindBoothsForChat();
+            BoothImageScript.FindBooths();
         }
     }
 }
