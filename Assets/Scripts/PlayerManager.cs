@@ -64,6 +64,7 @@ namespace Com.Oregonstate.MMOExpo
         {
             characterController = GetComponent<CharacterController>();
             agent = GetComponent<NavMeshAgent>();
+            BoothImageScript.FindPlayer();
 
             CameraWork _cameraWork = this.gameObject.GetComponent<CameraWork>();
 
@@ -210,4 +211,5 @@ namespace Com.Oregonstate.MMOExpo
         }
         #endregion
     }
+
 }
