@@ -132,6 +132,7 @@ namespace Com.Oregonstate.MMOExpo
                 {
                     //PhotonNetwork.LoadLevel(roomObj.SceneName);
                     SceneName = roomObj.SceneName;
+                    JsonHelper.BoothList = roomObj.Items;
                 }
                 else
                 {
