@@ -9,17 +9,11 @@ namespace Com.Oregonstate.MMOExpo
     public class PortalTeleporterScript : MonoBehaviour
     {
         public Launcher launcher;
+        public GameObject PortalPrefab;
 
         void OnTriggerEnter (Collider other) 
         {
-            if (SceneManager.GetActiveScene().name == "CS_Room")
-            {
-                launcher.Connect("ECE_Room");
-            }
-            else
-            {
-                launcher.Connect("CS_Room");
-            }
+            launcher.Connect(PortalPrefab.name);
         }
     }
 }   
