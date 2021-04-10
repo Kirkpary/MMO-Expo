@@ -4427,6 +4427,10 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: Connect
       objectReference: {fileID: 0}
+    - target: {fileID: 474144034, guid: 5c8ba86d00b71214abff16f2faa0dcc8, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
+      value: PortalLobby
+      objectReference: {fileID: 0}
     - target: {fileID: 4778160135398767332, guid: 5c8ba86d00b71214abff16f2faa0dcc8, type: 3}
       propertyPath: m_Name
       value: Bottom Panel

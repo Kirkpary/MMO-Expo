@@ -9,28 +9,20 @@ namespace Com.Oregonstate.MMOExpo
     public class PortalTeleporterScript : MonoBehaviour
     {
         public Launcher launcher;
-<<<<<<< HEAD
         public GameObject PortalPrefab;
+        private string DefaultWorld = "PortalLobby";
 
         void OnTriggerEnter (Collider other) 
         {
-            launcher.Connect(PortalPrefab.name);
-=======
-        public string RoomName = "";
-        private string DefaultWorld = "WorldLobby";
-
-        void OnTriggerEnter (Collider other) 
-        {
-            if (RoomName != "")
+            if (PortalPrefab.name != "")
             {
-                launcher.Connect(RoomName);
+                launcher.Connect(PortalPrefab.name);
             }
             else
             {
                 Debug.Log("No RoomName specified. Defaulting to " + DefaultWorld + ".", this);
                 launcher.Connect(DefaultWorld);
             }
->>>>>>> origin/main
         }
     }
 }   
