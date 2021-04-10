@@ -8,15 +8,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/CharacterSelection.unity
     guid: abf89ca6f2530e74c8b1e9681878e84c
-  - enabled: 0
-    path: Assets/Scenes/WorldLobby.unity
-    guid: 61966086c03e46141b27801a2e98d57d
   - enabled: 1
-    path: Assets/Scenes/CS_Room.unity
-    guid: 9fc0d4010bbf28b4594072e72b8655ab
-  - enabled: 1
-    path: Assets/Scenes/ECE_Room.unity
-    guid: abe7dc9d5512121418307a9fb9f6b45a
+    path: Assets/Scenes/PortalLobby.unity
+    guid: 89f238c1a5a6bf34bb462554e784403b
   - enabled: 1
     path: Assets/Scenes/Themes/beach.unity
     guid: c77bdeaebc3f4b34e8e870b5261dfece
