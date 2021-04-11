@@ -31,7 +31,7 @@ RectTransform:
   m_LocalScale: {x: 5, y: 0.2, z: 1}
   m_Children: []
   m_Father: {fileID: 8027699972359553923}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -183,51 +183,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PortalPrefab: {fileID: 8027699972359553951}
---- !u!1 &1326495042863322527
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 302484027732559263}
-  - component: {fileID: 6613161469323073715}
-  m_Layer: 0
-  m_Name: Launcher
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &302484027732559263
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1326495042863322527}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.22, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 8027699972359553923}
-  m_RootOrder: 5
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6613161469323073715
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1326495042863322527}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4458ddc62dd39e24d93c360e2739ee73, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  progressLabel: {fileID: 0}
-  controlPanel: {fileID: 0}
 --- !u!1 &1517039244450161180
 GameObject:
   m_ObjectHideFlags: 0
@@ -306,7 +261,7 @@ Transform:
   m_LocalScale: {x: 19, y: 0.05, z: 0.1}
   m_Children: []
   m_Father: {fileID: 8027699972359553923}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!33 &7583623168872206100
 MeshFilter:
@@ -452,7 +407,6 @@ Transform:
   - {fileID: 8027699973554748733}
   - {fileID: 6164974544144234580}
   - {fileID: 1757027500883645684}
-  - {fileID: 302484027732559263}
   - {fileID: 6901510963992771201}
   - {fileID: 1261330897853239409}
   m_Father: {fileID: 0}
@@ -531,7 +485,7 @@ GameObject:
   - component: {fileID: 8027699973554748733}
   - component: {fileID: 8027699973554748732}
   - component: {fileID: 8027699973554748735}
-  - component: {fileID: 8027699973554748734}
+  - component: {fileID: 5648313884644757663}
   m_Layer: 0
   m_Name: ColliderPlane
   m_TagString: Untagged
@@ -574,7 +528,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 16.499786, y: 0.97393817, z: 0}
   m_Center: {x: -0.32224178, y: -0.0056860927, z: 0}
---- !u!114 &8027699973554748734
+--- !u!114 &5648313884644757663
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -586,7 +540,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 763073971e85f9a489d140c32266ad7a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  launcher: {fileID: 6613161469323073715}
+  launcher: {fileID: 0}
   PortalPrefab: {fileID: 8027699972359553951}
 --- !u!1 &8027699973685513586
 GameObject:

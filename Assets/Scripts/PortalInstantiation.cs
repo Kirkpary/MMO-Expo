@@ -21,6 +21,8 @@ namespace Com.Oregonstate.MMOExpo
         {
             JsonPath = Application.streamingAssetsPath + "/RoomList.json";
             StartCoroutine(JsonHelper.JsonUrlToObject<RoomList>(JsonPath, false, InstantiateObjects));
+
+            PortalTeleporterScript.passLauncher(launcher);
         }
 
         void InstantiateObjects(RoomList roomList)

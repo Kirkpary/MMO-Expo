@@ -8,9 +8,14 @@ namespace Com.Oregonstate.MMOExpo
 {
     public class PortalTeleporterScript : MonoBehaviour
     {
-        public Launcher launcher;
         public GameObject PortalPrefab;
         private string DefaultWorld = "PortalLobby";
+        private static Launcher launcher;
+
+        public static void passLauncher(Launcher roomLauncher) 
+        {
+            launcher = roomLauncher;
+        }
 
         void OnTriggerEnter (Collider other) 
         {
