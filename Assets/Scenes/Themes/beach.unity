@@ -928,8 +928,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 467742546}
-  m_LocalRotation: {x: 0.07219532, y: 0.92445374, z: 0.22066146, w: -0.30245945}
-  m_LocalPosition: {x: -109.68137, y: 163.3738, z: -187.16208}
+  m_LocalRotation: {x: -0.103263035, y: 0.08285783, z: 0.008632508, w: 0.9911593}
+  m_LocalPosition: {x: 282.2819, y: -65.28934, z: -940.2966}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -1764,7 +1764,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 474144034, guid: 5c8ba86d00b71214abff16f2faa0dcc8, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
-      value: PortalLobby
+      value: Portal Lobby
       objectReference: {fileID: 0}
     - target: {fileID: 4778160135398767332, guid: 5c8ba86d00b71214abff16f2faa0dcc8, type: 3}
       propertyPath: m_Name

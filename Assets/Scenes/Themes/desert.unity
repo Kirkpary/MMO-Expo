@@ -3524,7 +3524,7 @@ PrefabInstance:
       objectReference: {fileID: 1656213438}
     - target: {fileID: 474144034, guid: 5c8ba86d00b71214abff16f2faa0dcc8, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
-      value: PortalLobby
+      value: Portal Lobby
       objectReference: {fileID: 0}
     - target: {fileID: 4778160135398767332, guid: 5c8ba86d00b71214abff16f2faa0dcc8, type: 3}
       propertyPath: m_Name
