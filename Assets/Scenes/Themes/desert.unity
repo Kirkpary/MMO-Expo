@@ -862,71 +862,6 @@ LightingSettings:
   m_PVRFilteringAtrousPositionSigmaDirect: 0.5
   m_PVRFilteringAtrousPositionSigmaIndirect: 2
   m_PVRFilteringAtrousPositionSigmaAO: 1
---- !u!1001 &354686716
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 8027699972359553923, guid: 17a4df626ffbd5e45abc45901dda27a7, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 93.21374
-      objectReference: {fileID: 0}
-    - target: {fileID: 8027699972359553923, guid: 17a4df626ffbd5e45abc45901dda27a7, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 6.81
-      objectReference: {fileID: 0}
-    - target: {fileID: 8027699972359553923, guid: 17a4df626ffbd5e45abc45901dda27a7, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -93.41338
-      objectReference: {fileID: 0}
-    - target: {fileID: 8027699972359553923, guid: 17a4df626ffbd5e45abc45901dda27a7, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8027699972359553923, guid: 17a4df626ffbd5e45abc45901dda27a7, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0.56982607
-      objectReference: {fileID: 0}
-    - target: {fileID: 8027699972359553923, guid: 17a4df626ffbd5e45abc45901dda27a7, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8027699972359553923, guid: 17a4df626ffbd5e45abc45901dda27a7, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.8217653
-      objectReference: {fileID: 0}
-    - target: {fileID: 8027699972359553923, guid: 17a4df626ffbd5e45abc45901dda27a7, type: 3}
-      propertyPath: m_RootOrder
-      value: 9
-      objectReference: {fileID: 0}
-    - target: {fileID: 8027699972359553923, guid: 17a4df626ffbd5e45abc45901dda27a7, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8027699972359553923, guid: 17a4df626ffbd5e45abc45901dda27a7, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: -69.476
-      objectReference: {fileID: 0}
-    - target: {fileID: 8027699972359553923, guid: 17a4df626ffbd5e45abc45901dda27a7, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8027699972359553951, guid: 17a4df626ffbd5e45abc45901dda27a7, type: 3}
-      propertyPath: m_Name
-      value: Portal
-      objectReference: {fileID: 0}
-    - target: {fileID: 8027699973554748734, guid: 17a4df626ffbd5e45abc45901dda27a7, type: 3}
-      propertyPath: launcher
-      value: 
-      objectReference: {fileID: 1656213438}
-    - target: {fileID: 8027699973554748734, guid: 17a4df626ffbd5e45abc45901dda27a7, type: 3}
-      propertyPath: RoomName
-      value: 
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 17a4df626ffbd5e45abc45901dda27a7, type: 3}
 --- !u!1 &496944707
 GameObject:
   m_ObjectHideFlags: 0
@@ -3587,6 +3522,10 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1656213438}
+    - target: {fileID: 474144034, guid: 5c8ba86d00b71214abff16f2faa0dcc8, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
+      value: Portal Lobby
+      objectReference: {fileID: 0}
     - target: {fileID: 4778160135398767332, guid: 5c8ba86d00b71214abff16f2faa0dcc8, type: 3}
       propertyPath: m_Name
       value: Bottom Panel

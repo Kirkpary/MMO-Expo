@@ -16,6 +16,7 @@ namespace Com.Oregonstate.MMOExpo
         [Tooltip("Collider for Object that the prefab needs to be leveled on.")]
         public Collider Ground;
 
+
         void Start()
         {
             // Reading the JSON file for this room
