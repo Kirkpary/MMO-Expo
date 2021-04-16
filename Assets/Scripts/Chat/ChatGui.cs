@@ -637,7 +637,7 @@ namespace Com.Oregonstate.MMOExpo
 		private void UnSubscribeCurrent()
 		{
 			List<String> currentChats = new List<string>();
-			currentChats.Add(SceneManagerHelper.ActiveSceneName);
+			currentChats.Add(PhotonNetwork.CurrentRoom.Name);
 			if (boothChannel != null)
 			{
 				currentChats.Add(boothChannel);
