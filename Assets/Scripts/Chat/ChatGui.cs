@@ -73,7 +73,7 @@ namespace Com.Oregonstate.MMOExpo
 		private readonly Dictionary<string, GameObject> channelToggles = new Dictionary<string, GameObject>();
 
 		[Tooltip("Text object to display the current user ID. Not currently part of the chat panel.")]
-		public Text UserIdText; // set in inspector
+		public Text UserIdText;
 
 		[Tooltip("Text object that tells the user how to open the chat.")]
 		public Text OpenChatPrompt;
@@ -117,6 +117,11 @@ namespace Com.Oregonstate.MMOExpo
 			//TODO DELETE
 			//DontDestroyOnLoad(this.gameObject);
 
+            if (UserIdText == null)
+            {
+                UserIdText = GameObject.Find("Username").gameObject.GetComponent<Text>();
+            }
+
 			chatManager = this;
 
 			if (UserIdText != null)
@@ -126,14 +131,14 @@ namespace Com.Oregonstate.MMOExpo
 			}
 			else
 			{
-				Debug.LogError("<Color=red><a>Missing</a></Color> userIdText Reference. Please set it up in GameObject 'Chat Panel'", this);
+				Debug.LogError("<Color=red><a>Missing</a></Color> userIdText Reference. Please set it up in GameObject 'Chat Manager'", this);
 			}
 			if (ChatPanel != null) {
 				this.ChatPanel.gameObject.SetActive(false);
 			}
 			else
 			{
-				Debug.LogError("<Color=red><a>Missing</a></Color> userIdText Reference. Please set it up in GameObject 'Chat Panel'", this);
+				Debug.LogError("<Color=red><a>Missing</a></Color> ChatPanel Reference. Please set it up in GameObject 'Chat Manager'", this);
 			}
 
 			chatEnabled = false;
