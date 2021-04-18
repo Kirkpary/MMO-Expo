@@ -107,7 +107,7 @@ namespace Com.Oregonstate.MMOExpo
 				"\n" +
 				"To send a private message: (username are case sensitive)\n" +
 				"\t<color=#DC4405>/msg</color> <color=green><username></color> <color=green><message></color>\n" +
-				"\n\n" +
+				"\n" +
 				"To clear the current chat tab (private chats get closed):\n" +
 				"\t<color=#DC4405>/clear</color>";
 
