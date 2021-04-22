@@ -20,6 +20,7 @@ namespace Com.Oregonstate.MMOExpo
         GraphicRaycaster graphicRaycaster;
         PointerEventData pointerEventData;
         EventSystem eventSystem;
+        Animator animator;
         #endregion
 
         #region Public Fields
@@ -64,9 +65,20 @@ namespace Com.Oregonstate.MMOExpo
         {
             characterController = GetComponent<CharacterController>();
             agent = GetComponent<NavMeshAgent>();
+            animator = GetComponent<Animator>();
             BoothImageScript.FindPlayer();
 
             CameraWork _cameraWork = this.gameObject.GetComponent<CameraWork>();
+
+            if (animator != null)
+            {
+                animator.SetInteger("arms", 5);
+                animator.SetInteger("legs", 5);
+            }
+            else
+            {
+                Debug.LogWarning("<Color=Yellow><a>Missing</a></Color> Animator reference on player Prefab.", this);
+            }
 
             if (_cameraWork != null)
             {
@@ -93,6 +105,8 @@ namespace Com.Oregonstate.MMOExpo
             {
                 Debug.LogWarning("<Color=Yellow><a>Missing</a></Color> PlayerUiPrefab reference on player Prefab.", this);
             }
+
+            
 
 #if UNITY_5_4_OR_NEWER
             // Unity 5.4 has a new scene management. register a method to call CalledOnLevelWasLoaded.

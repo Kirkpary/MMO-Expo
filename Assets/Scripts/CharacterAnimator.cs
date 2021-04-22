@@ -11,6 +11,15 @@ public class CharacterAnimator : MonoBehaviour
     void Start()
     {
         animator = GetComponent<Animator>();
+        if (animator != null)
+        {
+            animator.SetInteger("arms", 5);
+            animator.SetInteger("legs", 5);
+        }
+        else
+        {
+            Debug.LogWarning("<Color=Yellow><a>Missing</a></Color> Animator reference on player Prefab.", this);
+        }
     }
 
     // Update is called once per frame
