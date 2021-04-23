@@ -6914,12 +6914,12 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9113561252080322206}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b54278d2319451a409b1660c6621d2e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PlayerUiPrefab: {fileID: 0}
+  PlayerUiPrefab: {fileID: 8732337277991191219, guid: a1c0f010ec799b946a35808e5c255e4d, type: 3}
   OfflineDebugging: 0
 --- !u!114 &94355200218302945
 MonoBehaviour:
@@ -7020,10 +7020,10 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9113561252080322206}
   serializedVersion: 2
-  m_Mass: 1
+  m_Mass: 100
   m_Drag: 0
   m_AngularDrag: 0.05
-  m_UseGravity: 0
+  m_UseGravity: 1
   m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 0

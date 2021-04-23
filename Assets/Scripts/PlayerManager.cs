@@ -21,6 +21,10 @@ namespace Com.Oregonstate.MMOExpo
         PointerEventData pointerEventData;
         EventSystem eventSystem;
         Animator animator;
+        bool isAnimating;
+        Vector3 prevPos;
+        Vector3 newPos;
+        Vector3 objVel;
         #endregion
 
         #region Public Fields
@@ -66,19 +70,14 @@ namespace Com.Oregonstate.MMOExpo
             characterController = GetComponent<CharacterController>();
             agent = GetComponent<NavMeshAgent>();
             animator = GetComponent<Animator>();
+            isAnimating = false;
+
+            prevPos = agent.transform.position;
+            newPos = agent.transform.position;
+
             BoothImageScript.FindPlayer();
 
             CameraWork _cameraWork = this.gameObject.GetComponent<CameraWork>();
-
-            if (animator != null)
-            {
-                animator.SetInteger("arms", 5);
-                animator.SetInteger("legs", 5);
-            }
-            else
-            {
-                Debug.LogWarning("<Color=Yellow><a>Missing</a></Color> Animator reference on player Prefab.", this);
-            }
 
             if (_cameraWork != null)
             {
@@ -130,6 +129,23 @@ namespace Com.Oregonstate.MMOExpo
             if (photonView.IsMine && ChatGui.chatManager.IsChatConnected)
             {
                 ChatGui.chatManager.SubscirbeToClosestBooth(transform.position);
+            }
+
+            if (photonView.IsMine || OfflineDebugging)
+            {
+                if (!SearchScript.isSearchPanelEnabled)
+                {
+                    newPos = agent.transform.position;
+                    objVel = (newPos - prevPos) / Time.fixedDeltaTime;
+
+                    if (objVel.magnitude < 0.05f && isAnimating)
+                    {
+                        animator.SetInteger("arms", 5);
+                        animator.SetInteger("legs", 5);
+                        isAnimating = false;
+                    }
+                    prevPos = newPos;
+                }
             }
         }
 
@@ -196,7 +212,14 @@ namespace Com.Oregonstate.MMOExpo
                             if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, 100))
                             {
                                 agent.destination = hit.point;
+                                if (animator != null && !isAnimating)
+                                {
+                                    animator.SetInteger("arms", 1);
+                                    animator.SetInteger("legs", 1);
+                                    isAnimating = true;
+                                }
                             }
+                            
                         }
                     }
                 }
@@ -208,6 +231,13 @@ namespace Com.Oregonstate.MMOExpo
                         agent.ResetPath();
                         transform.Rotate(0, h * (agent.angularSpeed * Time.deltaTime), 0, Space.Self);
                         agent.Move(transform.forward * v * agent.speed * Time.deltaTime);
+
+                        if (animator != null && !isAnimating)
+                        {
+                            animator.SetInteger("arms", 1);
+                            animator.SetInteger("legs", 1);
+                            isAnimating = true;
+                        }
                     }
                 }
             }

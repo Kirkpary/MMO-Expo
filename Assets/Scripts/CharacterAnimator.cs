@@ -7,6 +7,7 @@ public class CharacterAnimator : MonoBehaviour
     private Animator animator;
     private bool isAnimating = false;
 
+
     // Start is called before the first frame update
     void Start()
     {
@@ -25,6 +26,10 @@ public class CharacterAnimator : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        
+
+
+        // Activate animation using Space
         if (Input.GetKeyDown(KeyCode.Space) && !isAnimating)
         {
             animator.SetInteger("arms", 1);
