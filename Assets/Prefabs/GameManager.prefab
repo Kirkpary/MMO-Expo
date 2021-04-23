@@ -58,7 +58,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a83d7bc1b1b1b0047ad47993bcc93b37, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  BoothPrefab: {fileID: 793397348027105764, guid: 28560baded6bb564dbde5199363d3300, type: 3}
+  BoothPrefab: {fileID: 1992380617159989032, guid: 715e26039b7bdb34eb312782247f1204, type: 3}
   SpawnpointListParent: {fileID: 0}
   Ground: {fileID: 0}
 --- !u!114 &7624437815781599447
