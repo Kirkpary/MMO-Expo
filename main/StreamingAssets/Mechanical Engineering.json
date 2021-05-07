@@ -1,0 +1,26 @@
+{
+	"SceneName": "valley",
+    "Items": [
+        {
+            "BoothName": "Booth 1"
+        },
+        {
+            "BoothName": "Booth 2"
+        },
+        {
+            "BoothName": "Booth 3"
+        },
+        {
+            "BoothName": "Booth 4"
+        },
+        {
+            "BoothName": "Booth 5"
+        },
+        {
+            "BoothName": "Booth 6"
+        },
+        {
+            "BoothName": "Booth 7"
+        }
+    ]
+}
