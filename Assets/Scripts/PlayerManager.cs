@@ -138,7 +138,7 @@ namespace Com.Oregonstate.MMOExpo
                     newPos = agent.transform.position;
                     objVel = (newPos - prevPos) / Time.fixedDeltaTime;
 
-                    if (objVel.magnitude < 0.05f && isAnimating)
+                    if (objVel.magnitude < 0.00001f && isAnimating)
                     {
                         animator.SetInteger("arms", 5);
                         animator.SetInteger("legs", 5);
@@ -196,6 +196,13 @@ namespace Com.Oregonstate.MMOExpo
                 {
                     if (Input.GetButtonDown("Fire1"))
                     {
+                        if (!agent.isStopped && animator != null)
+                        {
+                            animator.SetInteger("arms", 1);
+                            animator.SetInteger("legs", 1);
+                            isAnimating = true;
+                        }
+
                         // Check for UI click
                         pointerEventData = new PointerEventData(eventSystem);
                         pointerEventData.position = Input.mousePosition;
@@ -212,12 +219,12 @@ namespace Com.Oregonstate.MMOExpo
                             if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, 100))
                             {
                                 agent.destination = hit.point;
-                                if (animator != null && !isAnimating)
-                                {
-                                    animator.SetInteger("arms", 1);
-                                    animator.SetInteger("legs", 1);
-                                    isAnimating = true;
-                                }
+                                //if (animator != null && !isAnimating)
+                                //{
+                                //    animator.SetInteger("arms", 1);
+                                //    animator.SetInteger("legs", 1);
+                                //    isAnimating = true;
+                                //}
                             }
                             
                         }

@@ -18,7 +18,7 @@ public class CharacterSelection : MonoBehaviour
             GameObject newPlayer = Instantiate(character, gameObject.transform.position, gameObject.transform.rotation);
             newPlayer.transform.SetParent(parent);
             newPlayer.name = character.name;
-            newPlayer.tag = "Loaded";
+            //newPlayer.tag = "Loaded";
             newPlayer.SetActive(false);
             characters.Add(newPlayer);
         }
@@ -43,6 +43,7 @@ public class CharacterSelection : MonoBehaviour
         }
         Debug.LogFormat("The selectedChar is: {0} and characters.Count is: {1}", selectedCharacter, characters.Count);
         characters[selectedCharacter].SetActive(true);
+
     }
 
     public void StartGame()

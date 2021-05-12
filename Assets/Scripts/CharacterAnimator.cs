@@ -5,12 +5,16 @@ using UnityEngine;
 public class CharacterAnimator : MonoBehaviour
 {
     private Animator animator;
-    private bool isAnimating = false;
+    private bool isAnimating = false; 
 
 
     // Start is called before the first frame update
     void Start()
     {
+        GameObject body = this.transform.GetChild(1).gameObject;
+        Debug.Log("The name of the body gameObject is: " + body.name);
+        body.transform.Rotate(0.0f, 90.0f, 0, Space.World);
+
         animator = GetComponent<Animator>();
         if (animator != null)
         {
