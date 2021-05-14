@@ -14,6 +14,7 @@ namespace Com.Oregonstate.MMOExpo
         public GameObject BoothUI;
         public GameObject BoothImage;
         public GameObject Booth;
+        public GameObject BoothPrompt;
         private static GameObject[] Booths = null;
         public bool display = false;
         private static GameObject agent;
@@ -21,28 +22,39 @@ namespace Com.Oregonstate.MMOExpo
         // Update is called once per frame
         void Update()
         {
-            int i = 0;
-            foreach (GameObject booth in Booths)
+            if (Booths != null && agent != null)
             {
-                float distance = (booth.transform.position - agent.transform.position).sqrMagnitude;
-                if (distance < 10 && Input.GetKeyDown("space") && display == false)
+                int i = 0;
+                foreach (GameObject booth in Booths)
                 {
-                    Debug.Log(booth.name);
-                    string url = JsonHelper.BoothList[i].PictureURL;
-                    StartCoroutine(GetTexture(url));
-                    display = true;
-                    BoothImage.SetActive(display);
-                    Debug.Log("open");
-                    break;
+                    float distance = (booth.transform.position - agent.transform.position).sqrMagnitude;
+    /*                if (distance < 10)
+                    {
+                        BoothPrompt.SetActive(true);
+                    }
+                    else
+                    {
+                        BoothPrompt.SetActive(false);
+                    } */
+                    if (distance < 10 && Input.GetKeyDown("space") && display == false)
+                    {
+                        Debug.Log(booth.name);
+                        string url = JsonHelper.BoothList[i].PictureURL;
+                        StartCoroutine(GetTexture(url));
+                        display = true;
+                    //    BoothImage.SetActive(display);
+                        LeanTween.moveLocalY(BoothImage, 0, 2);
+                        break;
+                    }
+                    else if (Input.GetKeyDown("space") && display == true)
+                    {
+                        display = false;
+                       // BoothImage.SetActive(display);
+                        LeanTween.moveLocalY(BoothImage, -500, 2);
+                        break;
+                    }
+                    i++;
                 }
-                else if (Input.GetKeyDown("space") && display == true)
-                {
-                    display = false;
-                    BoothImage.SetActive(display);
-                    Debug.Log("close");
-                    break;
-                }
-                i++;
             }
 
         }
@@ -50,8 +62,10 @@ namespace Com.Oregonstate.MMOExpo
         private void Awake()
         {
             BoothUI = this.transform.GetChild(0).gameObject;
+            BoothPrompt = this.transform.GetChild(1).gameObject;
             BoothImage = BoothUI.gameObject;
-            BoothImage.SetActive(false);
+            BoothPrompt.SetActive(false);
+            LeanTween.moveLocalY(BoothImage, -500, 0);
         }
 
 
@@ -81,5 +95,6 @@ namespace Com.Oregonstate.MMOExpo
         {
             agent = GameObject.FindGameObjectWithTag("Player");
         }
+
     }
 }

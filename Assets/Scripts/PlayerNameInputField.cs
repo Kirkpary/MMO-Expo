@@ -30,10 +30,10 @@ namespace Com.Oregonstate.MMOExpo
                 if (PlayerPrefs.HasKey(playerNamePrefKey))
                 {
                     defaultName = PlayerPrefs.GetString(playerNamePrefKey);
-                    _inputField.text = defaultName;
                 }
             }
-            PhotonNetwork.NickName = defaultName;
+            _inputField.text = defaultName;
+            SetPlayerName(defaultName);
         }
         #endregion
 
@@ -47,8 +47,14 @@ namespace Com.Oregonstate.MMOExpo
             // #Inportant
             if (string.IsNullOrEmpty(value))
             {
-                Debug.LogError("Player Name is null or empty");
-                return;
+                Debug.LogWarning("Player Name is null or empty");
+                // If value is empty create a new username
+                value = "user";
+                // 4 = 10^5 = 100,000
+                for (int i = 0; i < 5; i++)
+                {
+                    value += (char)Random.Range('0', '9');
+                }
             }
             PhotonNetwork.NickName = value;
 

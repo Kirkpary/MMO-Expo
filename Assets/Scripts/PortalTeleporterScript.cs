@@ -19,14 +19,17 @@ namespace Com.Oregonstate.MMOExpo
 
         void OnTriggerEnter (Collider other) 
         {
-            if (PortalPrefab.name != "")
+            if (launcher != null)
             {
-                launcher.Connect(PortalPrefab.name);
-            }
-            else
-            {
-                Debug.Log("No RoomName specified. Defaulting to " + DefaultWorld + ".", this);
-                launcher.Connect(DefaultWorld);
+                if (PortalPrefab.name != "")
+                {
+                    launcher.Connect(PortalPrefab.name);
+                }
+                else
+                {
+                    Debug.Log("No RoomName specified. Defaulting to " + DefaultWorld + ".", this);
+                    launcher.Connect(DefaultWorld);
+                }
             }
         }
     }

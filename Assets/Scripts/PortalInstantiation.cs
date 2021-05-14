@@ -22,21 +22,35 @@ namespace Com.Oregonstate.MMOExpo
             JsonPath = Application.streamingAssetsPath + "/RoomList.json";
             StartCoroutine(JsonHelper.JsonUrlToObject<RoomList>(JsonPath, false, InstantiateObjects));
 
-            PortalTeleporterScript.passLauncher(launcher);
+            if (launcher)
+            {
+                PortalTeleporterScript.passLauncher(launcher);
+            }
+            else
+            {
+                Debug.LogWarning("<Color=yellow><a>Missing</a></Color> Launcher Reference. Portal teleporting disabled. Please set it up in GameObject '" + this.name + "'", this);
+            }
         }
 
         void InstantiateObjects(RoomList roomList)
         {
-            if (roomList != null)
+            if (PortalPrefab != null)
             {
-                int x = 0, y = 2, z = 5; // might change to something more elegant in the future
-                foreach (string roomName in roomList.RoomNames)
+                if (roomList != null)
                 {
-                    GameObject temp = Instantiate(PortalPrefab, new Vector3(x, y, z), Quaternion.identity);
-                    temp.name = roomName;
+                    int x = 0, y = 2, z = 5; // might change to something more elegant in the future
+                    foreach (string roomName in roomList.RoomNames)
+                    {
+                        GameObject temp = Instantiate(PortalPrefab, new Vector3(x, y, z), Quaternion.identity);
+                        temp.name = roomName;
 
-                    x += 6;
+                        x += 6;
+                    }
                 }
+            }
+            else
+            {
+                Debug.LogWarning("<Color=yellow><a>Missing</a></Color> PortalPrefab Reference. Portal spawning disabled. Please set it up in GameObject '" + this.name + "'", this);
             }
         }
     }
