@@ -5,7 +5,7 @@
 ### To Build Project
 1. Download Unity version 2020.3.5f1 and install the WebGL option.
 2. Clone the source code on Github to your computer.
-3. Make a [Photon Unity 3D Networking account](https://www.photonengine.com/en-US/Photon) and get API keys for Photon Chat and Photon Pun.
+3. Make a [Photon Unity 3D Networking](https://www.photonengine.com/en-US/Photon) account and get API keys for Photon Chat and Photon Pun.
 4. Open the project source code in Unity.
 5. Search up the 'PhotonServerSettings' file within the 'Assets' folder. Edit 'AppIdRealtime' and 'AppIdChat' within the file to include your API keys.
 6. Hit 'Play' to build the project locally.
