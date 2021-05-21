@@ -92,6 +92,7 @@ MonoBehaviour:
   BoothUI: {fileID: 0}
   BoothImage: {fileID: 0}
   Booth: {fileID: 0}
+  BoothPrompt: {fileID: 0}
   display: 0
 --- !u!1 &7527688265512856938
 GameObject:
