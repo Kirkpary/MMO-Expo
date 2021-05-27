@@ -50,5 +50,6 @@ public class CharacterSelection : MonoBehaviour
     {
         PlayerPrefs.SetString("selectedCharacter", characters[selectedCharacter].name);
         Debug.LogFormat("The selectedCharacter int is {0}", PlayerPrefs.GetString("selectedCharacter"));
+
     }
 }

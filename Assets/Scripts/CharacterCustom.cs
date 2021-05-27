@@ -4,10 +4,13 @@ using UnityEngine;
 
 public class CharacterCustom : MonoBehaviour
 {
+    public Texture[] skins;
+    public Texture[] hairs;
+
     private GameObject characterBody;
     private GameObject characterHead;
-    public Texture[] skins;
     private int selectedSkin = 0;
+    private int selectedHair = 0;
     // Start is called before the first frame update
     void Start()
     {
@@ -34,10 +37,20 @@ public class CharacterCustom : MonoBehaviour
         {
             selectedSkin += skins.Length;
         }
-        //Debug.Log("Current selectedSkin is:" + selectedSkin);
+        Debug.Log("Current selectedSkin is:" + selectedSkin);
         SkinnedMeshRenderer bodyRenderer = characterBody.GetComponentInChildren<SkinnedMeshRenderer>();
         SkinnedMeshRenderer headRenderer = characterHead.GetComponentInChildren<SkinnedMeshRenderer>();
         bodyRenderer.materials[0].mainTexture = skins[selectedSkin];
         headRenderer.materials[0].mainTexture = skins[selectedSkin];
+    }
+
+    public void nextHairTexture()
+    {
+
+    }
+
+    private void prevHairTexture()
+    {
+
     }
 }
