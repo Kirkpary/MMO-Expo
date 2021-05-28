@@ -290,14 +290,12 @@ namespace Com.Oregonstate.MMOExpo
 				}
 				else if ((tokens[0].Equals("/subscribeall") || tokens[0].Equals("/sa")))
 				{
-					Debug.Log("Room Name Length: " + JsonHelper.RoomNames.Length);
 					for (int i = 0; i < JsonHelper.RoomNames.Length; i++)
 					{
+						this.chatClient.Subscribe(new string[] { JsonHelper.RoomNames[i] });
 						string JsonPath = Application.streamingAssetsPath + "/" + JsonHelper.RoomNames[i] + ".json";
-						Debug.Log("Room Name Path: " + JsonPath);
 						StartCoroutine(JsonHelper.JsonUrlToObject<Room>(JsonPath, false, (roomObj) =>
 						{
-							Debug.Log("Booth Length: " + roomObj.Items.Length);
 							for (int j = 0; j < roomObj.Items.Length; j++)
                             {
 								this.chatClient.Subscribe(new string[] { roomObj.Items[j].BoothName });
