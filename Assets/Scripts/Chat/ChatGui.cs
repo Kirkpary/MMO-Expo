@@ -51,6 +51,7 @@ namespace Com.Oregonstate.MMOExpo
 			get { return chatEnabled; }
 		}
 		private static bool directMsgEnabled = false;
+		private static bool disableChat = true;
 
 		public ChatClient chatClient;
 
@@ -108,7 +109,12 @@ namespace Com.Oregonstate.MMOExpo
 						"\t<color=#DC4405>/s</color> <color=green><list of channelnames></color>\n" +
 						"\n";
 				}
-				HelpText += "To leave channel(s):\n" +
+				HelpText += "To subscribe to all booth and room channels :  \n" +
+					"\t<color=#DC4405>/subscribeall</color>\n" +
+					"\tor\n" +
+					"\t<color=#DC4405>/sa</color>\n" +
+					"\n" +
+					"To leave channel(s):\n" +
 					"\t<color=#DC4405>/unsubscribe</color> <color=green><list of channelnames></color>\n" +
 					"\tor\n" +
 					"\t<color=#DC4405>/u</color> <color=green><list of channelnames></color>\n" +
@@ -153,6 +159,10 @@ namespace Com.Oregonstate.MMOExpo
 
 			chatEnabled = false;
 			isChatConnected = false;
+			if (disableChat)
+            {
+				this.OpenChatPrompt.enabled = false;
+			}
 
 			#if PHOTON_UNITY_NETWORKING
 			this.chatAppSettings = PhotonNetwork.PhotonServerSettings.AppSettings.GetChatSettings();
@@ -166,9 +176,12 @@ namespace Com.Oregonstate.MMOExpo
 			}
 			else
 			{
-				// Add the chat for the current room to the join on connect list
-				ChannelsToJoinOnConnect.Add(PhotonNetwork.CurrentRoom.Name);
-				Connect();
+				if (!disableChat)
+				{
+					// Add the chat for the current room to the join on connect list
+					ChannelsToJoinOnConnect.Add(PhotonNetwork.CurrentRoom.Name);
+					Connect();
+				}
 			}
 		}
 
@@ -418,7 +431,10 @@ namespace Com.Oregonstate.MMOExpo
 
 			this.chatClient.SetOnlineStatus(ChatUserStatus.Online); // You can set your online state (without a mesage).
 
-			this.OpenChatPrompt.enabled = true;
+			if (!disableChat)
+			{
+				this.OpenChatPrompt.enabled = true;
+			}
 
 		}
 
@@ -647,17 +663,23 @@ namespace Com.Oregonstate.MMOExpo
 
 		public void ShowChat()
 		{
-			this.ChatPanel.gameObject.SetActive(true);
-			this.OpenChatPrompt.enabled = false;
-			chatEnabled = true;
-			InputFieldChat.Select();
-			InputFieldChat.ActivateInputField();
+			if (!disableChat)
+			{
+				this.ChatPanel.gameObject.SetActive(true);
+				this.OpenChatPrompt.enabled = false;
+				chatEnabled = true;
+				InputFieldChat.Select();
+				InputFieldChat.ActivateInputField();
+			}
 		}
 
 		public void HideChat()
 		{
 			this.ChatPanel.gameObject.SetActive(false);
-			this.OpenChatPrompt.enabled = true;
+			if (!disableChat)
+			{
+				this.OpenChatPrompt.enabled = true;
+			}
 			chatEnabled = false;
 		}
 
