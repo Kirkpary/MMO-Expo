@@ -50,6 +50,8 @@ namespace Com.Oregonstate.MMOExpo
 		public static bool isChatEnabled { 
 			get { return chatEnabled; }
 		}
+		private static bool directMsgEnabled = false;
+		private static bool disableChat = true;
 
 		public ChatClient chatClient;
 
@@ -89,35 +91,49 @@ namespace Com.Oregonstate.MMOExpo
 		}
 
 		// private static string WelcomeText = "Welcome to chat. Type /help to list commands.";
-		private static string HelpText = "\n    -- HELP --\n" +
-			"To subscribe to channel(s) (channelnames are case sensitive) :  \n" +
-				"\t<color=#DC4405>/subscribe</color> <color=green><list of channelnames></color>\n" +
-				"\tor\n" +
-				"\t<color=#DC4405>/s</color> <color=green><list of channelnames></color>\n" +
-				"\n" +
-				"To leave channel(s):\n" +
-				"\t<color=#DC4405>/unsubscribe</color> <color=green><list of channelnames></color>\n" +
-				"\tor\n" +
-				"\t<color=#DC4405>/u</color> <color=green><list of channelnames></color>\n" +
-				"\n" +
-				"To switch the active channel\n" +
-				"\t<color=#DC4405>/join</color> <color=green><channelname></color>\n" +
-				"\tor\n" +
-				"\t<color=#DC4405>/j</color> <color=green><channelname></color>\n" +
-				"\n" +
-				"To send a private message: (username are case sensitive)\n" +
-				"\t<color=#DC4405>/msg</color> <color=green><username></color> <color=green><message></color>\n" +
-				"\n" +
-				"To clear the current chat tab (private chats get closed):\n" +
-				"\t<color=#DC4405>/clear</color>";
-
+		private static string HelpText = null;
 
 		public void Start()
 		{
 			//TODO DELETE
 			//DontDestroyOnLoad(this.gameObject);
 
-            if (UserIdText == null)
+			if (HelpText == null)
+			{
+				HelpText = "\n    -- HELP --\n";
+				if (directMsgEnabled)
+				{
+					HelpText += "To subscribe to channel(s) (channelnames are case sensitive) :  \n" +
+						"\t<color=#DC4405>/subscribe</color> <color=green><list of channelnames></color>\n" +
+						"\tor\n" +
+						"\t<color=#DC4405>/s</color> <color=green><list of channelnames></color>\n" +
+						"\n";
+				}
+				HelpText += "To subscribe to all booth and room channels :  \n" +
+					"\t<color=#DC4405>/subscribeall</color>\n" +
+					"\tor\n" +
+					"\t<color=#DC4405>/sa</color>\n" +
+					"\n" +
+					"To leave channel(s):\n" +
+					"\t<color=#DC4405>/unsubscribe</color> <color=green><list of channelnames></color>\n" +
+					"\tor\n" +
+					"\t<color=#DC4405>/u</color> <color=green><list of channelnames></color>\n" +
+					"\n";
+				if (directMsgEnabled)
+				{
+					HelpText += "To switch the active channel\n" +
+						"\t<color=#DC4405>/join</color> <color=green><channelname></color>\n" +
+						"\tor\n" +
+						"\t<color=#DC4405>/j</color> <color=green><channelname></color>\n" +
+						"\n" +
+						"To send a private message: (username are case sensitive)\n" +
+						"\t<color=#DC4405>/msg</color> <color=green><username></color> <color=green><message></color>\n" +
+						"\n";
+				}
+				HelpText += "To clear the current chat tab (private chats get closed):\n" +
+					"\t<color=#DC4405>/clear</color>";
+			}
+			if (UserIdText == null)
             {
                 UserIdText = GameObject.Find("Username").gameObject.GetComponent<Text>();
             }
@@ -143,6 +159,10 @@ namespace Com.Oregonstate.MMOExpo
 
 			chatEnabled = false;
 			isChatConnected = false;
+			if (disableChat)
+            {
+				this.OpenChatPrompt.enabled = false;
+			}
 
 			#if PHOTON_UNITY_NETWORKING
 			this.chatAppSettings = PhotonNetwork.PhotonServerSettings.AppSettings.GetChatSettings();
@@ -156,9 +176,12 @@ namespace Com.Oregonstate.MMOExpo
 			}
 			else
 			{
-				// Add the chat for the current room to the join on connect list
-				ChannelsToJoinOnConnect.Add(PhotonNetwork.CurrentRoom.Name);
-				Connect();
+				if (!disableChat)
+				{
+					// Add the chat for the current room to the join on connect list
+					ChannelsToJoinOnConnect.Add(PhotonNetwork.CurrentRoom.Name);
+					Connect();
+				}
 			}
 		}
 
@@ -252,7 +275,7 @@ namespace Com.Oregonstate.MMOExpo
 
 			bool doingPrivateChat = this.chatClient.PrivateChannels.ContainsKey(this.selectedChannelName);
 			string privateChatTarget = string.Empty;
-			if (doingPrivateChat)
+			if (doingPrivateChat && directMsgEnabled)
 			{
 				// the channel name for a private conversation is (on the client!!) always composed of both user's IDs: "this:remote"
 				// so the remote ID is simple to figure out
@@ -270,7 +293,7 @@ namespace Com.Oregonstate.MMOExpo
 				{
 					this.PostHelpToCurrentChannel();
 				}
-				if ((tokens[0].Equals("/subscribe") || tokens[0].Equals("/s")) && !string.IsNullOrEmpty(tokens[1]))
+				if ((tokens[0].Equals("/subscribe") || tokens[0].Equals("/s")) && !string.IsNullOrEmpty(tokens[1]) && directMsgEnabled)
 				{
 					this.chatClient.Subscribe(tokens[1].Split(new char[] {' ', ','}));
 				}
@@ -278,9 +301,24 @@ namespace Com.Oregonstate.MMOExpo
 				{
 					this.chatClient.Unsubscribe(tokens[1].Split(new char[] {' ', ','}));
 				}
+				else if ((tokens[0].Equals("/subscribeall") || tokens[0].Equals("/sa")))
+				{
+					for (int i = 0; i < JsonHelper.RoomNames.Length; i++)
+					{
+						this.chatClient.Subscribe(new string[] { JsonHelper.RoomNames[i] });
+						string JsonPath = Application.streamingAssetsPath + "/" + JsonHelper.RoomNames[i] + ".json";
+						StartCoroutine(JsonHelper.JsonUrlToObject<Room>(JsonPath, false, (roomObj) =>
+						{
+							for (int j = 0; j < roomObj.Items.Length; j++)
+                            {
+								this.chatClient.Subscribe(new string[] { roomObj.Items[j].BoothName });
+							}
+						}));
+					}
+				}
 				else if (tokens[0].Equals("/clear"))
 				{
-					if (doingPrivateChat)
+					if (doingPrivateChat && directMsgEnabled)
 					{
 						if (this.channelToggles.ContainsKey(selectedChannelName))
 						{
@@ -306,14 +344,14 @@ namespace Com.Oregonstate.MMOExpo
 					else
 					{
 						ChatChannel channel;
-						if (this.chatClient.TryGetChannel(this.selectedChannelName, doingPrivateChat, out channel))
+						if (this.chatClient.TryGetChannel(this.selectedChannelName, doingPrivateChat && directMsgEnabled, out channel))
 						{
 							channel.ClearMessages();
 							this.CurrentChannelText.text = "";
 						}
 					}
 				}
-				else if (tokens[0].Equals("/msg") && !string.IsNullOrEmpty(tokens[1]))
+				else if (tokens[0].Equals("/msg") && !string.IsNullOrEmpty(tokens[1]) && directMsgEnabled)
 				{
 					string[] subtokens = tokens[1].Split(new char[] {' ', ','}, 2);
 					if (subtokens.Length < 2) return;
@@ -322,7 +360,7 @@ namespace Com.Oregonstate.MMOExpo
 					string message = subtokens[1];
 					this.chatClient.SendPrivateMessage(targetUser, message);
 				}
-				else if ((tokens[0].Equals("/join") || tokens[0].Equals("/j")) && !string.IsNullOrEmpty(tokens[1]))
+				else if ((tokens[0].Equals("/join") || tokens[0].Equals("/j")) && !string.IsNullOrEmpty(tokens[1]) && directMsgEnabled)
 				{
 					string[] subtokens = tokens[1].Split(new char[] { ' ', ',' }, 2);
 
@@ -343,7 +381,7 @@ namespace Com.Oregonstate.MMOExpo
 			}
 			else
 			{
-				if (doingPrivateChat)
+				if (doingPrivateChat && directMsgEnabled)
 				{
 					this.chatClient.SendPrivateMessage(privateChatTarget, inputLine);
 				}
@@ -393,7 +431,10 @@ namespace Com.Oregonstate.MMOExpo
 
 			this.chatClient.SetOnlineStatus(ChatUserStatus.Online); // You can set your online state (without a mesage).
 
-			this.OpenChatPrompt.enabled = true;
+			if (!disableChat)
+			{
+				this.OpenChatPrompt.enabled = true;
+			}
 
 		}
 
@@ -622,17 +663,23 @@ namespace Com.Oregonstate.MMOExpo
 
 		public void ShowChat()
 		{
-			this.ChatPanel.gameObject.SetActive(true);
-			this.OpenChatPrompt.enabled = false;
-			chatEnabled = true;
-			InputFieldChat.Select();
-			InputFieldChat.ActivateInputField();
+			if (!disableChat)
+			{
+				this.ChatPanel.gameObject.SetActive(true);
+				this.OpenChatPrompt.enabled = false;
+				chatEnabled = true;
+				InputFieldChat.Select();
+				InputFieldChat.ActivateInputField();
+			}
 		}
 
 		public void HideChat()
 		{
 			this.ChatPanel.gameObject.SetActive(false);
-			this.OpenChatPrompt.enabled = true;
+			if (!disableChat)
+			{
+				this.OpenChatPrompt.enabled = true;
+			}
 			chatEnabled = false;
 		}
 
