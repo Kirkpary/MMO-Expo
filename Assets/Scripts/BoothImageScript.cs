@@ -47,15 +47,13 @@ namespace Com.Oregonstate.MMOExpo
                         string zoomURL = JsonHelper.BoothList[i].ZoomLink;
                         StartCoroutine(GetTexture(url));
                         display = true;
-                    //    BoothImage.SetActive(display);
                         LeanTween.moveLocalY(BoothImage, 0, 2);
-                        LeanTween.moveLocalY(BoothButton, -200, 2);
+                        LeanTween.moveLocalY(BoothButton, -185, 2);
                         break;
                     }
                     else if (Input.GetKeyDown("space") && display == true)
                     {
                         display = false;
-                       // BoothImage.SetActive(display);
                         LeanTween.moveLocalY(BoothImage, -500, 2);
                         LeanTween.moveLocalY(BoothButton, -500, 2);
                         break;
