@@ -34,6 +34,7 @@ namespace Com.Oregonstate.MMOExpo
 
         void InstantiateObjects(RoomList roomList)
         {
+            JsonHelper.RoomNames = roomList.RoomNames;
             if (PortalPrefab != null)
             {
                 if (roomList != null)

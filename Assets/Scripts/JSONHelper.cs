@@ -45,6 +45,9 @@ namespace Com.Oregonstate.MMOExpo
         [HideInInspector]
         // Make json booth list available to other objects
         public static Booth[] BoothList;
+        [HideInInspector]
+        // Make json room list available to other objects
+        public static string[] RoomNames;
 
         /// <summary>
         /// Function to read/download json with passed in path.
