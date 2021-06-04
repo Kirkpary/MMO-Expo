@@ -23,6 +23,7 @@ namespace Com.Oregonstate.MMOExpo
         public string Description;
         public Sprite Picture;
         public string PictureURL;
+        public string ZoomLink;
     }
     #endregion
 

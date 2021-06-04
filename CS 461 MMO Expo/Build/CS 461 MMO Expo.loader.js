@@ -1,6 +1,26 @@
 function createUnityInstance(canvas, config, onProgress) {
   onProgress = onProgress || function () {};
 
+  function errorListener(e) {
+    var error = e.type == "unhandledrejection" && typeof e.reason == "object" ? e.reason : typeof e.error == "object" ? e.error : null;
+    var message = error ? error.toString() : typeof e.message == "string" ? e.message : typeof e.reason == "string" ? e.reason : "";
+    if (error && typeof error.stack == "string")
+      message += "\n" + error.stack.substring(!error.stack.lastIndexOf(message, 0) ? message.length : 0).replace(/(^\n*|\n*$)/g, "");
+    if (!message || !Module.stackTraceRegExp || !Module.stackTraceRegExp.test(message))
+      return;
+    var filename =
+      e instanceof ErrorEvent ? e.filename :
+      error && typeof error.fileName == "string" ? error.fileName :
+      error && typeof error.sourceURL == "string" ? error.sourceURL :
+      "";
+    var lineno =
+      e instanceof ErrorEvent ? e.lineno :
+      error && typeof error.lineNumber == "number" ? error.lineNumber :
+      error && typeof error.line == "number" ? error.line :
+      0;
+    errorHandler(message, filename, lineno);
+  }
+
   var Module = {
     canvas: canvas,
     webglContextAttributes: {
@@ -47,9 +67,21 @@ function createUnityInstance(canvas, config, onProgress) {
 
   Module.streamingAssetsUrl = new URL(Module.streamingAssetsUrl, document.URL).href;
 
-  Module.disabledCanvasEvents.forEach(function (disabledCanvasEvent) {
-    canvas.addEventListener(disabledCanvasEvent, function (e) { e.preventDefault(); });
+  // Operate on a clone of Module.disabledCanvasEvents field so that at Quit time
+  // we will ensure we'll remove the events that we created (in case user has
+  // modified/cleared Module.disabledCanvasEvents in between)
+  var disabledCanvasEvents = Module.disabledCanvasEvents.slice();
+
+  function preventDefault(e) {
+    e.preventDefault();
+  }
+
+  disabledCanvasEvents.forEach(function (disabledCanvasEvent) {
+    canvas.addEventListener(disabledCanvasEvent, preventDefault);
   });
+
+  window.addEventListener("error", errorListener);
+  window.addEventListener("unhandledrejection", errorListener);
 
   var unityInstance = {
     Module: Module,
@@ -67,183 +99,118 @@ function createUnityInstance(canvas, config, onProgress) {
       return new Promise(function (resolve, reject) {
         Module.shouldQuit = true;
         Module.onQuit = resolve;
+
+        // Clear the event handlers we added above, so that the event handler
+        // functions will not hold references to this JS function scope after
+        // exit, to allow JS garbage collection to take place.
+        disabledCanvasEvents.forEach(function (disabledCanvasEvent) {
+          canvas.removeEventListener(disabledCanvasEvent, preventDefault);
+        });
+        window.removeEventListener("error", errorListener);
+        window.removeEventListener("unhandledrejection", errorListener);
       });
     },
   };
 
-  // The Unity WebGL generated content depends on SystemInfo, therefore it should not be changed. If any modification is necessary, do it at your own risk.
   Module.SystemInfo = (function () {
-    var unknown = "-";
-    var nVer = navigator.appVersion;
-    var nAgt = navigator.userAgent;
-    var browser = navigator.appName;
-    var version = navigator.appVersion;
-    var majorVersion = parseInt(navigator.appVersion, 10);
-    var nameOffset, verOffset, ix;
-    if ((verOffset = nAgt.indexOf("Opera")) != -1) {
-      browser = "Opera";
-      version = nAgt.substring(verOffset + 6);
-      if ((verOffset = nAgt.indexOf("Version")) != -1) {
-        version = nAgt.substring(verOffset + 8);
-      }
-    } else if ((verOffset = nAgt.indexOf("MSIE")) != -1) {
-      browser = "Microsoft Internet Explorer";
-      version = nAgt.substring(verOffset + 5);
-    } else if ((verOffset = nAgt.indexOf("Edge")) != -1) {
-      browser = "Edge";
-      version = nAgt.substring(verOffset + 5);
-    } else if ((verOffset = nAgt.indexOf("Chrome")) != -1) {
-      browser = "Chrome";
-      version = nAgt.substring(verOffset + 7);
-    } else if ((verOffset = nAgt.indexOf("Safari")) != -1) {
-      browser = "Safari";
-      version = nAgt.substring(verOffset + 7);
-      if ((verOffset = nAgt.indexOf("Version")) != -1) {
-        version = nAgt.substring(verOffset + 8);
-      }
-    } else if ((verOffset = nAgt.indexOf("Firefox")) != -1) {
-      browser = "Firefox";
-      version = nAgt.substring(verOffset + 8);
-    } else if (nAgt.indexOf("Trident/") != -1) {
-      browser = "Microsoft Internet Explorer";
-      version = nAgt.substring(nAgt.indexOf("rv:") + 3);
-    } else if ((nameOffset = nAgt.lastIndexOf(" ") + 1) < (verOffset = nAgt.lastIndexOf("/"))) {
-      browser = nAgt.substring(nameOffset, verOffset);
-      version = nAgt.substring(verOffset + 1);
-      if (browser.toLowerCase() == browser.toUpperCase()) {
-        browser = navigator.appName;
-      }
-    }
-    if ((ix = version.indexOf(";")) != -1)
-      version = version.substring(0, ix);
-    if ((ix = version.indexOf(" ")) != -1)
-      version = version.substring(0, ix);
-    if ((ix = version.indexOf(")")) != -1)
-      version = version.substring(0, ix);
-    majorVersion = parseInt("" + version, 10);
-    if (isNaN(majorVersion)) {
-      version = "" + parseFloat(navigator.appVersion);
-      majorVersion = parseInt(navigator.appVersion, 10);
-    }
-    else version = "" + parseFloat(version);
-    var mobile = /Mobile|mini|Fennec|Android|iP(ad|od|hone)/.test(nVer);
-    var os = unknown;
-    var clientStrings = [
-      {s: "Windows 3.11", r: /Win16/},
-      {s: "Windows 95", r: /(Windows 95|Win95|Windows_95)/},
-      {s: "Windows ME", r: /(Win 9x 4.90|Windows ME)/},
-      {s: "Windows 98", r: /(Windows 98|Win98)/},
-      {s: "Windows CE", r: /Windows CE/},
-      {s: "Windows 2000", r: /(Windows NT 5.0|Windows 2000)/},
-      {s: "Windows XP", r: /(Windows NT 5.1|Windows XP)/},
-      {s: "Windows Server 2003", r: /Windows NT 5.2/},
-      {s: "Windows Vista", r: /Windows NT 6.0/},
-      {s: "Windows 7", r: /(Windows 7|Windows NT 6.1)/},
-      {s: "Windows 8.1", r: /(Windows 8.1|Windows NT 6.3)/},
-      {s: "Windows 8", r: /(Windows 8|Windows NT 6.2)/},
-      {s: "Windows 10", r: /(Windows 10|Windows NT 10.0)/},
-      {s: "Windows NT 4.0", r: /(Windows NT 4.0|WinNT4.0|WinNT|Windows NT)/},
-      {s: "Windows ME", r: /Windows ME/},
-      {s: "Android", r: /Android/},
-      {s: "Open BSD", r: /OpenBSD/},
-      {s: "Sun OS", r: /SunOS/},
-      {s: "Linux", r: /(Linux|X11)/},
-      {s: "iOS", r: /(iPhone|iPad|iPod)/},
-      {s: "Mac OS X", r: /Mac OS X/},
-      {s: "Mac OS", r: /(MacPPC|MacIntel|Mac_PowerPC|Macintosh)/},
-      {s: "QNX", r: /QNX/},
-      {s: "UNIX", r: /UNIX/}, 
-      {s: "BeOS", r: /BeOS/},
-      {s: "OS/2", r: /OS\/2/},
-      {s: "Search Bot", r: /(nuhk|Googlebot|Yammybot|Openbot|Slurp|MSNBot|Ask Jeeves\/Teoma|ia_archiver)/}
+
+    var browser, browserVersion, os, osVersion, canvas, gpu;
+
+    var ua = navigator.userAgent + ' ';
+    var browsers = [
+      ['Firefox', 'Firefox'],
+      ['OPR', 'Opera'],
+      ['Edg', 'Edge'],
+      ['SamsungBrowser', 'Samsung Browser'],
+      ['Trident', 'Internet Explorer'],
+      ['MSIE', 'Internet Explorer'],
+      ['Chrome', 'Chrome'],
+      ['CriOS', 'Chrome on iOS Safari'],
+      ['FxiOS', 'Firefox on iOS Safari'],
+      ['Safari', 'Safari'],
     ];
-    for (var id in clientStrings) {
-      var cs = clientStrings[id];
-      if (cs.r.test(nAgt)) {
-        os = cs.s;
+
+    function extractRe(re, str, idx) {
+      re = RegExp(re, 'i').exec(str);
+      return re && re[idx];
+    }
+    for(var b = 0; b < browsers.length; ++b) {
+      browserVersion = extractRe(browsers[b][0] + '[\/ ](.*?)[ \\)]', ua, 1);
+      if (browserVersion) {
+        browser = browsers[b][1];
         break;
       }
     }
-    var osVersion = unknown;
-    if (/Windows/.test(os)) {
-      osVersion = /Windows (.*)/.exec(os)[1];
-      os = "Windows";
-    }
-    switch (os) {
-    case "Mac OS X":
-      osVersion = /Mac OS X (10[\.\_\d]+)/.exec(nAgt)[1];
-      break;
-    case "Android":
-      osVersion = /Android ([\.\_\d]+)/.exec(nAgt)[1];
-      break;
-    case "iOS":
-      osVersion = /OS (\d+)_(\d+)_?(\d+)?/.exec(nVer);
-      osVersion = osVersion[1] + "." + osVersion[2] + "." + (osVersion[3] | 0);
-      break;
-    }
-    return {
-      width: screen.width ? screen.width : 0,
-      height: screen.height ? screen.height : 0,
-      browser: browser,
-      browserVersion: version,
-      mobile: mobile,
-      os: os,
-      osVersion: osVersion,
-      gpu: (function() {
-        var canvas = document.createElement("canvas");
-        var gl = canvas.getContext("experimental-webgl");
-        if(gl) {
-          var renderedInfo = gl.getExtension("WEBGL_debug_renderer_info");
-          if(renderedInfo) {
-            return gl.getParameter(renderedInfo.UNMASKED_RENDERER_WEBGL);
-          }
-        }
-        return unknown;
-      })(),
-      language: window.navigator.userLanguage || window.navigator.language,
-      hasWebGL: (function() {
-        if (!window.WebGLRenderingContext) {
-          return 0;
-        }
-        var canvas = document.createElement("canvas");
-        var gl = canvas.getContext("webgl2");
-        if (!gl) {
-          gl = canvas.getContext("experimental-webgl2");
-          if (!gl) {
-            gl = canvas.getContext("webgl");
-            if (!gl) {
-              gl = canvas.getContext("experimental-webgl");
-              if (!gl) {
-                return 0;
-              }
-            }
-            return 1;
-          }
-          return 2;
-        }
-        return 2;
-      })(),
-      hasCursorLock: (function() {
-        var e = document.createElement("canvas");
-        if (e["requestPointerLock"] || e["mozRequestPointerLock"] || e["webkitRequestPointerLock"] || e["msRequestPointerLock"]) return 1; else return 0;
-      })(),
-      hasFullscreen: (function() {
-        var e = document.createElement("canvas");
-        if (e["requestFullScreen"] || e["mozRequestFullScreen"] || e["msRequestFullscreen"] || e["webkitRequestFullScreen"]) {
-          if (browser.indexOf("Safari") == -1 || version >= 10.1) return 1;
-        }
-        return 0;
-      })(),
-      hasThreads: typeof SharedArrayBuffer !== 'undefined',
-      hasWasm: typeof WebAssembly == "object" && typeof WebAssembly.validate == "function" && typeof WebAssembly.compile == "function",
-      hasWasmThreads: (function(){
-        if (typeof WebAssembly != "object") return false;
-        if (typeof SharedArrayBuffer === 'undefined') return false;
+    if (browser == 'Safari') browserVersion = extractRe('Version\/(.*?) ', ua, 1);
+    if (browser == 'Internet Explorer') browserVersion = extractRe('rv:(.*?)\\)? ', ua, 1) || browserVersion;
 
-        var wasmMemory = new WebAssembly.Memory({"initial": 1, "maximum": 1, "shared": true});
-        var isSharedArrayBuffer = wasmMemory.buffer instanceof SharedArrayBuffer;
-        delete wasmMemory;
-        return isSharedArrayBuffer;
+    var oses = [
+      ['Windows (.*?)[;\)]', 'Windows'],
+      ['Android ([0-9_\.]+)', 'Android'],
+      ['iPhone OS ([0-9_\.]+)', 'iPhoneOS'],
+      ['iPad.*? OS ([0-9_\.]+)', 'iPadOS'],
+      ['FreeBSD( )', 'FreeBSD'],
+      ['OpenBSD( )', 'OpenBSD'],
+      ['Linux|X11()', 'Linux'],
+      ['Mac OS X ([0-9_\.]+)', 'macOS'],
+      ['bot|google|baidu|bing|msn|teoma|slurp|yandex', 'Search Bot']
+    ];
+    for(var o = 0; o < oses.length; ++o) {
+      osVersion = extractRe(oses[o][0], ua, 1);
+      if (osVersion) {
+        os = oses[o][1];
+        osVersion = osVersion.replace(/_/g, '.');
+        break;
+      }
+    }
+    var versionMappings = {
+      'NT 5.0': '2000',
+      'NT 5.1': 'XP',
+      'NT 5.2': 'Server 2003',
+      'NT 6.0': 'Vista',
+      'NT 6.1': '7',
+      'NT 6.2': '8',
+      'NT 6.3': '8.1',
+      'NT 10.0': '10'
+    };
+    osVersion = versionMappings[osVersion] || osVersion;
+
+    // TODO: Add mobile device identifier, e.g. SM-G960U
+
+    canvas = document.createElement("canvas");
+    if (canvas) {
+      gl = canvas.getContext("webgl2");
+      glVersion = gl ? 2 : 0;
+      if (!gl) {
+        if (gl = canvas && canvas.getContext("webgl")) glVersion = 1;
+      }
+
+      if (gl) {
+        gpu = (gl.getExtension("WEBGL_debug_renderer_info") && gl.getParameter(0x9246 /*debugRendererInfo.UNMASKED_RENDERER_WEBGL*/)) || gl.getParameter(0x1F01 /*gl.RENDERER*/);
+      }
+    }
+
+    var hasThreads = typeof SharedArrayBuffer !== 'undefined';
+    var hasWasm = typeof WebAssembly === "object" && typeof WebAssembly.compile === "function";
+    return {
+      width: screen.width,
+      height: screen.height,
+      userAgent: ua.trim(),
+      browser: browser || 'Unknown browser',
+      browserVersion: browserVersion || 'Unknown version',
+      mobile: /Mobile|Android|iP(ad|hone)/.test(navigator.appVersion),
+      os: os || 'Unknown OS',
+      osVersion: osVersion || 'Unknown OS Version',
+      gpu: gpu || 'Unknown GPU',
+      language: navigator.userLanguage || navigator.language,
+      hasWebGL: glVersion,
+      hasCursorLock: !!document.body.requestPointerLock,
+      hasFullscreen: !!document.body.requestFullscreen,
+      hasThreads: hasThreads,
+      hasWasm: hasWasm,
+      hasWasmThreads: (function() {
+        var wasmMemory = hasWasm && hasThreads && new WebAssembly.Memory({"initial": 1, "maximum": 1, "shared": true});
+        return wasmMemory && wasmMemory.buffer instanceof SharedArrayBuffer;
       })(),
     };
   })();
@@ -278,33 +245,12 @@ function createUnityInstance(canvas, config, onProgress) {
     errorHandler.didShowErrorMessage = true;
   }
 
-  function errorListener(e) {
-    var error = e.type == "unhandledrejection" && typeof e.reason == "object" ? e.reason : typeof e.error == "object" ? e.error : null;
-    var message = error ? error.toString() : typeof e.message == "string" ? e.message : typeof e.reason == "string" ? e.reason : "";
-    if (error && typeof error.stack == "string")
-      message += "\n" + error.stack.substring(!error.stack.lastIndexOf(message, 0) ? message.length : 0).replace(/(^\n*|\n*$)/g, "");
-    if (!message || !Module.stackTraceRegExp || !Module.stackTraceRegExp.test(message))
-      return;
-    var filename =
-      e instanceof ErrorEvent ? e.filename :
-      error && typeof error.fileName == "string" ? error.fileName :
-      error && typeof error.sourceURL == "string" ? error.sourceURL :
-      "";
-    var lineno =
-      e instanceof ErrorEvent ? e.lineno :
-      error && typeof error.lineNumber == "number" ? error.lineNumber :
-      error && typeof error.line == "number" ? error.line :
-      0;
-    errorHandler(message, filename, lineno);
-  }
 
   Module.abortHandler = function (message) {
     errorHandler(message, "", 0);
     return true;
   };
 
-  window.addEventListener("error", errorListener);
-  window.addEventListener("unhandledrejection", errorListener);
   Error.stackTraceLimit = Math.max(Error.stackTraceLimit || 0, 50);
 
   function progressUpdate(id, e) {
@@ -592,8 +538,17 @@ function createUnityInstance(canvas, config, onProgress) {
         var script = document.createElement("script");
         script.src = Module.frameworkUrl;
         script.onload = function () {
-          delete script.onload;
-          resolve(unityFramework);
+          // Adding the framework.js script to DOM created a global
+          // 'unityFramework' variable that should be considered internal.
+          // Capture the variable to local scope and clear it from global
+          // scope so that JS garbage collection can take place on
+          // application quit.
+          var fw = unityFramework;
+          unityFramework = null;
+          // Also ensure this function will not hold any JS scope
+          // references to prevent JS garbage collection.
+          script.onload = null;
+          resolve(fw);
         }
         document.body.appendChild(script);
         Module.deinitializers.push(function() {
