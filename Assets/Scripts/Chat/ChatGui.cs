@@ -50,8 +50,8 @@ namespace Com.Oregonstate.MMOExpo
 		public static bool isChatEnabled { 
 			get { return chatEnabled; }
 		}
-		private static bool directMsgEnabled = false;
-		private static bool disableChat = true;
+		private static bool disableDirectMsg = false;
+		private static bool disableChat = false;
 
 		public ChatClient chatClient;
 
@@ -101,7 +101,7 @@ namespace Com.Oregonstate.MMOExpo
 			if (HelpText == null)
 			{
 				HelpText = "\n    -- HELP --\n";
-				if (directMsgEnabled)
+				if (!disableDirectMsg)
 				{
 					HelpText += "To subscribe to channel(s) (channelnames are case sensitive) :  \n" +
 						"\t<color=#DC4405>/subscribe</color> <color=green><list of channelnames></color>\n" +
@@ -119,7 +119,7 @@ namespace Com.Oregonstate.MMOExpo
 					"\tor\n" +
 					"\t<color=#DC4405>/u</color> <color=green><list of channelnames></color>\n" +
 					"\n";
-				if (directMsgEnabled)
+				if (!disableDirectMsg)
 				{
 					HelpText += "To switch the active channel\n" +
 						"\t<color=#DC4405>/join</color> <color=green><channelname></color>\n" +
@@ -275,7 +275,7 @@ namespace Com.Oregonstate.MMOExpo
 
 			bool doingPrivateChat = this.chatClient.PrivateChannels.ContainsKey(this.selectedChannelName);
 			string privateChatTarget = string.Empty;
-			if (doingPrivateChat && directMsgEnabled)
+			if (doingPrivateChat && !disableDirectMsg)
 			{
 				// the channel name for a private conversation is (on the client!!) always composed of both user's IDs: "this:remote"
 				// so the remote ID is simple to figure out
@@ -293,7 +293,7 @@ namespace Com.Oregonstate.MMOExpo
 				{
 					this.PostHelpToCurrentChannel();
 				}
-				if ((tokens[0].Equals("/subscribe") || tokens[0].Equals("/s")) && !string.IsNullOrEmpty(tokens[1]) && directMsgEnabled)
+				if ((tokens[0].Equals("/subscribe") || tokens[0].Equals("/s")) && !string.IsNullOrEmpty(tokens[1]) && !disableDirectMsg)
 				{
 					this.chatClient.Subscribe(tokens[1].Split(new char[] {' ', ','}));
 				}
@@ -318,7 +318,7 @@ namespace Com.Oregonstate.MMOExpo
 				}
 				else if (tokens[0].Equals("/clear"))
 				{
-					if (doingPrivateChat && directMsgEnabled)
+					if (doingPrivateChat && !disableDirectMsg)
 					{
 						if (this.channelToggles.ContainsKey(selectedChannelName))
 						{
@@ -344,14 +344,14 @@ namespace Com.Oregonstate.MMOExpo
 					else
 					{
 						ChatChannel channel;
-						if (this.chatClient.TryGetChannel(this.selectedChannelName, doingPrivateChat && directMsgEnabled, out channel))
+						if (this.chatClient.TryGetChannel(this.selectedChannelName, doingPrivateChat && !disableDirectMsg, out channel))
 						{
 							channel.ClearMessages();
 							this.CurrentChannelText.text = "";
 						}
 					}
 				}
-				else if (tokens[0].Equals("/msg") && !string.IsNullOrEmpty(tokens[1]) && directMsgEnabled)
+				else if (tokens[0].Equals("/msg") && !string.IsNullOrEmpty(tokens[1]) && !disableDirectMsg)
 				{
 					string[] subtokens = tokens[1].Split(new char[] {' ', ','}, 2);
 					if (subtokens.Length < 2) return;
@@ -360,7 +360,7 @@ namespace Com.Oregonstate.MMOExpo
 					string message = subtokens[1];
 					this.chatClient.SendPrivateMessage(targetUser, message);
 				}
-				else if ((tokens[0].Equals("/join") || tokens[0].Equals("/j")) && !string.IsNullOrEmpty(tokens[1]) && directMsgEnabled)
+				else if ((tokens[0].Equals("/join") || tokens[0].Equals("/j")) && !string.IsNullOrEmpty(tokens[1]) && !disableDirectMsg)
 				{
 					string[] subtokens = tokens[1].Split(new char[] { ' ', ',' }, 2);
 
@@ -381,7 +381,7 @@ namespace Com.Oregonstate.MMOExpo
 			}
 			else
 			{
-				if (doingPrivateChat && directMsgEnabled)
+				if (doingPrivateChat && !disableDirectMsg)
 				{
 					this.chatClient.SendPrivateMessage(privateChatTarget, inputLine);
 				}
